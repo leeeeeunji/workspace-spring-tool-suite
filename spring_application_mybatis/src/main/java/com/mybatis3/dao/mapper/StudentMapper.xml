@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis3.dao.mapper.StudentMapper">
+	<!--
+	/**************************************************
+	  SELECT
+	 **************************************************/
+	/*
+	 * A.select sql의 결과 타입이 DTO,VO,Domain객체인 경우 resultType : DTO,VO,Domain
+	 */
+	-->
+	<select id="findStudentById" parameterType="int" resultType="com.mybatis3.domain.Student">
+		select stud_id, name, email, dob from students where stud_id=#{studId}
+	</select>
+	<select id="findAllStudents" resultType="com.mybatis3.domain.Student">
+		select stud_id, name, email, dob from students
+	</select>
+	<!-- 
+	/*
+	 * B.select sql의 결과 타입이 String, Wrapper객체인 경우 resultType : java.lang.String, java.lang.Integer
+	 */
+	 -->
+	<select id="findStudentNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+		select name from students where stud_id=#{studId}
+	</select>
+	<select id="findStudentNameList" resultType="java.lang.String">
+		select name from students
+	</select>
+	
+	
+	<!--
+	/**************************************************
+	  INSERT
+	 **************************************************/
+	 	parameterType : DTO, VO, Domain
+	-->
+	<insert id="insertStudent" parameterType="com.mybatis3.domain.Student">
+		insert into students(stud_id,name,email,dob)
+		values (#{studId},#{name},#{email},#{dob})
+	</insert>
+	
+	<insert id="insertStudentBySequence1" parameterType="com.mybatis3.domain.Student">
+		insert into students(stud_id,name,email,dob)
+			values (students_stud_id_seq.nextval,#{name},#{email},#{dob})
+	</insert>
+	
+	<insert id="insertStudentBySequence2" parameterType="com.mybatis3.domain.Student">
+		<selectKey order="BEFORE" resultType="int" keyProperty="studId">
+			select students_stud_id_seq.nextval from dual
+		</selectKey>
+		insert into students(stud_id, name, email, dob)
+			values (#{studId},#{name},#{email},#{dob})
+	</insert>
+	
+	
+	<!--
+	/**************************************************
+	  UPDATE
+	 **************************************************/
+	 	parameterType : DTO, VO, Domain
+	-->
+	<update id="updateStudentById" parameterType="com.mybatis3.domain.Student">
+		update students set name=#{name}, email=#{email}, dob=#{dob} where stud_id=#{studId}
+	</update>
+	
+	
+	<!--
+	/**************************************************
+	  DELETE
+	 **************************************************/
+	 	parameterType : int, (java.lang.)String
+	-->
+	<delete id="deleteStudentById" parameterType="int">
+		delete from students where stud_id=#{studId}
+	</delete>
+	
+	
+</mapper>
