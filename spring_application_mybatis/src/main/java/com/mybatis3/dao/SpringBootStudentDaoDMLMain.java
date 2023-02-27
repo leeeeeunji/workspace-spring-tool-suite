@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -11,12 +12,14 @@ import org.springframework.context.ApplicationContext;
 import com.mybatis3.domain.Student;
 
 @SpringBootApplication
+@MapperScan(basePackages = "com.mabatis3.dao.mapper")
 public class SpringBootStudentDaoDMLMain {
 
 	public static void main(String[] args) throws Exception {
 		ApplicationContext appicationContext=
 				SpringApplication.run(SpringBootStudentDaoDMLMain.class, args);
 		StudentDao studentDao=(StudentDao)appicationContext.getBean(StudentDao.class);
+		
 		System.out.println("---------insertStudent(Dto)--------------------------");
 		Student student1 = new Student(100000, "김십만", "100000@gmail.com", new Date());
 		System.out.println("### row count : " + studentDao.insertStudent(student1));

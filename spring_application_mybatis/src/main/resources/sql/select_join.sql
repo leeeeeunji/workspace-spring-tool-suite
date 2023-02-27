@@ -140,8 +140,15 @@ join courses c
 on ce.course_id=c.course_id
 where s.stud_id=1;
         
-  
-  
+/*
+  tutors courses join{1:N]
+강사 정보와 개설된 강의들
+*/
+select t.tutor_id, t.name as tutor_name, email, course_id, c.name as course_name, description, start_date, end_date 
+from tutors t 
+join courses c 
+on t.tutor_id = c.tutor_id 
+where t.tutor_id = 1;
 
       
       

@@ -1,31 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis3.dao.mapper.StudentMapper">
+<!-- ####################resultMap 정의###################### -->
+	<resultMap  id="studentWithAddressResultMap" type="com.mybatis3.domain.Student" autoMapping="true">
+		<!-- 
+		<result column="STUD_ID" property="studId" />
+		<result column="NAME" property="name" />
+		<result column="EMAIL" property="email" />
+		<result column="DOB" property="dob" />
+		-->
+		<association property="address" javaType="com.mybatis3.domain.Address" autoMapping="true">
+			<!--  
+			<result column="ADDR_ID" property="addrId"/>
+			<result column="STREET" property="street"/>
+			<result column="CITY" property="city"/>
+			<result column="STATE" property="state"/>
+			<result column="ZIP" property="zip"/>
+			<result column="COUNTRY" property="country"/>
+			-->
+		</association>
+		
+	</resultMap>
+	
+	<resultMap id="studentWithCoursesResultMap" 
+				type="com.mybatis3.domain.Student"
+				autoMapping="true">
+				<result column="STUDENT_NAME" property="name"/>	
+		<collection property="courseList" 
+					javaType="java.util.List" 
+					ofType="com.mybatis3.domain.Course"
+					autoMapping="true">
+				<result column="COURSE_NAME" property="name"/>
+		</collection>
+	</resultMap>
+
+
 	<!--
 	/**************************************************
 	  SELECT
 	 **************************************************/
 	/*
-	 * A.select sql의 결과 타입이 DTO,VO,Domain객체인 경우 resultType : DTO,VO,Domain
+	 * A.select sql의 결과 타입이 DTO,VO,Domain객체인 경우 
+	 	resultType : DTO,VO,Domain
 	 */
 	-->
 	<select id="findStudentById" parameterType="int" resultType="com.mybatis3.domain.Student">
 		select stud_id, name, email, dob from students where stud_id=#{studId}
 	</select>
-	<select id="findAllStudents" resultType="com.mybatis3.domain.Student">
+	<select id="findAllStudents" 
+			resultType="com.mybatis3.domain.Student">
 		select stud_id, name, email, dob from students
 	</select>
 	<!-- 
 	/*
-	 * B.select sql의 결과 타입이 String, Wrapper객체인 경우 resultType : java.lang.String, java.lang.Integer
+	 * B.select sql의 결과 타입이 String, Wrapper객체인 경우 
+	 	resultType : java.lang.String, java.lang.Integer
 	 */
 	 -->
-	<select id="findStudentNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+	<select id="findStudentNameById" 
+			parameterType="java.lang.Integer" 
+			resultType="java.lang.String">
 		select name from students where stud_id=#{studId}
 	</select>
-	<select id="findStudentNameList" resultType="java.lang.String">
+	<select id="findStudentNameList" 
+			resultType="java.lang.String">
 		select name from students
 	</select>
+	
+	
+	<!--
+	/**************************************************
+	  SELECT[students + address JOIN] (1:1)
+	 **************************************************/
+	 /*
+	 select sql의 결과 타입이 DTO,VO,Domain객체인 경우 
+	 resultMap : findStudentByIdWithAddress
+	 */
+	-->
+	<select id="findStudentByIdWithAddress" 
+			parameterType="java.lang.Integer"
+			resultMap="studentWithAddressResultMap">
+	select stud_id, name, email, dob, a.addr_id, street, city, state, zip, country
+	FROM students s 
+    left outer join addresses a 
+    on s.addr_id=a.addr_id where s.stud_id=#{studId}
+	</select>
+	
+	
+	<!--
+	/**************************************************
+	  SELECT[students + course_enrollment JOIN] (1:1)
+	 **************************************************/
+	 /*
+	 select sql의 결과 타입이 DTO,VO,Domain객체인 경우 
+	 resultMap : findStudentByIdWithCourses
+	 */
+	-->
+	<!--  
+	<select id="findStudentByIdWithCourses" 
+			parameterType="java.lang.Integer"
+			resultMap="studentWithCoursesResultMap">
+		select s.stud_id, s.name as student_name, email, dob, 
+				c.course_id, c.name as course_name, description, start_date, end_date
+		from students s 
+		join course_enrollment ce
+		on s.stud_id = ce.stud_id
+		join courses c
+		on ce.course_id=c.course_id where s.stud_id=#{studId}
+	</select>
+	-> StudentMapper에 복붙해놔서 중복이기 때문에 중복방지를 위해 해당 코드는 주석처리
+	-->
 	
 	
 	<!--
@@ -44,6 +128,7 @@
 			values (students_stud_id_seq.nextval,#{name},#{email},#{dob})
 	</insert>
 	
+	<!--  
 	<insert id="insertStudentBySequence2" parameterType="com.mybatis3.domain.Student">
 		<selectKey order="BEFORE" resultType="int" keyProperty="studId">
 			select students_stud_id_seq.nextval from dual
@@ -51,6 +136,7 @@
 		insert into students(stud_id, name, email, dob)
 			values (#{studId},#{name},#{email},#{dob})
 	</insert>
+	-->
 	
 	
 	<!--
@@ -73,6 +159,9 @@
 	<delete id="deleteStudentById" parameterType="int">
 		delete from students where stud_id=#{studId}
 	</delete>
-	
-	
+
+
+
+
+
 </mapper>
