@@ -1,4 +1,4 @@
-package com.itwill.guest.controller;
+ package com.itwill.guest.controller;
 
 import java.util.List;
 
@@ -73,6 +73,11 @@ public class GuestController {
 		model.addAttribute("guest", guest);
 		return "guest_modify_form";
 	}
+	
+	public String guest_modify_action() {
+		return "";
+	}
+	
 	
 	@RequestMapping("/guest_write_form")
 	public String guest_write_form() {
