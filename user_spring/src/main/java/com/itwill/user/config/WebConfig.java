@@ -1,8 +1,13 @@
 package com.itwill.user.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.itwill.user.controller.AuthLoginAnnotationInterceptor;
+import com.itwill.user.controller.AuthLoginInterceptor;
 
 @Configuration
 
@@ -19,7 +24,33 @@ public class WebConfig implements WebMvcConfigurer{
 	}
 	*/
 	
-	/*************************************************************/
+	/*
+	 *InterCeptor 등록
+	 */
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		/*
+		AuthLoginInterceptor authLoginInterceptor = new AuthLoginInterceptor();
+		registry.addInterceptor(authLoginInterceptor)
+		.addPathPatterns("/**")
+		.excludePathPatterns("/css/**")
+		.excludePathPatterns("/js/**")
+		.excludePathPatterns("/image/**")
+		.excludePathPatterns("/user_main")
+		.excludePathPatterns("/user_login_form")
+		.excludePathPatterns("/user_login_action")
+		.excludePathPatterns("/user_write_form")
+		.excludePathPatterns("/user_write_action");
+		*/
+		AuthLoginAnnotationInterceptor authLoginAnnotationInterceptor = new AuthLoginAnnotationInterceptor();
+		
+		registry.addInterceptor(authLoginAnnotationInterceptor)
+		.addPathPatterns("/**")
+		.excludePathPatterns("/css/**")
+		.excludePathPatterns("/js/**")
+		.excludePathPatterns("/image/**");
+	}
+	/***************************************************************/
 	
 	/*********************Spring MVC 빈객체등록*********************/
 	// 1.ViewResolver객체등록

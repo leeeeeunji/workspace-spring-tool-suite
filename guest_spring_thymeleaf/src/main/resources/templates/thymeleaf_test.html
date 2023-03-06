@@ -1,0 +1,28 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 th:text="'th헤드라인'">헤드라인1</h1>
+	아이디 : <input type="text" value="guard" th:value="가드">
+	
+	<div>
+		<span th:if="${true}">여자</span>
+		<span th:if="${false}">남자</span>
+	</div>
+	<div>
+		<span th:if="${true}">여자</span>
+		<span th:unless="${true}">남자</span>
+	</div>
+	
+	<th:block th:if="${true}">
+		<div>th:if="${true}"인 경우 출력</div>
+	</th:block>
+	<th:block th:unless="${false}">
+		<div>th:unless="${false}"인 경우 출력</div>
+	</th:block>
+	
+</body>
+</html>
