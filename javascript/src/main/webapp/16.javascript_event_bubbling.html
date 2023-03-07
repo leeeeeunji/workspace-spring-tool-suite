@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	*{
+		border: 1px dotted blue;
+		
+	}
+</style>
+<script type="text/javascript">
+	function eventStopPropagation(e){
+		alert('p');
+		//이벤트버블링중지
+		
+	} 
+</script>
+</head>
+<body onclick="alert('body');">
+	<div onclick="alert('outer div');">
+		<div onclick="alert('inner div');">
+			<h1 onclick="alert('h1');">
+				<span onclick="eventStopPropagation(event);">java script event bubbling[이벤트전파중지]</span>
+			</h1>
+		</div>
+	</div>
+	<br/>
+	<br/>
+</body>
+</html>

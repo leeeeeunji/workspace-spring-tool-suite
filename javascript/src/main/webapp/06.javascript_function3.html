@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+    /*
+    1. function객체를 변수에 대입(일급함수)
+    2. function객체를 파라메타데이타로 사용
+    3. function객체를 반환
+    
+   	- 자바스크립트 내부함수
+   	- 클로져(closure)
+		클로져는 내부함수가 참조하는 외부함수의 지역변수가
+		외부함수에 의해 내부함수가 반환된 이후에도 환경(life-cycle)이
+		유지되는 것을 의미한다.
+     */
+
+	function outer_function1() {
+    	let outer1_var = "outer1 var value";
+    	/******** inner function *********/
+    	function inner_function1() {
+    		let inner1_var = "inner1 var value";
+    		document.write("inner_function1 -> outer1_var : " + outer1_var + "<br>");
+    		document.write("inner_function1 -> inner1_var : " + inner1_var + "<br>");
+    	}
+    	document.write("----------------outer_function1에서 inner_function1호출 시작---------------<br>");
+    	inner_function1();
+    	document.write("-----------------outer_function1에서 inner_function1호출 끝----------------<br>");
+    	
+    	document.write("outer_function1 -> outer1_var : " + outer1_var + "<br>");
+    	document.write("outer_function1 -> inner1_var : 존재하지 않음<br>");//Uncaught ReferenceError: inner1_var is not defined
+    	return inner_function1;//inner_function1()->괄호붙이면 안 됨
+    }
+	
+    
+    function outer_function2() {
+    	let outer2_var = "outer2 var value";
+    	return function() {
+    		let inner2_var = "inner2 var value";
+    		document.write("익명 inner_function2 -> outer2_var : " + outer2_var + "<br>");
+    		document.write("익명 inner_function2 -> inner2_var : " + inner2_var + "<br>");
+    	}
+    }
+
+    
+    function outer_function4(a,b) {
+    	let c = a + b;
+    	return function() {
+    		document.write("익명 inner_function4() -> a : " + a + "<br>");
+    		document.write("익명 inner_function4() -> b : " + b + "<br>");
+    		document.write("익명 inner_function4() -> c : " + c + "<br>");
+    	}
+    }
+    
+    
+</script>
+
+</head>
+<body>
+	<h1>javascript inner function,closure(클로져)</h1>
+	<hr />
+	<script type="text/javascript">
+		document.write('######################outer_function1()호출 시작##################<br>');
+		let returnInnerFunction1 = outer_function1();
+		document.write('######################outer_function1()호출  끝##################<br>');
+		
+		
+		document.write('######################반환받은 inner_function1()호출 시작##################<br>');
+		returnInnerFunction1();
+		document.write('######################반환받은 inner_function1()호출   끝##################<br>');
+		
+		
+		document.write('######################반환받은 inner_function2()호출 시작##################<br>');
+		let returnInnerFunction2 = outer_function2();
+		returnInnerFunction2();
+		document.write('######################반환받은 inner_function2()호출   끝##################<br>');
+		
+		
+		document.write('######################반환받은 inner_function3()호출 시작##################<br>');
+		document.write('######################반환받은 inner_function3()호출   끝##################<br>');
+		
+		
+		document.write('######################반환받은 inner_function4()호출  시작##################<br>');
+		let returnInnerFunction4 = outer_function4(300, 400);
+		returnInnerFunction4();
+		
+		outer_function4(300, 400)();
+		
+		document.write('######################반환받은 inner_function4()호출    끝##################<br>');
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
