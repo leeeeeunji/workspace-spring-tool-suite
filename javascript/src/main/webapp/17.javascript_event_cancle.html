@@ -5,32 +5,66 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	
-	
+	window.addEventListener('load', function() {
 		/*
-		window.onload 이벤트발생시점
-		   - DOM Tree 생성직후 렌더링전에호출
+		window.onload 이벤트 발생시점
+		   - DOM Tree 생성 직후 렌더링 전에 호출
 		 */
 		/*******이벤트등록*********/
+		document.getElementById('tweet')
+				.addEventListener('click', function() {
+					alert('상세보기');
+				});
+		document.getElementById('imagespan')
+				.addEventListener('click', function(e) {
+					alert('프로필보기');
+					e.stopPropagation();
+				});
+		//load시에 addEventListener 실행. addEventListener 실행될 때 익명함수 실행
 		
-	    	
-		/*
-	    	anchor클릭시
-	    	1.click event발생(o)
-	    	2.href에기술된 url로 page요청(o)
-	    	*/
-	   
-	    	/*
-	    	anchor클릭시
-	    	1.click event발생(o)
-	    	2.href에기술된 url로 page요청취소( X )[e.preventDefault();]
-	    	*/
-	    	
-		  /*
-	    	submit버튼클릭시
-	    	1.submit event발생(o)
-	    	2.action 에기술된 url로 page요청( x )
-	    	*/
-	    
+	});
+	
+	
+	document.getElementById("mainp").addEventListener('click', function(e) {
+		alert('main.jsp로 페이지 기반 요청');
+	});
+	/*
+   	anchor클릭시
+   	1.click event발생(o)
+   	2.href에 기술된 url로 page요청(o)
+   	*/
+   	
+   	
+   	document.getElementById("maina").addEventListener('click', function(e) {
+		alert('main.jsp로 페이지 기반 요청');
+	   	/*
+	   	anchor클릭시
+	   	1.click event발생(o)
+	   	*/
+	   	e.preventDefault();
+	   	/*
+	   	2.href에 기술된 url로 page요청취소( X )[e.preventDefault();]
+	   	*/
+	});
+   	
+	
+ 	/*
+   	submit버튼 클릭시
+   	1.submit event발생(o)
+   	2.action 에 기술된 url로 page요청( x )
+   	*/
+   	document.getElementById("f")
+   			.addEventListener('submit', function(e) {
+   				/*
+   			   	submit버튼 클릭시
+   			   	1.submit event발생(o)
+   			   	2.action 에 기술된 url로 page요청( x )
+   			   	*/
+   			   	alert('submit버튼 클릭 시, join.jsp로 페이지요청 취소');
+   				console.log(e.terget);
+   				e.preventDefault();
+   			});
+   	
 	
 	    	
 	/*
@@ -51,7 +85,7 @@
 			<span id="imageSpan"> <img src='penguin1.gif' width="50px"
 				height="50px" style="border: 1px solid red" />
 			</span> 
-			오늘은날씨가좋아요!!!
+			오늘은 날씨가 좋아요!!!
 		</div>
 	</div>
 
@@ -62,9 +96,9 @@
 
 	<h2>디폴트 이벤트 취소[e.preventDefault()](page요청취소)</h2>
 	1.anchor tag:
-	<a id="mainp" href='main.jsp'>메인페이지요청[페이지요청]</a>
+	<a id="mainp" href='main.jsp'>메인페이지 요청[페이지요청]</a>
 	<br /> 2.anchor tag:
-	<a id="maina" href='main.jsp'>메인페이지요청[AJAX요청]</a>
+	<a id="maina" href='main.jsp'>메인페이지 요청[AJAX요청]</a>
 	<br />
 	<br />
 	<form id="f" name="f" action="join.jsp" method="get">

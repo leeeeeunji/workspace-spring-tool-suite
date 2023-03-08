@@ -4,34 +4,60 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	
+	let count = 0;
 	function create() {
-		
+		count++;
 		/*
-		<< Node생성기능 document객체만가지는 기능 >>
+		<< Node생성기능 document객체만 가지는 기능 >>
 		1.div Element(tag)
 		 */
+		let newDivE = document.createElement('div');
+		
+		newDivE.setAttribute("id", "newDiv" + count);
+		newDivE.setAttribute("style", "border:1px solid gold");
 		
 			/*
 			1-1.TextNode생성
 			 */
-			
+			let textMessage = `새로 생성된 DIV${count}의 TextNode`;
+			let newTextNode = document.createTextNode(textMessage);
+			newDivE.appendChild(newTextNode);
+			 
 			/*
 			1-2.img Element생성
 				<img src='p_red.png' width='20px' height='20px'/>
 			 */
+			 newDivE.innerHTML = "<img src='p_blue.png' width='20px' height='20px'> " + newDivE.innerHTML + " <img src='p_red.png' width='20px' height='20px'>";
+			 
 			 
 		/*
 		2.DOM Tree에추가
 		 */
-	
+		var parentDivE = document.getElementById('parent');
+		parentDivE.appendChild(newDivE);
 	}
+	
 	function remove() {
-	   
-	   
+	   if(count==0) return;
+	   let removeDivE = document.getElementById("newDiv" + count);
+	   let parentDivE = document.getElementById("parent");
+	   parentDivE.removeChild(removeDivE);
+	   count--;
 	}
 	
+	let imageNo = 1;
 	function update() {
+	   /*
+	   let bodyNodeList = document.getElementsByTagName('body');
+	   let bodyE = bodyNodeList[0];
+	   */
+	   let bodyE = document.body;
+	   bodyE.style.backgroundImage = "url('penguin" + imageNo + ".gif')";
+	   bodyE.style.backgroundRepeatX = 'no-repeat';
+	   bodyE.style.backgroundRepeatY = 'no-repeat';
+	   //bodyE.style.backgroundSize = 'cover';
+	   imageNo++;
+	   imageNo = imageNo%3+1;
 	   
 	}
 </script>
@@ -42,7 +68,7 @@
 	<div id='parent'>
 		<!-- 
 		<div id="newDiv1" style="border: 1px dotted gold;">
-			새로생성된DIV1 의 TextNode
+			새로생성된 DIV1 의 TextNode
 		</div>
  		-->
 	</div>

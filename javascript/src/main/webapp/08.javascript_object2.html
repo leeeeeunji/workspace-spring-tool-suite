@@ -13,6 +13,66 @@
 	/*
 	JSON
 	*/
+	const studentObject1 = {
+			id : 'xxx',
+			name : 'sim',
+			kor : 100,
+			eng : 80,
+			math : 99,
+			tot : 0,
+			avg : 0.0,
+			calculateTot : function(){
+				this.tot = this.kor + this.eng + this.math;
+			},
+			calculateAvg : function(){
+				this.avg = this.tot / 3;
+			},
+			toString : function(){
+				return "[" + this.id + "]" + this.name + "," + this.kor + "," + this.eng + "," + this.math + "," + this.tot + "," + this.avg;
+			}
+	}
+	
+	const studentObject2 = {
+			id : 'yyy',
+			name : 'lee',
+			kor : 80,
+			eng : 100,
+			math : 95,
+			tot : 0,
+			avg : 0.0,
+			calculateTot : function(){
+				this.tot = this.kor + this.eng + this.math;
+			},
+			calculateAvg : function(){
+				this.avg = this.tot / 3;
+			},
+			toString : function(){
+				return "[" + this.id + "]" + this.name + "," + this.kor + "," + this.eng + "," + this.math + "," + this.tot + "," + this.avg;
+			}
+	}
+	
+	const studentObject3 = {
+			id:'zzz',
+			name : 'park',
+			kor : 100,
+			eng : 100,
+			math : 100,
+			tot : 0,
+			avg : 0.0,
+			calculateTot : function(){
+				this.tot = this.kor + this.eng + this.math;
+			},
+			calculateAvg : function(){
+				this.avg = this.tot / 3;
+			},
+			toString:function(){
+				return "[" + this.id + "]" + this.name + "," + this.kor + "," + this.eng + "," + this.math + "," + this.tot + "," + this.avg;
+			}
+	}
+	
+	const studentArray = [studentObject1, studentObject2, studentObject3];
+	
+	//console.log(this);//=window
 	
 </script>
 </head>
@@ -20,6 +80,11 @@
 <h1>생성자 함수1</h1><hr>
 <script type="text/javascript">
 	document.write('--------------student 리스트---------------------<br>');
+	for(let i = 0; i < studentArray.length; i++) {
+		studentArray[i].calculateTot();//괄호 필수
+		studentArray[i].calculateAvg();
+		document.write(studentArray[i].toString() + "<br>");
+	}
 	
 </script>
 </body>

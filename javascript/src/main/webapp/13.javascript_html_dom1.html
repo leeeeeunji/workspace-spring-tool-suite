@@ -5,14 +5,30 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function findById(){
-		
+		let div1E = document.getElementById('div1');
+		let div2E = document.getElementById('div2');
+		let div3E = document.getElementById('div3');
+		let div4E = document.getElementById('div4');
+		div1E.innerHTML = "<form>검색어<input type='search'/><input type='submit' value='검색'/></form>"
+		div2E.innerHTML = 'div2 chanhge';
+		div3E.style.border = '3px solid red';
+		div4E.style.visivility='hidden';
 	}
 	function findByClass(){
-		
+		let divNodeList =  document.getElementsByClassName('menu');
+		for(let i=0; divNodeList.length; i++) {
+			divNodeList[i].style.color='red';
+			divNodeList[i].style.background='black';
+			divNodeList[i].style.border='1px dotted blue';
+		}
 	}
 	var count=0;
 	function findByTagName(){
-		 
+		 let h1ENodeList = document.getElementsByTagName("h1");
+		 for(let i = 0; i < h1ENodeList.length; i++) {
+			 h1ENodeList[i].innerHTML = 'h1변경[' + count++ + ']';
+			 h1ENodeList[i].style.fontSize = count + 'pt';
+		 }
 	}
 </script>
 </head>
@@ -22,9 +38,9 @@
 	<h1>HTML DOM객체 찾기</h1>
 	<hr>
 	<ol>
-		<li>document.getElementById('id');[한개엘레멘트]</li>
-		<li>document.getElementsByClassName('className');[여러개엘레멘트]</li>
-		<li>document.getElementsByTagName('tagName');[여러개엘레멘트]</li>
+		<li>document.getElementById('id');[한개 엘레멘트]</li>
+		<li>document.getElementsByClassName('className');[여러개 엘레멘트]</li>
+		<li>document.getElementsByTagName('tagName');[여러개 엘레멘트]</li>
 	</ol>
 	<div id="div1">id=div1</div>
 	<div id="div2">id=div2</div>
@@ -42,9 +58,9 @@
 		id=resultDiv<br>
 	</div>
 	<div>
-		<input type="button" value="id로찾기" onclick="findById();"> 
-		<input type="button" value="class로찾기" onclick="findByClass();"> 
-		<input type="button" value="tagName으로찾기" onclick="findByTagName();">
+		<input type="button" value="id로 찾기" onclick="findById();"> 
+		<input type="button" value="class로 찾기" onclick="findByClass();"> 
+		<input type="button" value="tagName으로 찾기" onclick="findByTagName();">
 	</div>
 </body>
 </html>

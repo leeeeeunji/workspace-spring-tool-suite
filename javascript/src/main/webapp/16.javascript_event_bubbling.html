@@ -13,8 +13,9 @@
 	function eventStopPropagation(e){
 		alert('p');
 		//이벤트버블링중지
+		e.stopPropagation();
 		
-	} 
+	};
 </script>
 </head>
 <body onclick="alert('body');">
