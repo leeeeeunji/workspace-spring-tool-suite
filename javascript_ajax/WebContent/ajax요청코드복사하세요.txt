@@ -1,0 +1,5 @@
+xhr=new XMLHttpRequest();
+xhr.open('GET','xxx.jsp');
+xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xhr.onload=callBackFunction;
+xhr.send("id=ccc");

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	body{
+		background-color: gray;
+	}
+	li{
+		list-style: none;
+	}
+</style>
+<script type="text/javascript" src='../httpRequest.js'></script>
+<script type="text/javascript">
+	
+	function requestOpenApi(){
+		var xmlUrl1="http://api.flickr.com/services/feeds/photos_public.gne?id=117992213@N05&format=rest";
+		var xmlUrl2="http://api.flickr.com/services/feeds/geo/?id=31911236@N07&lang=ko-kr";
+		sendRequest(xmlUrl2,null,displayResult,'GET');
+	}
+	function displayResult(){
+		if(xhr.readyState==4){
+			var xmlStr=xhr.responseText;
+			var xmlDocument=xhr.responseXML;
+			document.getElementById("printDiv").innerHTML=xmlStr;
+			console.log(xmlDocument);
+		}
+	}
+	
+</script>
+</head>
+<body>
+<h1 onclick="requestOpenApi();">OPEN API XML[클릭시요청]</h1>
+<hr/>
+<div id="printDiv" style="border: 1px solid blue;width: 70%">
+	
+</div>
+</body>
+</html>

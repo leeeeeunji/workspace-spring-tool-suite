@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+    var xhr=null;
+	function ajaxRequestIdCheck(){
+		  
+	    	var idStr = document.f.id.value;
+	    	if(idStr==null||idStr.trim()==''){
+	    	    return;
+	    	}
+			/*
+			AJAX요청순서
+			*/
+			/*
+			1. XMLHttpRequest객체생성
+			*/
+			xhr = new XMLHttpRequest();
+			
+			/*
+			2. 요청속성설정 
+			*/
+			xhr.open('GET', '02.ajaxRequest.jsp?id=' + idStr);
+				/*
+				응답이 도착했을 때 실행되는 콜백함수 등록(이벤트 프로퍼티에 함수 등록)
+				*/
+			xhr.onload = responseCallBack;
+			/*
+			3.요청
+			*/
+			xhr.send(null);
+			
+			
+	}	
+	/*
+	응답이 도착했을때 실행되는 사용자정의 콜백함수
+	*/
+	function responseCallBack(){
+		let responseStr = xhr.responseText;
+		document.getElementById('msg').innerHTML = responseStr;
+	}
+</script>
+</head>
+<body>
+<h1>ajax요청</h1><hr/>
+<form name="f" id="f" action="">
+	아이디:<input type="text" name="id" id="id"  onkeyup="ajaxRequestIdCheck();">
+	<span id="msg"></span>
+</form>
+
+<pre>
+ page기반요청
+    1. submit버튼클릭[form.submit()]
+    2. anchor tag 클릭
+    3. location.href=''
+    요청-->기존페이지 DOM Tree 제거(UI사라짐) -->응답(HTML) -->응답HTML로 DOM Tree 다시생성 --> UI렌더링
+ 
+ ajax 요청
+    1. XMLHttpRequest.send()메쏘드사용 
+    
+    요청-->기존페이지 DOM Tree 유지(UI안사라짐) -->응답데이타(text,html,json,xml) -->응답데이타 로 DOM Tree 일부변경 -->  일부UI 렌더링
+</pre>
+</body>
+</html>
+
+
+
+
+
+
+

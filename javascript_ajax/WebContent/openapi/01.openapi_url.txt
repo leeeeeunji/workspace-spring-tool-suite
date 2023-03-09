@@ -1,0 +1,62 @@
+<<HTML>>
+https://m.naver.com/index.html
+<<XML>>
+http://api.flickr.com/services/feeds/photos_public.gne?id=117992213@N05&format=rest
+http://api.flickr.com/services/feeds/geo/?id=31911236@N07&lang=ko-kr
+
+
+<<JSONP>>
+https://api.foursquare.com/v2/venues/explore?ll=37.499597,127.031372&radius=500&limit=50&v=20220412&client_secret=4ZTOF5RTH4XPCVZVVX4QRNA41PYWM2KOSFL5DLNUK4X3ASD1&client_id=4XW1NDXIE042PYDOA5ISWYB25ESRHPJZN4HGGWECIM22V3TT&callback=foursquareCallBack
+http://api.flickr.com/services/feeds/photos_public.gne?id=117992213@N05&format=json
+
+<<NAVER JSON>>
+https://openapi.naver.com/v1/search/book?display=100&query=ajax   
+https://openapi.naver.com/v1/search/blog?display=100&query=ajax 
+<<NAVER XML>>
+https://openapi.naver.com/v1/search/book.xml?display=100&query=ajax 
+https://openapi.naver.com/v1/search/blog.xml?display=100query=ajax 
+
+<<JSON>>
+https://api.foursquare.com/v2/venues/explore?ll=37.499597,127.031372&radius=500&limit=50&v=20220412&client_secret=4ZTOF5RTH4XPCVZVVX4QRNA41PYWM2KOSFL5DLNUK4X3ASD1&client_id=4XW1NDXIE042PYDOA5ISWYB25ESRHPJZN4HGGWECIM22V3TT
+https://api.androidhive.info/contacts/
+
+{"contacts": [ 
+        { 
+                "id": "c200", 
+                "name": "Ravi Tamada", 
+                "email": "ravi@gmail.com", 
+                "address": "xx-xx-xxxx,x - street, x - country", 
+                "gender" : "male", 
+                "phone": { 
+                    "mobile": "+91 0000000000", 
+                    "home": "00 000000", 
+                    "office": "00 000000"
+                } 
+        }, 
+        { 
+                "id": "c201", 
+                "name": "Johnny Depp", 
+                "email": "johnny_depp@gmail.com", 
+                "address": "xx-xx-xxxx,x - street, x - country", 
+                "gender" : "male", 
+                "phone": { 
+                    "mobile": "+91 0000000000", 
+                    "home": "00 000000", 
+                    "office": "00 000000"
+		}
+	},
+	....
+	]
+}
+
+
+
+
+
+
+
+
+
+
+
+
