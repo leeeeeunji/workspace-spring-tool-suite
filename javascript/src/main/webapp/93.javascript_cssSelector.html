@@ -37,12 +37,23 @@ div.myClass{
 	
 	<script type="text/javascript">
 		/*********(,or)  #content or div**********/
+		let nodeList1 = document.querySelectorAll('#content, div');
+		for(i = 0; i < nodeList1.length; i++) {
+			nodeList1[i].style.border = '1px solid blue';
+		}
 		
 		/*********class가 myClass인 모든 엘레멘트*****/
+		let nodeList2 = document.querySelectorAll('.myClass');
+		for(i = 0; i < nodeList2.length; i++) {
+			nodeList2[i].style.color = 'green';
+		}
 		
 		/*********div 엘레멘트중에서 class가 myClass인 모든 엘레멘트*****/
+		let nodeList3 = document.querySelectorAll('div.myClass');
+		nodeList3[0].style.backgroundColor = 'purple';
 		
 		/*********id가 content인 엘레멘트*****/
+		document.querySelector("#content").style.backgroundColor = 'aliceblue';
 	
 	</script>
 </body>

@@ -20,9 +20,15 @@
 			*/
 			
 			window.onload=function(e){
-				/*****dom tree생성후 랜더링전 dom node찾기******/
+				/*****dom tree생성 후 랜더링 전 dom node찾기******/
 				//document.getElementsByTagName("div");
+				let divElementList = document.querySelectorAll("div");
+				for(let i = 0; i < divElementList.length; i++) {
+					divElementList[i].style.background = 'pink';
+				}
 				
+				let divElement = document.querySelector("div");
+				divElement.style.border = "1px dotted blue";
 			};
 			
 			
@@ -32,25 +38,25 @@
 	</head>
 	<body style="font-size: 15pt">
 		<h3>querySelector</h3>
-		<div>
-			CSS 선택자를 이용한 HTML Element 검색 div
-		</div>
-		<div>
-			CSS 선택자를 이용한 HTML Element 검색 div
-		</div>
-		<div>
-			CSS 선택자를 이용한 HTML Element 검색 div
-		</div>
+		<p>
+			CSS 선택자를 이용한 HTML Element 검색 p
+		</p>
+		<p>
+			CSS 선택자를 이용한 HTML Element 검색 p
+		</p>
+		<p>
+			CSS 선택자를 이용한 HTML Element 검색 p
+		</p>
 		<h3>querySelectorAll</h3>
-		<p>
-			CSS 선택자를 이용한 HTML Element 검색 p
-		</p>
-		<p>
-			CSS 선택자를 이용한 HTML Element 검색 p
-		</p>
-		<p>
-			CSS 선택자를 이용한 HTML Element 검색 p
-		</p>
+		<div>
+			CSS 선택자를 이용한 HTML Element 검색 div
+		</div>
+		<div>
+			CSS 선택자를 이용한 HTML Element 검색 div
+		</div>
+		<div>
+			CSS 선택자를 이용한 HTML Element 검색 div
+		</div>
 		
 		
 		
