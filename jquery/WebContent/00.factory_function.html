@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-my-0.1.js" >
+</script>
+<script type="text/javascript">
+	/*
+	<<< jQuery factory function에 들어갈수있는인자>>>
+		1 . $('#id') , $('h1') ... 						:css selector문자열
+		2 . $(document),$(document.joinForm),$(Element)	:표준객체(Element)
+		3 . $(function(){...})							:함수
+		4 . $('<div></div>')							:태그문자열
+		    div element jQuery wrapper객체생성
+	*/
+	
+	console.log("1" + window.jQuery);
+	console.log("2" + window.$);
+	$(function() {
+		console.log('------DOM tree 로딩 직후 호출되는 코드[jQuery, $]------');			
+	});
+	
+	window.onload=function(){
+		console.log('------DOM tree 로딩 직후 호출되는 코드[window.onload]------');	
+		let jQueryWrapperObject1 = jQuery('h1');
+		let jQueryWrapperObject2 = $('h2');
+		console.log("3. factory function return : " + jQueryWrapperObject1);
+		console.log("4. factory function return : " + jQueryWrapperObject2);
+		
+		jQueryWrapperObject1.css('color', 'blue');
+		jQueryWrapperObject2.css('background', 'gold');
+		jQueryWrapperObject1.text('오늘은 jQuery를 공부합니다.');
+		jQueryWrapperObject2.text('factory function()은 중요한 내용입니다.');
+		
+		$('h3').css('background', 'pink').text('jquery chaining coding!');
+		$('h4').text('힘내세요~~~').css('border','5px dotted blue');
+		$('h5').text('오늘은 월요일입니다!').css('color', 'green');
+		$('h6').text('오늘은 월요일입니다!').css('color', 'purple').css('background', 'gray');
+		
+		console.log("$('h1').text() => " + $('h1').text());
+		console.log("$('h2').text() => " + $('h2').text());
+		
+		let nameArray = ['kim, lim, sim, Tim, gim'];
+		$.each(nameArray, function(i, element) {
+			console.log(i + "-> " + element);
+		});
+		
+		let h3Element = document.querySelector('h3');
+		let h3jQueryObject = $(h3Element);
+		console.log("h3Element 표준객체 : " + h3Element);
+		console.log("h3jQueryObject jQuery객체 : " + h3jQueryObject);
+		//h3Element.text('jQuery객체 아님') (X)
+		h3jQueryObject.text('>>>>>>>>>>>>>> jQuery객체');
+		
+	};
+	
+</script>
+</head>
+<body>
+<h1>jQuery,$[factory function]</h1>
+<h1>jQuery,$[factory function]</h1>
+<h1>jQuery,$[factory function]</h1>
+<hr/>
+<h2>jQuery,$[factory function]</h2>
+<h3>jQuery,$[factory function]</h3>
+<h3>jQuery,$[factory function]</h3>
+<h3>jQuery,$[factory function]</h3>
+<h4>jQuery,$[factory function]</h4>
+<h5>jQuery,$[factory function]</h5>
+<h6>jQuery,$[factory function]</h6>
+
+</body>
+</html>

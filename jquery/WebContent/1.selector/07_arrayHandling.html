@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>배열 처리 메소드 활용</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	let listElementArray = $('#nameList > li').get();
+	let listElement0 = $('#nameList > li').get(0);
+   	console.log("1. li element array : " + listElementArray);
+   	console.log("2. li element array index 0 : " + listElement0);
+   	console.log("3. li element array index 0 -> listElement0.firstChild.nodeValue : " + listElement0.firstChild.nodeValue);
+   	//=
+   	console.log("3. li element array index 0 -> $(listElement0).text() : " + $(listElement0).text());
+	$('h2').text("Members of Groups are " + $('#nameList > li').get().length + "명");
+});
+</script>
+</head>
+<body style="padding: 10px;">
+	<h2></h2>
+	<ul id="nameList">
+		<li>권하나</li>
+		<li>노자훈</li>
+		<li>박유홍</li>
+		<li>윤용환</li>
+		<li>이도영</li>
+	</ul>
+</body>
+</html>

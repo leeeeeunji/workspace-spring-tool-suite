@@ -30,7 +30,7 @@ menuGuestHome.addEventListener('click', function(e) {
 });
 menuGuestList.addEventListener('click', function(e) {
 	let params = '';
-	let jsonResult = Service.guestService('GET', 'guest/guest_list_json.jsp', params);
+	let jsonResult = Service.guestService('GET', URL.GUEST_LIST_URL, params);
 	View.render("#guest-list-template", jsonResult, "#content");
 	e.preventDefault();
 });
@@ -61,7 +61,7 @@ document.addEventListener('click', function(e) {
 		<a href="#" class="user guest_item_a" guest_no="585"> 3시40분 시작</a>
 		*/
 		let params = 'guest_no=' + e.target.getAttribute("guest_no");
-		let jsonResult = Service.guestService('POST', URL.GUEST_DETAIL_URL, params);
+		let jsonResult = Service.guestService('GET', URL.GUEST_DETAIL_URL, params);
 		View.render("#guest-detail-template", jsonResult, "#content");
 	}
 	
@@ -77,15 +77,115 @@ document.addEventListener('click', function(e) {
 	}
 	
 	/********************** guest_write_action ***********************/
+	if(e.target.id == 'btn.write.action') {
+		if (document.f.guest_name.value == "") {
+			alert("이름을 입력하십시요.");
+			document.f.guest_name.focus();
+			return false;
+		}
+		if (document.f.guest_email.value == "") {
+			alert("이메일을 입력하십시요.");
+			document.f.guest_email.focus();
+			return false;
+		}
+		if (document.f.guest_homepage.value == "") {
+			alert("홈페이지를 입력하십시요.");
+			document.f.guest_homepage.focus();
+			return false;
+		}
+	
+		if (document.f.guest_title.value == "") {
+			alert("제목을 입력하십시요.");
+			document.f.guest_title.focus();
+			return false;
+		}
+		if (document.f.guest_content.value == "") {
+			alert("내용을 입력하십시요.");
+			document.f.guest_content.focus();
+			return false;
+		}
+		
+		const f = document.querySelector('#guest_write_form');
+		const formData = new FormData(f);
+		const params = new URLSearchParams(formData).toString();
+		
+		const jsonResult = Service.guestService('POST', URL.GUEST_WRITE_ACTION_URL, params);
+		if(sjonResult.code == 1){
+			//쓰기 성공시 리스트클릭이벤트 발생
+			menuGuestList.click();
+		}else if(jsonResult.code == 2) {
+			alert(jsonResult.msg);
+		}
+	}
+	
 	/********************** guest_modify_form_action ***********************/
+	if(e.target.id == 'btn_guest_modify_form') {
+		const params = 'guest_no=' + e.target.getAttribute('guest_no');
+		Service.guestService('POST', URL.GUEST_DETAIL_URL, params);
+		View.render('#guest-modify-form-template', jsonResult, '#content');
+	}
+	
 	/********************** guest_modify_action ***********************/
+	if(e.target.id == 'btn_guest_modify_action') {
+		if (document.f.guest_name.value == "") {
+			alert("이름을 입력하십시요.");
+			document.f.guest_name.focus();
+			return false;
+		}
+		if (document.f.guest_email.value == "") {
+			alert("이메일을 입력하십시요.");
+			document.f.guest_email.focus();
+			return false;
+		}
+		if (document.f.guest_homepage.value == "") {
+			alert("홈페이지를 입력하십시요.");
+			document.f.guest_homepage.focus();
+			return false;
+		}
+	
+		if (document.f.guest_title.value == "") {
+			alert("제목을 입력하십시요.");
+			document.f.guest_title.focus();
+			return false;
+		}
+		if (document.f.guest_content.value == "") {
+			alert("내용을 입력하십시요.");
+			document.f.guest_content.focus();
+			return false;
+		}
+		
+		const f = document.querySelector('#guest_modify_form');
+		const formData = new FormData(f);
+		const params = new URLSearchParams(formData).toString();
+		const jsonResult = Service.guestService('POST', URL.GUEST_MODIFY_ACTION_URL, params);
+		if(jsonResult == 1) {
+			const params = 'guest_no=' + f.guest_no.value;
+			Service.guestService('GET', URL.GUEST_DETAIL_URL, params);
+			View.render('#guest-detail-template', jsonResult, '#content');
+		}else if(jsonResult == 2) {
+			alert(jsonResult.msg);
+		}
+	}
 	
 	
-	e.preventDefault(jsonResult.msg);
+	/********************** guest_list ***********************/
+	if(e.target.id == 'btn_guest_list') {
+		menuGuestList.click();
+	}
+	
+	/********************** guest_write_form ***********************/
+	if(e.target.id == 'btn_guest_write_form') {
+		menuGuestWriteForm.click();
+	}
+	
+	e.preventDefault();
 	
 });
 
-
+/*
+초기로딩시에 home anchor click event trigger
+*/
+menuGuestHome.click();
 
 
 

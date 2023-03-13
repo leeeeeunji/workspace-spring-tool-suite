@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>배열 처리 메소드 활용</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+	/*
+	자바스크립트 표준
+	- ECMA (European Computer Manufacturers Association)
+	- Ecma International
+	- ECMAScript 5
+	- ecma5
+	*/
+	
+	/*
+	sort()
+		The sort() method sorts the items of an array.
+		The sort order can be either alphabetic or numeric,
+			and either ascending or descending.
+		Default sort order is alphabetic and ascending.
+	*/
+	$(function(){
+		
+		var memberNameArray=['kim','sim','kang','king','hong'];
+		memberNameArray.sort();
+		//memberNameArray.reverse();
+		//sort = 오름차순, reverse = 내림차순
+		memberNameArray.sort(function(name1, name2) {
+			if(name1 < name2) {
+				return 1;
+			}else {
+				return -1;
+			}
+		})
+		
+		var memberScoreArray=[89,45,23,98,12];
+		memberScoreArray.sort();
+		//memberScoreArray.reverse();
+		memberScoreArray.sort(function(score1, score2) {
+			if(score1 < score2) {
+				return 1;
+			}else {
+				return -1;
+			}
+		});
+	
+		
+		var memberArray=[
+				{'id':'guard1','name':'kim1','address':'경기도'},
+				{'id':'guard2','name':'kim2','address':'경기레'},
+				{'id':'guard3','name':'kim3','address':'경기미'},
+				{'id':'guard4','name':'kim4','address':'경기파'},
+				{'id':'guard5','name':'kim5','address':'경기솔'}
+		];
+		memberArray.sort(function(member1, member2) {
+			if(member1.address < member2.address) {
+				return 1;
+			}else {
+				return -1;
+			}
+		});
+		
+		/*************정렬결과출력**************/
+		//$('.sorted1').html(memberNameArray.join(', '));
+		$('.sorted1').html(memberNameArray.join('<br>'));
+		
+		$('.sorted2').html(memberScoreArray.join(' -> '));
+
+		$.each(memberArray, function(i, member) {
+			$('.sorted3').append(`${member.id}, ${member.name}, ${member.address}<br>`);
+		})
+	});
+	
+	
+	
+
+</script>
+</head>
+<body style="padding: 10px;">
+	<h2>Members of my Group are</h2>
+	<p class="sorted1"></p>
+	<p class="sorted2"></p>
+	<p class="sorted3"></p>
+</body>
+</html>

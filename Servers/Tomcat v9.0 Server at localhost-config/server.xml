@@ -154,7 +154,7 @@
 
         
 
-      <Context docBase="javascript" path="/javascript" reloadable="true" source="org.eclipse.jst.jee.server:javascript"/><Context docBase="javascript_ajax" path="/javascript_ajax" reloadable="true" source="org.eclipse.jst.jee.server:javascript_ajax"/><Context docBase="guest_javascript_ajax" path="/guest_javascript_ajax_sample" reloadable="true" source="org.eclipse.jst.jee.server:guest_javascript_ajax"/></Host>
+      <Context docBase="javascript" path="/javascript" reloadable="true" source="org.eclipse.jst.jee.server:javascript"/><Context docBase="javascript_ajax" path="/javascript_ajax" reloadable="true" source="org.eclipse.jst.jee.server:javascript_ajax"/><Context docBase="guest_javascript_ajax" path="/guest_javascript_ajax_sample" reloadable="true" source="org.eclipse.jst.jee.server:guest_javascript_ajax"/><Context docBase="jquery" path="/jquery" reloadable="true" source="org.eclipse.jst.jee.server:jquery"/></Host>
     </Engine>
   </Service>
 </Server>

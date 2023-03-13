@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            
+            $('h1,h3').next().hide();
+            
+        	$('h1,h3').click(function(e){
+        		/**************기본효과(slide)*********/
+        		/*
+        		$(e.target).next().show();
+        		$(e.target).next().hide();
+        		$(e.target).next().toggle();
+        		*/
+        		/**************slide효과***************/
+        		//$(e.target).next().slideDown();
+        		//$(e.target).next().slideUp();
+        		
+        		$(e.target).next().slideToggle(2000,function(){
+        		    alert('slideToggle 이완료된후 실행하는 function');
+        		});
+        		
+        		/**************fade효과***************
+        		$(e.target).next().fadeIn();
+        		$(e.target).next().fadeOut();
+        		$(e.target).next().fadeToggle(2000);
+        		*/
+        	});
+        	
+        	/*
+        	var h1ElementArray = document.getElementsByTagName();
+        	for(var i=0;i<h1ElementArray.length;i++){
+        		h1ElementArray[i].addEventListener('click',function(e){
+        			
+        		});
+        	}
+        	*/
+        });
+    </script>
+</head>
+<body>
+    <h1>방명록타이틀1</h1>
+    <div>
+        <h3>내용소제목1</h3>
+        <div>
+        	<p>내용1</p>
+        	<p>내용1</p>
+        	<p>내용1</p>
+        	<p>내용1</p>
+        	<p>내용1</p>
+        	<p>내용1</p>
+        	<p>내용1</p>
+        	<p>내용1</p>
+        </div>
+    </div>
+    <h1>방명록타이틀2</h1>
+    <div>
+        <h3>내용소제목2</h3>
+         <div>
+        	<p>내용2</p>
+        	<p>내용2</p>
+        	<p>내용2</p>
+        	<p>내용2</p>
+        	<p>내용2</p>
+        	<p>내용2</p>
+        	<p>내용2</p>
+        	<p>내용2</p>
+        </div>
+    </div>
+</body>
+</html>
