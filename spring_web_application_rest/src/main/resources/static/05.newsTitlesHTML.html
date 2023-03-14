@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/*
+	1.tag selector
+	*/
+	h1{
+		text-align: center;
+		color: blue;
+	}
+	ul{
+		list-style:none;	
+		padding: 0px;
+	}
+	li{
+		padding-bottom: 5px;
+		font-weight:bold;
+			
+	}
+	/*
+	2. class selector
+	*/
+	.titleBackClass{
+		background-color: pink;
+	}
+	h1.titleBackClass{
+		background-color: gold;
+	}
+	
+	/*
+	3.id selector
+	*/
+	#content{
+		border: 1px solid black;
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 50px;
+		padding:20px ;
+	}
+	#newsDiv{
+		padding-top:2%;
+		padding-left:5%;
+		padding-bottom:2%;
+	}
+	
+	
+</style>
+<script type="text/javascript" src="ajaxRequest.js"></script>
+<script type="text/javascript">
+	
+	function requestNews() {
+	   ajaxRequest('GET','05.newsTitlesHTML.jsp',null,responseNews);
+	}
+	function responseNews(xhr) {
+		document.getElementById('newsDiv').innerHTML=xhr.responseText;
+	    	   /*
+			<< 서버로부터받은데이타[HTML] >>
+			<ul>
+				<li>참으로 수고 많으셨습니다...[연합뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>IS 60개국 테러 위협 영상 공개…한국도 포함 포토[SBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>통일부 남북 당국회담 실무접촉서 입장차[KBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>내년도 수도권 집값·전세값↑…2∼3년후 조정[TBC뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국토부 폴크스바겐 경유차 연비 3단계로 조사[OMY뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>日롯데 신격호 소송 이해하는가 건강문제 제기[조선뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국가유공자 부인 위장 재혼시 유족자격 있다[YTN뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>청소년에 한달 100건 성매매 강요 조폭 징역 6년[CBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>한국인들 실직·이직 공포에 시달린다[ITWILL뉴스-2021. 4. 14 오후 12:33:32]</li>
+			</ul>
+			 */
+			 
+			/*
+			<< 보여줘야할데이타[HTML] >>
+			<ul>
+				<li>참으로 수고 많으셨습니다...[연합뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>IS 60개국 테러 위협 영상 공개…한국도 포함 포토[SBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>통일부 남북 당국회담 실무접촉서 입장차[KBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>내년도 수도권 집값·전세값↑…2∼3년후 조정[TBC뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국토부 폴크스바겐 경유차 연비 3단계로 조사[OMY뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>日롯데 신격호 소송 이해하는가 건강문제 제기[조선뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국가유공자 부인 위장 재혼시 유족자격 있다[YTN뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>청소년에 한달 100건 성매매 강요 조폭 징역 6년[CBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>한국인들 실직·이직 공포에 시달린다[ITWILL뉴스-2021. 4. 14 오후 12:33:32]</li>
+			</ul>
+			 */
+			
+	}
+	
+	window.onload=function(){
+		//DOM트리로딩후 실행
+		setInterval(requestNews,3000);
+	};
+	
+	
+</script>
+</head>
+<body>
+	<div id="content">
+		<h1 class="titleBackClass">실시간늬우스[HTML]</h1>
+		<hr>
+		<div id="newsDiv" class="titleBackClass">
+			<!-- 
+			<ul>
+				<li>참으로 수고 많으셨습니다...[연합뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>IS 60개국 테러 위협 영상 공개…한국도 포함 포토[SBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>통일부 남북 당국회담 실무접촉서 입장차[KBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>내년도 수도권 집값·전세값↑…2∼3년후 조정[TBC뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국토부 폴크스바겐 경유차 연비 3단계로 조사[OMY뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>日롯데 신격호 소송 이해하는가 건강문제 제기[조선뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국가유공자 부인 위장 재혼시 유족자격 있다[YTN뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>청소년에 한달 100건 성매매 강요 조폭 징역 6년[CBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>한국인들 실직·이직 공포에 시달린다[ITWILL뉴스-2021. 4. 14 오후 12:33:32]</li>
+			</ul>
+		 	 -->
+		</div>
+	</div>
+</body>
+</html>

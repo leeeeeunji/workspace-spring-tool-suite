@@ -17,11 +17,36 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	
+	let clickCount = 0;
+	let enterCount = 0;
+	let leaveCount = 0;
 	
 	$(function(){
-		
-		
+		/*
+		$('h2').click(function(e) {
+			$(e.target).html('jQuery에서 제공하는 Event 핸들링 메소드' + ++clickCount);
+		});
+		$('#mouseArea').mouseenter(function(e) {
+			$('#spResult').html(`mouse enter count : ${++enterCount}<br>
+								 mouse leave count : ${leaveCount}`);
+		});
+		$('#mouseArea').mouseleave(function(e) {
+			$('#spResult').html(`mouse enter count : ${enterCount}<br>
+								 mouse leave count : ${++leaveCount}`);
+		});
+		*/
+		$('h2').on('click', function(e){
+			$(e.target).html('jQuery에서 제공하는 Event 핸들링 메소드' + ++clickCount);
+		});
+		$('#mouseArea').on('mouseenter mouseleave', function(e) {
+			if(e.type == 'mouseenter') {
+				enterCount++;
+			}else if(e.type == 'mouseleave') {
+				leaveCount++;
+			}
+			$('#spResult').html(`mouse enter count : ${enterCount}<br>
+								 mouse leave count : ${leaveCount}`);
+		});
 		
 	});
 </script>

@@ -17,18 +17,26 @@ $(function() {
 	/*
 	현재DOM Tree에있는 엘레멘트만 이벤트처리
 	*/
-	
-	
+	/*
+	$('li').click(function(e) {
+		alert($(e.target).text());
+	});
+	*/
 	
 	/*
-	현재DOM Tree의 ul 에 자식으로 동적으로추가되는 li 엘레멘트도 이벤트처리
+	현재DOM Tree의 ul 에 자식으로 동적으로 추가되는 li 엘레멘트도 이벤트처리
 	*/
+	$('ul').on('click', 'li', function(e) {
+		alert($(e.target).text());
+	});
 	
 	
 	/*
 	동적노드추가버튼 이벤트처리
 	*/
-	
+	$('#btnAdd').click(function() {
+		$('ul').append('<li>list item ' + $('li').length + '</li>');
+	});
 	
 	
 });

@@ -67,7 +67,12 @@ td {
 	</div>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-	
+	$('td').css('border', '1px dotted red');
+	$('td:first').css('color', 'pink');
+	$('td:first-child').css('background', 'green');
+	$('td:last').css('color', 'red');
+	$('td:last-child').css('background', 'gold');
+	$('td:nth-child(2)').css('background', 'aliceblue');
 </script>	
 </body>
 </html>

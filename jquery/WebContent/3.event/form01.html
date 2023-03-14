@@ -25,11 +25,25 @@ td {
 	$(function() {
 		
 			/*
-			폼을이용한 서버로의 jquery ajax요청
-			1.parameter생성
-			2.jquery ajax요청
-			3.submit default중지
+			폼을 이용한 서버로의 jquery ajax요청
+			1.parameter 생성
+			2.jquery ajax 요청
+			3.submit default 중지
 			*/
+			/*
+			$('#f').on('submit',function(e) {
+				
+			});
+			=
+			*/
+			$('#f').submit(function(e) {
+				alert('submit -> ');
+				let parameter1 = $('#f').serialize();
+				let parameter2 = $(e.target).serialize();
+				console.log('parameter1 : ' + parameter1);
+				console.log('parameter1 : ' + parameter2);
+				e.preventDefault();
+			});
 			
 			
 			

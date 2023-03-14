@@ -4,39 +4,22 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         $(function(){
-            
-            $('h1,h3').next().hide();
-            
-        	$('h1,h3').click(function(e){
-        		/**************기본효과(slide)*********/
-        		/*
-        		$(e.target).next().show();
-        		$(e.target).next().hide();
-        		$(e.target).next().toggle();
-        		*/
-        		/**************slide효과***************/
-        		//$(e.target).next().slideDown();
-        		//$(e.target).next().slideUp();
-        		
-        		$(e.target).next().slideToggle(2000,function(){
-        		    alert('slideToggle 이완료된후 실행하는 function');
-        		});
-        		
-        		/**************fade효과***************
-        		$(e.target).next().fadeIn();
-        		$(e.target).next().fadeOut();
-        		$(e.target).next().fadeToggle(2000);
-        		*/
-        	});
-        	
+        	$('h1, h3').next().hide();
         	/*
-        	var h1ElementArray = document.getElementsByTagName();
-        	for(var i=0;i<h1ElementArray.length;i++){
-        		h1ElementArray[i].addEventListener('click',function(e){
-        			
-        		});
-        	}
-        	*/
+            $('h1, h3').next().hide();
+            $('h1, h3').next().show();
+            
+            $('h1, h3').next().fadeOut(2000);
+            $('h1, h3').next().fadeIn(2000);
+            $('h1, h3').next().slideUp(2000);
+            $('h1, h3').next().slideDown(2000);
+            $('h1, h3').next().fadeToggle(2000);
+            $('h1, h3').next().slideToggle(2000);
+            */
+            $('h1, h3').click(function(e) {
+            	//$(e.target).next().fadeToggle(2000);
+            	$(e.target).next().slideToggle(1000);
+            });
         });
     </script>
 </head>

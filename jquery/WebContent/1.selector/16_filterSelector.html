@@ -84,7 +84,15 @@ td{
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
+		$('tr').css('background', 'white');
+		$('tr:eq(0)').css('background', 'green');
+		$('td:eq(39)').css('background', 'pink');
+		$('tr:eq(0) > td:eq(9)').css('background', 'orange');
+		$('tr:eq(1) > td:gt(2)').css('background', 'gold');
+		$('tr:eq(2) > td:odd').css('background', 'tomato');
+		$('tr:eq(2) > td:even').css('background', 'purple');
+		$('tr:eq(3) > td:first').css('background', 'blue');
+		$('tr:eq(3) > td:last').css('background', 'red');
 		
 		
 		
