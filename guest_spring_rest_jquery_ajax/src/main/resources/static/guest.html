@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>방명록 관리</title>
+<link rel=stylesheet href="css/styles.css" type="text/css">
+<link rel=stylesheet href="css/guest.css" type="text/css">
+<link rel="icon" href="image/favicon-32x32.png">
+<style type="text/css" media="screen"></style>
+<script type="text/javascript">
+	
+</script>
+<script  defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+<script  src="js/app.js"  type="module" ></script>
+</head>
+
+<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
+	marginwidth=0 marginheight=0>
+	<!-- container start-->
+	<div id="container">
+		<!-- header start -->
+		<div id="header">
+			<!-- include_common_top.jsp start-->
+
+			<h1>
+				<a href="">방명록 JAVASCRIPT</a>
+			</h1>
+			<!-- include_common_top.jsp end-->
+		</div>
+		<!-- header end -->
+		<!-- navigation start-->
+		<div id="navigation">
+			<!-- include_common_left.jsp start-->
+
+			<p>
+				<strong>메 뉴</strong>
+			</p>
+			<ul class="guest_menus">
+				<li><a id="menu_guest_home" href="test.jsp">방명록홈</a></li>
+				<li><a id="menu_guest_list" href="#">방명록리스트</a></li>
+				<li><a id="menu_guest_write_form" href="#">방명록쓰기폼</a></li>
+
+			</ul>
+			<!-- include_common_left.jsp end-->
+		</div>
+		<!-- navigation end-->
+		<!-- wrapper start -->
+		<div id="wrapper">
+			<!-- content start -->
+			<!-- include_content start-->
+			<div id="content">
+				
+			</div>
+			<!-- include_content end-->
+			<!-- content end -->
+		</div>
+		<!--wrapper end-->
+		<div id="footer">
+			<!-- include_common_bottom.jsp start-->
+			<p align="center">Copyright (&copy;) By Kimkyoungho.[김경호] All
+				rights reserved.</p>
+			<!-- include_common_bottom.jsp end-->
+		</div>
+	</div>
+	<!--container end-->
+	<!-- #####################template###################### -->
+	<!-- guest-main-template -->
+	<script id="guest-main-template" type="text/x-handlebars-template">
+		<img src='image/enter.png' width="540" height="350px" style="margin: 10px" />
+	</script>
+	<!-- guest-list-template -->
+	<script id="guest-list-template" type="text/x-handlebars-template">
+		<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td><br>
+				<table style="padding-left: 10px" border="0" cellpadding="0"
+					cellspacing="0">
+					<tbody>
+						<tr>
+							<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리 -
+									리스트</b></td>
+						</tr>
+					</tbody>
+				</table>
+				<form name="f" method="post">
+
+					<table border="0" cellpadding="0" cellspacing="1" width="590"
+						bgcolor="BBBBBB">
+						<tbody>
+							<tr>
+								<td width="50" align="center" bgcolor="E6ECDE" height="22">번호</td>
+								<td width="300" align="center" bgcolor="E6ECDE">제목</td>
+								<td width="120" align="center" bgcolor="E6ECDE">이름</td>
+								<td width="120" align="center" bgcolor="E6ECDE">날짜</td>
+							</tr>
+							{{#data}}
+							<!-- guest start -->
+							<tr class="guest_item">
+								<td width="50" align="center" bgcolor="ffffff" height="20">124</td>
+								<td width="300" bgcolor="ffffff" style="padding-left: 10">
+									<a href="#" class="user guest_item_a" guest_no="124">{{guest_title}}
+								</a>
+								</td>
+								<td width="120" align="center" bgcolor="ffffff">{{guest_name}}</td>
+								<td width="120" align="center" bgcolor="ffffff">{{substring guest_date 0 10}}</td>
+							</tr>
+							<!-- guest end -->
+							{{/data}}
+						</tbody>
+					</table>
+				</form> <!-- button -->
+				<table border="0" cellpadding="0" cellspacing="1" width="590">
+					<tbody>
+						<tr>
+							<td align="right"><input type="button" id="btn_guest_write_form" value="방명록 쓰기"></td>
+						</tr>
+					</tbody>
+				</table></td>
+		</tr>
+	</tbody>
+</table>
+	</script>
+	<!-- guest-view-template -->
+	<script id="guest-detail-template" type="text/x-handlebars-template">
+	<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				<!--contents--> <br>
+				<table style="padding-left: 10px" border="0" cellpadding="0"
+					cellspacing="0">
+					<tbody>
+						<tr>
+							<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리 -
+									방명록 상세보기</b></td>
+						</tr>
+					</tbody>
+				</table> <!-- view Form  -->
+				<form name="f" method="post">
+					<input type="hidden" name="guest_no" value="3">
+					<table border="0" cellpadding="0" cellspacing="1" width="590"
+						bgcolor="BBBBBB">
+						<tbody>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">번호</td>
+								<td width="490" bgcolor="ffffff" align="left"
+									style="padding-left: 10px">3</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
+								<td width="490" bgcolor="ffffff" align="left"
+									style="padding-left: 10px">김경호3333</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">날짜</td>
+								<td width="490" bgcolor="ffffff" align="left"
+									style="padding-left: 10px">2022-07-22</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">홈페이지</td>
+								<td width="490" bgcolor="ffffff" align="left"
+									style="padding-left: 10px">http://</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">제목</td>
+								<td width="490" bgcolor="ffffff" align="left"
+									style="padding-left: 10px">방명록 사용법 [수정]gfhf</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="110">내용</td>
+								<td width="490" bgcolor="ffffff" align="left"
+									style="padding-left: 10px">방명록처럼 사용하시면 됩니다람쥐~~~</td>
+							</tr>
+						</tbody>
+					</table>
+				</form> <br>
+				<table width="590" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td align="center"><input type="button" value="수정"
+								id="btn_guest_modify_form" guest_no="1">
+								&nbsp; <input type="button" value="삭제"
+								id="btn_guest_remove_action" guest_no="1">
+								&nbsp; <input type="button" value="목록" id="btn_guest_list">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>
+	</script>
+	<!--guest-write-form-template  -->
+	<script id="guest-write-form-template" type="text/x-handlebars-template">
+		<table width="0" border="0" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td>
+						<!--contents--> <br>
+						<table style="padding-left: 10px" border="0" cellpadding="0"
+							cellspacing="0">
+							<tbody>
+								<tr>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리 -
+											방명록 쓰기</b></td>
+								</tr>
+							</tbody>
+						</table> <!-- guest write Form  -->
+						<form id="guest_write_form" name="f" method="post">
+							<table border="0" cellpadding="0" cellspacing="1" width="590"
+								bgcolor="BBBBBB">
+								<tbody>
+									<tr>
+										<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
+										<td width="490" align="left" bgcolor="ffffff"
+											style="padding-left: 10px"><input type="text"
+											style="width: 150" name="guest_name"></td>
+									</tr>
+									<tr>
+										<td width="100" align="center" bgcolor="E6ECDE" height="22">이메일</td>
+										<td width="490" align="left" bgcolor="ffffff"
+											style="padding-left: 10px"><input type="text"
+											style="width: 150" name="guest_email"></td>
+									</tr>
+									<tr>
+										<td width="100" align="center" bgcolor="E6ECDE" height="22">홈페이지</td>
+										<td width="490" align="left" bgcolor="ffffff"
+											style="padding-left: 10px"><input type="text"
+											style="width: 150" name="guest_homepage"></td>
+									</tr>
+									<tr>
+										<td width="100" align="center" bgcolor="E6ECDE" height="22">타이틀</td>
+										<td width="490" align="left" bgcolor="ffffff"
+											style="padding-left: 10px"><input type="text"
+											style="width: 240" name="guest_title"></td>
+									</tr>
+									<tr>
+										<td width="100" align="center" bgcolor="E6ECDE" height="22">내용</td>
+										<td width="490" align="left" bgcolor="ffffff"
+											style="padding-left: 10px"><textarea wrap="soft"
+												style="width: 240px" rows="10" name="guest_content"></textarea>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form> <br>
+						<table width="590" border="0" cellpadding="0" cellspacing="0">
+							<tbody>
+								<tr>
+									<td align="center"><input type="button" value="방명록쓰기" id="btn_guest_write_action"> &nbsp; 
+									<input type="button" id="btn_guest_list" value="방명록목록"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</script>
+	<!-- guest-modify-form-template -->
+	<script id="guest-modify-form-template" type="text/x-handlebars-template">
+		<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td><br>
+				<table style="padding-left: 10px" border="0" cellpadding="0"
+					cellspacing="0">
+					<tbody>
+						<tr>
+							<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리 -
+									방명록 수정</b></td>
+						</tr>
+					</tbody>
+				</table> <!-- modify Form  -->
+				<form name="f" method="post">
+					<input type="hidden" name="guest_no" value="3">
+					<table border="0" cellpadding="0" cellspacing="1" width="590"
+						bgcolor="BBBBBB">
+						<tbody>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">번호</td>
+								<td align="left" width="490" bgcolor="ffffff"
+									style="padding-left: 10px">3</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
+								<td align="left" width="490" bgcolor="ffffff"
+									style="padding-left: 10px"><input type="text"
+									style="width: 150" name="guest_name" value="김경호3333"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">홈페이지</td>
+								<td align="left" width="490" bgcolor="ffffff"
+									style="padding-left: 10px"><input type="text"
+									style="width: 150" name="guest_homepage" value="http://"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이메일</td>
+								<td align="left" width="490" bgcolor="ffffff"
+									style="padding-left: 10px"><input type="text"
+									style="width: 240" name="guest_email" value="guard3@naver.com"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">제목</td>
+								<td align="left" width="490" bgcolor="ffffff"
+									style="padding-left: 10px"><input type="text"
+									style="width: 240" name="guest_title" value="방명록 사용법 [수정]gfhf"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">내용</td>
+								<td align="left" width="490" bgcolor="ffffff"
+									style="padding-left: 10px"><textarea wrap="soft"
+										style="width: 240px" rows="10" name="guest_content">방명록처럼 사용하시면 됩니다람쥐~~~</textarea>
+
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+
+				<table width="590" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td align="center"><input type="button" value="수정"
+								id="btn_guest_modify_action"> &nbsp; <input
+								id="btn_guest_list" type="button" value="목록"></td>
+						</tr>
+					</tbody>
+				</table></td>
+		</tr>
+	</tbody>
+</table>
+	</script>
+	
+	
+	
+</body>
+</html>

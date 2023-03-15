@@ -49,14 +49,11 @@
 	
 	
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script type="text/javascript" src="ajaxRequest.js"></script>
 <script type="text/javascript">
 	
-	function requestNews() {
-	   ajaxRequest('GET','05.newsTitlesHTML.jsp',null,responseNews);
-	}
-	function responseNews(xhr) {
-		document.getElementById('newsDiv').innerHTML=xhr.responseText;
+	
 	    	   /*
 			<< 서버로부터받은데이타[HTML] >>
 			<ul>
@@ -86,13 +83,20 @@
 				<li>한국인들 실직·이직 공포에 시달린다[ITWILL뉴스-2021. 4. 14 오후 12:33:32]</li>
 			</ul>
 			 */
-			
-	}
+			$(function() {
+				setInterval(function() {
+					$.ajax({
+						url:'05.newsTitlesHTML',
+						dataType:'html',
+						success:function(responseHtml) {
+							$('#newsDiv').html(responseHtml);
+						}
+					});
+				}, 1000);
+			});
 	
-	window.onload=function(){
-		//DOM트리로딩후 실행
-		setInterval(requestNews,3000);
-	};
+	
+	
 	
 	
 </script>

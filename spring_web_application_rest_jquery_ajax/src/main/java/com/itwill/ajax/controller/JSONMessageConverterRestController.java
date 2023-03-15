@@ -18,37 +18,38 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 public class JSONMessageConverterRestController {
 
-	
 	@ApiOperation(value = "뉴스리스트")
-	@GetMapping(value = "/news", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/news",produces = "application/json;charset=UTF-8")
 	public List<News> newsTitlesListJson() {
 		return this.getNewsList();
 	}
-	
-	@GetMapping(value = "/news/{no}", produces = "application/json;charset=UTF-8")
-	public News newsTitleJSON(@PathVariable(name = "no") int no) {
-		News news = null;
+	@GetMapping(value = "/news/{no}" ,produces = "application/json;charset=UTF-8")
+	public News newsTitleJSON(@PathVariable int no ) {
+		News news=null;
 		for(News tempNews:this.getNewsList()) {
-			if(tempNews.getNo() == no) {
-				news = tempNews;
+			if(tempNews.getNo()==no) {
+				news=tempNews;
 				break;
 			}
 		}
 		return news;
 	}
-
 	/*
-	 * { "code": 1, 
-	 * 	 "msg":"성공", 
-	 * 	 "data": [ { "newsTitle": "참으로 수고 많으셨습니다…",
-	 * 				"company": "연합뉴스", 
-	 * 				"date": "2021. 10. 13 오전 10:48:19" },.. ] }
-	 * 
+	  { 
+	   "code": 1,
+	   "msg":"성공", 
+	   "data": [  { 
+	   				"newsTitle": "참으로 수고 많으셨습니다…",
+	  				"company": "연합뉴스", "date": "2021. 10. 13 오전 10:48:19" 
+	  				},
+	   			  .. 
+	           ]
+	  }
 	 */
 	
-	@GetMapping(value = "/map_news", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/map_news",produces = "application/json;charset=UTF-8")
 	public Map<String, Object> newsTitlesMapJson() {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String,Object> resultMap=new HashMap<String, Object>();
 		resultMap.put("code", 1);
 		resultMap.put("msg", "성공");
 		resultMap.put("data", this.getNewsList());

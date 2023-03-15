@@ -15,53 +15,74 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.ajax.domain.News;
 
-@RestController 
+@RestController
 public class JavaScriptAjaxRestController {
 	/*
 	 * << @ResponseBody >> 
-	 * - ViewResolver-->View-->foward jsp 를 사용하지 않는다 
+	 * - ViewResolver-->View-->foward jsp 를 사용하지않는다 
 	 * - MessageConverter(text,xml,json)가 클라이언트로 응답한다. 
 	 * - @RestController 어노테이션을 사용하면
 	 *   생략가능하다.
 	 */
 	@GetMapping("/02.ajaxRequest")
-	public String ajaxRequest(@RequestParam(name = "id", defaultValue = "") String id) throws Exception {
-		String msg = "";
-		if(id.startsWith("guard")) {
-			msg = "사용가능";
-		}else {			
-			msg = "사용불가";
+	public String ajaxRequest(@RequestParam(name = "id",defaultValue = "") String id) throws Exception {
+		String msg="";
+		if(id.startsWith("guard")){
+			msg="사용가능";
+		}else{
+			msg="사용불가능";
 		}
+		Thread.sleep(500);
 		return msg;
 	}
 
-	@GetMapping("/03.ajaxRequestGETPOST")
-	public String ajaxRequestGETPOST() throws Exception {
-		return "";
+	@RequestMapping(value = "03.ajaxRequestGETPOST")
+	public String ajaxRequestGETPOST(@RequestParam(required = true, defaultValue = "") String id) throws Exception {
+		String msg = "";
+		if (id.startsWith("guard")) {
+			msg = "사용가능";
+		} else {
+			msg = "사용불가능";
+		}
+		Thread.sleep(1000);
+		return msg;
 	}
 
-	@GetMapping("/04.server_clock")
+	@GetMapping("04.server_clock")
 	public String server_clock() {
 		return new Date().toLocaleString();
 	}
 
 	
+	@RequestMapping(value = "/05.newsTitlesHTML", produces = "text/plain;charset=UTF-8")
 	public String newsTitlesHTML() {
-		return "";
+		List<News> newsList = this.getNewsList();
+		StringBuffer sb = new StringBuffer();
+		sb.append("<ul>");
+		for (int i = 0; i < newsList.size(); i++) {
+			News news = newsList.get(i);
+			sb.append("<li>" + news.getTitle() + "[" + news.getCompany() + "-" + news.getDate() + "][HTML]</li>");
+		}
+		sb.append("</ul>");
+		return sb.toString();
 	}
 
-	
+	@GetMapping(value = "08.newsTitlesJSON", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> newsTitlesJSON() {
-		
-		return null;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("code", 1);
+		resultMap.put("msg", "성공");
+		resultMap.put("url", "guest_main");
+		resultMap.put("data", this.getNewsList());
+		return resultMap;
 	}
 
 	/*
 	{
-		"count":2,
-		"data":["자바","자라","자바라"]
+			"count":2,
+			"data":["자바","자라","자바라"]
 	}
-	*/
+	 */
 	public Map<String,Object> suggest(@RequestParam(value = "keyword",defaultValue = "") String keyword ) {
 		
 		return null;

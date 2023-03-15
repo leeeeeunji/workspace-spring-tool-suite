@@ -3,20 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script type="text/javascript" src="ajaxRequest.js"></script>
 <script type="text/javascript">
+	$(function() {
+		window.setInterval(function(){
+			$.ajax({
+				url:'04.server_clock',
+				success:function(responseData){
+					$('#serverTimeSpan').html(responseData);
+				}
+			});
+		}, 1000);
+		
+		
+	});
 	
-	function requestServerTime(){
-	 	ajaxRequest('GET','04.server_clock',null,function(xhr){
-	 		document.getElementById('serverTimeSpan').innerHTML = xhr.responseText;
-	 	});
-	}
-	window.onload=function(){
-		/*
-		1초마다 한번씩 requestServerTime함수실행
-		*/
-		window.setInterval(requestServerTime,1000);
-	};
 	
 </script>
 </head>

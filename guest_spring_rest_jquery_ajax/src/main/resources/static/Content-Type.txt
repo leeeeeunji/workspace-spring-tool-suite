@@ -1,0 +1,19 @@
+Content-Type
+	Content-Type은 api 연동시에 보내는 자원을 명시하기 위해 보통 사용합니다.
+		- api 요청 시 request에 실어 보내는 데이터(body)의 type정보를 표현합니다.
+    		- Text타입으로는 text/css, text/javascript, text/html, text/plain 등이 있습니다. 
+    		- file을 실어보내기 위해서는 multipart/form-data가 있고 
+    		- Application 타입으로는 application/json, application/x-www-urlencoded가 있습니다.
+ 
+
+* application/json과 application/x-www-form-urlencoded
+	요즈음의 대부분의 request에 대한 Content-Type은 application/json 타입인 것이 많습니다.
+	application/json은 RestFul API를 사용하게 되며 request를 날릴 때 대부분 json을 많이 사용하게 됨에 따라 자연스럽게 사용이 많이 늘게 되었습니다.
+	application/x-www-form-urlencoded는 html의 form의 기본 Content-Type으로 요즘은 자주 사용하지 않지만 여전히 사용하는 경우가 종종 존재합니다.
+
+	차이점은 application/json은 {key: value}의 형태로 전송되지만 
+		application/x-www-form-urlencoded는 key=value&key=value의 형태로 전달된다는 점입니다.
+	
+	즉 application/x-www-form-urlencoded는 보내는 데이터를 URL인코딩 이라고 부르는 방식으로
+		인코딩 후에 웹서버로 보내는 방식을 의미합니다. 
+		(따라서 사용하는 library나 framework에서 x-www-form-urlencoded를 사용할 경우 body 인코딩이 지원하는지 꼭 확인해봐야 합니다.)
