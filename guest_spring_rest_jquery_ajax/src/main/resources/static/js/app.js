@@ -55,8 +55,19 @@ $(document).on('click', '#menu_guest_list, #btn_guest_list', function(e) {
 
  /******** guest detail ********/
 $(document).on('click', '.guest_item_a', function(e) {
-	console.log(e.target);
-	View.render("#guest-detail-template", {});
+	let url = 'guest/' + $(e.target).attr('guest_no');
+	let method = 'GET';
+	let contentType = "application/json;charset=UTF-8";
+	let sendData = {};
+	let async = true;
+	Request.ajaxRequest(url, 
+						method, 
+						contentType,
+						sendData,
+						function(resultJson) {
+							View.render('#guest-detail-template', resultJson);
+						},
+						async);
 	e.preventDefault();
 }); 
 
@@ -101,8 +112,21 @@ $(document).on('click', '#btn_guest_write_action', function(e) {
 
  /******** guest modify form ********/
 $(document).on('click', '#btn_guest_modify_form', function(e) {
-	console.log(e.target);
-	View.render("#guest-modify-form-template", {});
+
+	let url = 'guest/' + $(e.target).attr('guest_no');
+	let method = 'GET';
+	let contentType = "application/json;charset=UTF-8";
+	let sendData = {};
+	let async = true;
+	Request.ajaxRequest(url, 
+						method, 
+						contentType,
+						sendData,
+						function(resultJson) {
+							View.render('#guest-modify-form-template', resultJson);
+						},
+						async);	
+
 	e.preventDefault();
 }); 
 
