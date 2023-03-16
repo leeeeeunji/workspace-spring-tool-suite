@@ -6,11 +6,24 @@
 <link rel=stylesheet href="css/styles.css" type="text/css">
 <link rel=stylesheet href="css/guest.css" type="text/css">
 <link rel="icon" href="image/favicon-32x32.png">
-<style type="text/css" media="screen"></style>
+<style type="text/css" media="screen">
+	/****** form validation css 추가 ******/
+	label.error{
+		color:red;	
+		margin-left: 5px
+	}
+	input.error{
+		color:coral;	
+	}
+	.valid{
+		border: 2px solid green;
+	}
+</style>
 <script type="text/javascript">
-	
+
 </script>
 <script  defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script  defer src="js/jquery.validate.js"></script>
 <script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 <script  src="js/app.js"  type="module" ></script>
 </head>
@@ -124,6 +137,7 @@
 	</script>
 	<!-- guest-view-template -->
 	<script id="guest-detail-template" type="text/x-handlebars-template">
+	{{#data}}
 	<table border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 		<tr>
@@ -138,12 +152,11 @@
 						</tr>
 					</tbody>
 				</table> <!-- view Form  -->
-				<form name="f" method="post">
+				<form id="guest_view_form" name="f" method="post">
 					<input type="hidden" name="guest_no" value="{{guest_no}}">
 					<table border="0" cellpadding="0" cellspacing="1" width="590"
 						bgcolor="BBBBBB">
 						<tbody>
-							{{#data}}
 							<tr>
 								<td width="100" align="center" bgcolor="E6ECDE" height="22">번호</td>
 								<td width="490" bgcolor="ffffff" align="left"
@@ -152,12 +165,12 @@
 							<tr>
 								<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
 								<td width="490" bgcolor="ffffff" align="left"
-									style="padding-left: 10px">{{guest_no}}</td>
+									style="padding-left: 10px">{{guest_name}}</td>
 							</tr>
 							<tr>
 								<td width="100" align="center" bgcolor="E6ECDE" height="22">날짜</td>
 								<td width="490" bgcolor="ffffff" align="left"
-									style="padding-left: 10px">{{substring guest_date 0 10}}</td>
+									style="padding-left: 10px">{{guest_date}}</td>
 							</tr>
 							<tr>
 								<td width="100" align="center" bgcolor="E6ECDE" height="22">홈페이지</td>
@@ -174,7 +187,6 @@
 								<td width="490" bgcolor="ffffff" align="left"
 									style="padding-left: 10px">{{guest_content}}</td>
 							</tr>
-							{{/data}}
 						</tbody>
 					</table>
 				</form> <br>
@@ -194,6 +206,7 @@
 		</tr>
 	</tbody>
 </table>
+{{/data}}
 	</script>
 	<!--guest-write-form-template  -->
 	<script id="guest-write-form-template" type="text/x-handlebars-template">
@@ -237,7 +250,7 @@
 										<td width="100" align="center" bgcolor="E6ECDE" height="22">타이틀</td>
 										<td width="490" align="left" bgcolor="ffffff"
 											style="padding-left: 10px"><input type="text"
-											style="width: 240" name="guest_title"></td>
+											style="width: 240" name="guest_title" id="guest_title"></td>
 									</tr>
 									<tr>
 										<td width="100" align="center" bgcolor="E6ECDE" height="22">내용</td>

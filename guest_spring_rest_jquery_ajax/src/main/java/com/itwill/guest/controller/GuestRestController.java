@@ -80,6 +80,7 @@ public class GuestRestController {
 			guestService.insertGuest(guest);
 			code = 1;
 			msg = "성공";
+			guest = guestService.selectByNo(guest.getGuest_no());
 			data.add(guest);
 		} catch (Exception e) {
 			code = 2;
