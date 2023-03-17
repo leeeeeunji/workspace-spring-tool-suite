@@ -11,9 +11,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript">
         	/***메뉴숨기기****/
-        	
         	$(function(){
-        		
+        		$('#header div.menuButton').click(function(e){
+        			$('#header ul').slideToggle(500);
+        			$(e.target).toggleClass('menuButtonPress');
+        		});
+        		$('#header ul li a').click(function(e) {
+        			if($(e.target).attr('href').startsWith('http://')){
+        				//absolute path -> page request
+        				
+        			}else{
+        				//relative path-->ajax request
+        				let requestUrl=$(e.target).attr('href');
+        				alert(requestUrl+"--> ajax request!");
+        				
+        				e.preventDefault();
+        			};
+        		});
         	});
         	
         </script>

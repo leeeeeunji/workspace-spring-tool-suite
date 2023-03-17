@@ -4,33 +4,48 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	div,span{
-		
-	}
-	div{
-		
-	}
-	span{
-		
-	}
+div,span{
+	border:1px solid red;
+	width:100px;
+	height:100px;
+	margin:10px;
+	padding:10px;
+}
+div{
+	display:inline;
+}
+span{
+	display:block;
+}
+#ib > span {
+	display:inline-block;
+	margin:0px;
+	padding:0px;
+	width:100px;
+	height:100px;
+}
+
+#ib{
+	display:block;
+	width:400px;
+}
+
 </style>
 </head>
 <body>
-<div>
-	div1
-</div>
-<div>
-	div2
-</div>
-<div>
-	div2
-</div>
+<div>div1</div>
+<div>div2</div>
+<div>div2</div>
 <br>
 <br>
 <br>
 <span>span1</span>
 <span>span2</span>
 <span>span3</span>
-
+<div id="ib">
+	<span>span.......</span>
+	<span>span.............</span>
+	<span>span..................</span>
+</div>
 </body>
 </html>
