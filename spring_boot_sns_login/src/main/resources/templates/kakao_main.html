@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.api-btn {
+	outline: none;
+	font-family: NotoSans DemiLight, Malgun Gothic, 맑은 고딕,
+		Apple SD Gothic Neo, 돋움, dotum, sans-serif;
+	background-color: #ffeb00;
+	color: #000;
+	font-size: 16px;
+	font-weight: 600;
+	height: 49px;
+	line-height: 49px;
+	min-width: 222px;
+}
+</style>
+
+<script type="text/javascript">
+</script>
+</head>
+<body>
+	<h1>카카오메인</h1>
+	<th:block th:if="${session.kakaoProfile == null}">
+		<!-- case 1 -->
+		<a class="p-2"
+			href="https://kauth.kakao.com/oauth/authorize?client_id=8bc3332ee65be6ad9a783d7c89686f47&redirect_uri=http://localhost:8080/kakao_login_action&response_type=code">
+			<img
+			th:src="@{https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg}" />
+		</a>
+		
+		<br>
+		<br>
+
+	
+	</th:block>
+	<th:block th:if="${session.kakaoProfile != null}">
+		
+		<ul>
+			<li>------------------------ session ------------------------</li>
+			<li th:text="|session.kakaoProfile:${session.kakaoProfile}|"></li>
+			
+			<li>------------------------ request ------------------------</li>
+			<li th:text="|kakaoProfile:${kakaoProfile}|"></li>
+		</ul>
+		<button class="api-btn" onclick="requestUserInfo()"
+			style="visibility: hidden">사용자 정보 가져오기</button>
+		<p id="token-result"></p>
+		<a
+			href="https://kauth.kakao.com/oauth/logout?client_id=8bc3332ee65be6ad9a783d7c89686f47&logout_redirect_uri=http://localhost:8080/kakao_main">로그아웃</a>
+	</th:block>
+	<script type="text/javascript">
+	displayToken();
+	</script>
+</body>
+</html>
