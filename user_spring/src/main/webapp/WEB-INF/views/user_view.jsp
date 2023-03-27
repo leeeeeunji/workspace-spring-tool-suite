@@ -1,4 +1,4 @@
-<%@page import="com.itwill.user.User"%>
+<%@page import="com.itwill.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   
