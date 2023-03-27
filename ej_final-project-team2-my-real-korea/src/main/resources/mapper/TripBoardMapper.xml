@@ -13,9 +13,47 @@
 			#{tbImg},#{tbStartDate},#{tbEndDate},#{tbStyle},#{tbHashtag},#{cityNo},#{userId})
 </insert>
 
-<!--  게시글 번호로 게시물 1개 보기  -->
+<!--  동행게시판 게시글 수정 -->
+<update id="updateTripBoard" parameterType="com.itwill.ej_final_project.dto.TripBoard">
+	update trip_board set t_bo_title=#{tbTitle},t_bo_content=#{tbContent},t_bo_person=#{tbPerson},
+                        	t_bo_img=#{tbImg},t_bo_start_date=#{tbStartDate},t_bo_end_date=#{tbEndDate},
+                        	t_bo_style=#{tbStyle},hashtag=#{tbHashtag},city_no=#{cityNo} where t_bo_no=#{tbNo}
+</update>
+
+<!--  동행게시판 게시글 삭제 -->
+<delete id="deleteTripBoard" parameterType="java.lang.Integer">
+	delete trip_board where t_bo_no=#{tbNo}
+</delete>
+
+<!--  게시글 번호로 게시글 1개 보기  -->
 <select id="selectByTbNo" parameterType="java.lang.Integer" resultType="com.itwill.ej_final_project.dto.TripBoard">
 	select * from trip_board where t_bo_no=#{tbNo}
+</select>
+
+<!--  게시글 모집상태별로 보기  -->
+<select id="selectByTbStatus" parameterType="java.lang.Integer" resultType="com.itwill.ej_final_project.dto.TripBoard">
+	select * from trip_board where t_bo_status=#{tbStatus}
+</select>
+
+<!--  게시글 지역별로 보기  -->
+<select id="selectByCityNo" parameterType="java.lang.Integer" resultType="com.itwill.ej_final_project.dto.TripBoard">
+	select * from trip_board where city_no=#{cityNo}
+</select>
+
+<!--  게시글 해시태그별로 보기  -->
+<select id="selectByHashtag" parameterType="java.lang.Integer" resultType="com.itwill.ej_final_project.dto.TripBoard">
+	select * from trip_board where hashtag=#{tbHashtag}
+</select>
+
+<!--  게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순)  -->
+<select id="selectAllOrderByDate" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
+	select * from trip_board order by t_bo_date desc;
+</select>
+
+
+<!--  게시판 리스트 정렬(조회수 기준 내림차순)  -->
+<select id="selectAllOrderByReadCount" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
+	select * from trip_board order by t_bo_readcount desc;
 </select>
 
 <!--  동행게시판 리스트(게시물 시작번호~끝번호) - 페이징 처리 -->
@@ -29,27 +67,10 @@
 	<![CDATA[ where idx >= #{tbPageStart} and idx <= #{tbPageEnd} ]]> 
 </select>
 
-<!--  동행게시판 게시글 삭제 -->
-<delete id="deleteTripBoard" parameterType="java.lang.Integer">
-	delete trip_board where t_bo_no=#{tbNo}
-</delete>
-
-<!--  동행게시판 게시글 수정 -->
-<update id="updateTripBoard" parameterType="com.itwill.ej_final_project.dto.TripBoard">
-	update trip_board set t_bo_title=#{tbTitle},t_bo_content=#{tbContent},t_bo_person=#{tbPerson},
-                        	t_bo_img=#{tbImg},t_bo_start_date=#{tbStartDate},t_bo_end_date=#{tbEndDate},
-                        	t_bo_style=#{tbStyle},hashtag=#{tbHashtag},city_no=#{cityNo} where t_bo_no=#{tbNo}
-</update>
-
 <!--  동행게시판 게시글 조회수 1 증가 -->
 <update id="increaseTbReadCount" parameterType="java.lang.Integer">
 	update trip_board set t_bo_readcount=t_bo_readcount+1 where t_bo_no=#{tbNo};
 </update>
-
-<!--  검색된 게시글 총 개수 -->
-<select id="selectTbSearchCount" parameterType="String" resultType="java.lang.Integer">
-	select count(*) cnt from trip_board where t_bo_title like '%'||#{tbKeyword}||'%'
-</select>
 
 <!--  키워드로 검색된 동행게시판 리스트 -->
 <select id="selectSearchTbList" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
@@ -60,6 +81,11 @@
         where t_bo_title like '%'||#{tbKeyword}||'%'
         order by t_bo_no desc) s
     )
-	<![CDATA[ where idx >= #{tbPageStart} and idx <= #{tbPageEnd} ]]> 
+	<![CDATA[ where idx >= #{pageBegin} and idx <= #{pageEnd} ]]> 
+</select>
+
+<!--  검색된 게시글 총 개수 -->
+<select id="selectTbSearchCount" parameterType="String" resultType="java.lang.Integer">
+	select count(*) cnt from trip_board where t_bo_title like '%'||#{tbKeyword}||'%'
 </select>
 </mapper>
