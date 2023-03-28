@@ -34,7 +34,7 @@ public class TripBoardUtils {
 	 */
 	public String getTitleString(TripBoard tripBoard) {
 		StringBuilder title = new StringBuilder(128);
-		String t = tripBoard.getTbTitle();
+		String t = tripBoard.getTBoTitle();
 		if (t.length() > 15) {
 			t = String.format("%s...", t.substring(0, 15));
 		}

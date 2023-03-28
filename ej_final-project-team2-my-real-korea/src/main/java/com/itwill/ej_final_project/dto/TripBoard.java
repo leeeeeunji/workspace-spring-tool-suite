@@ -14,21 +14,21 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class TripBoard {
-	private int tbNo;
-	private String tbTitle;
-	private String tbContent;
+	private int tBoNo;
+	private String tBoTitle;
+	private String tBoContent;
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	private Date tbDate;
-	private int tbReadcount;
-	private int tbStatus;
-	private int tbPerson;
-	private String tbImg;
+	private Date tBoDate;
+	private int tBoReadcount;
+	private int tBoStatus;
+	private int tBoPerson;
+	private String tBoImg;
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	private Date tbStartDate;
+	private Date tBoStartDate;
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	private Date tbEndDate;
-	private String tbStyle;
-	private String tbHashtag;
+	private Date tBoEndDate;
+	private String tBoStyle;
+	private String hashtag;
 	//FK
 	private int cityNo;
 	private String userId;

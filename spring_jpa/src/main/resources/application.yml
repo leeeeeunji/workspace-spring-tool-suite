@@ -1,0 +1,14 @@
+spring: 
+  datasource: 
+    url: jdbc:oracle:thin:@182.237.126.19:1521:XE
+    username: jdeveloper40
+    password: jdeveloper40
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+       hibernate:
+        format-sql: true
+    hibernate:
+      ddl-auto: create
+      

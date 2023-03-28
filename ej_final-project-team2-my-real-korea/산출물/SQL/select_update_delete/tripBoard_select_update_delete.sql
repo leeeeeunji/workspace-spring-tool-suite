@@ -42,6 +42,18 @@ select * from
     )
 where idx >= 1 and idx <= 10;
 
+-- 게시글 총 개수
+select count(*) from trip_board;
+
+-- 모집상태별 게시글 개수
+select count(*) from trip_board where t_bo_status=0;
+
+-- 지역별 게시글 개수
+select count(*) from trip_board where city_no=1;
+
+-- 해시태그별 게시글 개수
+select count(*) from trip_board where hashtag='아무나다좋아';
+
 -- 게시글 조회수 1 증가
 update trip_board set t_bo_readcount=t_bo_readcount+1 where t_bo_no=6;
 

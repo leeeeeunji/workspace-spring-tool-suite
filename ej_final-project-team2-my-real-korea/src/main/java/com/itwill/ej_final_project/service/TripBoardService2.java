@@ -5,7 +5,7 @@ import java.util.List;
 import com.itwill.ej_final_project.dto.TripBoard;
 import com.itwill.ej_final_project.dto.TripBoardListPageMakerDto;
 
-public interface TripBoardService {
+public interface TripBoardService2 {
 	/*
 	 * 게시글 추가
 	 */
