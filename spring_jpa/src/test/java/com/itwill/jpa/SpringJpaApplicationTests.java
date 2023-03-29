@@ -1,10 +1,10 @@
-package com.itwill.user;
+package com.itwill.jpa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringJpaApplicationTests {
+public class SpringJpaApplicationTests {
 
 	@Test
 	void contextLoads() {

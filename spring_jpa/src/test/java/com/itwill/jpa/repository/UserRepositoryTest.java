@@ -3,6 +3,7 @@ package com.itwill.jpa.repository;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,13 +11,11 @@ import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
+import com.itwill.jpa.SpringJpaApplicationTests;
 import com.itwill.jpa.entity.User;
 
-@SpringBootTest
-@Transactional
-class UserRepositoryTest {
+class UserRepositoryTest extends SpringJpaApplicationTests {
 
 	@Autowired
 	public UserRepository userRepository;
@@ -24,9 +23,9 @@ class UserRepositoryTest {
 	@Test
 	void user_crud() {
 		/********** insert ***********/
-		User user1 = new User("조인성", "aaa1@gmail.com", new Date(), LocalDateTime.now());
-		User user2 = new User("문성민", "aaa2@gmail.com", new Date(), LocalDateTime.now());
-		User user3 = new User("유연석", "aaa3@gmail.com", new Date(), LocalDateTime.now());
+		User user1 = new User("조인성", "aaa1@gmail.com", LocalDateTime.now(), LocalDateTime.now());
+		User user2 = new User("문성민", "aaa2@gmail.com", LocalDateTime.now(), LocalDateTime.now());
+		User user3 = new User("유연석", "aaa3@gmail.com", LocalDateTime.now(), LocalDateTime.now());
 		
 		User saveUser1 = userRepository.save(user1);
 		User saveUser2 = userRepository.save(user2);
@@ -67,7 +66,7 @@ class UserRepositoryTest {
 		
 	@Test
 	void select() {
-		
+		/*
 		User user1 = new User("조인성", "aaa1@gmail.com", new Date(), LocalDateTime.now());
 		User user2 = new User("문성민", "aaa2@gmail.com", new Date(), LocalDateTime.now());
 		User user3 = new User("유연석", "aaa3@gmail.com", new Date(), LocalDateTime.now());
@@ -76,10 +75,25 @@ class UserRepositoryTest {
 		User saveUser2 = userRepository.save(user2);
 		User saveUser3 = userRepository.save(user3);
 		
-		
+		*/
 		System.out.println(">>> findByName : " + userRepository.findByName("조인성"));
 		System.out.println(">>> findByEmail : " + userRepository.findByEmail("aaa3@gmail.com"));
-			
+		
+		
+		System.out.println(">>> findFirst2ByName : "
+							+ userRepository.findFirst2ByName("김경호11"));
+		System.out.println(">>> findTop2ByName : "
+				+ userRepository.findTop2ByName("김경호11"));
+		
+		
+		System.out.println(">>> findByIdAfter : "
+				+ userRepository.findByIdAfter(7L));
+		System.out.println(">>> findByIdBetween : "
+				+ userRepository.findByIdBetween(7L, 12L));
+		System.out.println(">>> findByCreatedAtGreaterThan : "
+				+ userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+		System.out.println(">>> findByCreatedAtGreaterThanEqual : "
+				+ userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusMinutes(10L)));
 		
 	}
 }

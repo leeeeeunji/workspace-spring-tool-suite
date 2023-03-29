@@ -10,7 +10,7 @@
 	insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
             values (#{tBoNo},#{tBoTitle},#{tBoContent},sysdate,#{tBoReadcount},#{tBoStatus},#{tBoPerson},
-                    #{tBoImg},#{tBoStartDate},#{tBoEndDate},#{tBoStyle},#{hashtag}',#{cityNo},#{userId}); 
+                    #{tBoImg},#{tBoStartDate},#{tBoEndDate},#{tBoStyle},#{hashtag},#{cityNo},#{userId})
 </insert>
 
 <!--  동행게시판 게시글 수정 -->
@@ -56,15 +56,9 @@
 	select * from trip_board order by t_bo_readcount desc
 </select>
 
-<!--  동행게시판 리스트(게시물 시작번호~끝번호) - 페이징 처리 -->
+<!--  동행게시판 리스트 -->
 <select id="selectAllTb" parameterType="java.util.Map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from
-    (select rownum idx, s.* from
-        (select t_bo_no, t_bo_title, t_bo_content, t_bo_date, t_bo_readcount, t_bo_status, t_bo_person,
-        t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id from trip_board
-        order by t_bo_no desc) s
-    )
-	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
+	select * from trip_board
 </select>
 
 <!-- 게시글 총 개수 -->
@@ -94,14 +88,7 @@
 
 <!--  키워드로 검색된 동행게시판 리스트 -->
 <select id="selectSearchTbList" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from
-    (select rownum idx, s.* from
-        (select t_bo_no, t_bo_title, t_bo_content, t_bo_date, t_bo_readcount, t_bo_status, t_bo_person,
-        t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id from trip_board
-        where t_bo_title like '%'||#{keyword}||'%'
-        order by t_bo_no desc) s
-    )
-	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
+	select * from trip_board where t_bo_title like '%'||#{keyword}||'%'
 </select>
 
 <!--  검색된 게시글 총 개수 -->

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -25,11 +26,13 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity(name = "users")
+@SequenceGenerator(name = "USERS_ID_SEQ_gen", sequenceName = "USERS_ID_SEQ", 
+					initialValue = 1, allocationSize = 1)
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_ID_SEQ_gen")
 	@Column(name = "id")
-	private long userId;
+	private Long id;
 	
 	@NonNull
 	@Column(nullable = false)
@@ -39,10 +42,10 @@ public class User {
 	private String email;
 	
 	@NonNull
-	@Column(nullable = false)
-	private Date createdAt;
+	@Column(nullable = false, updatable = false)
+	private LocalDateTime createdAt;
 
+	@NonNull
 	@Column(nullable = false)
-	@ColumnDefault("sysdate")
 	private LocalDateTime updatedAt;
 }
