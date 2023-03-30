@@ -1,0 +1,37 @@
+logging:
+  level:
+    org:
+      springframework:
+        beans: debug
+        context: debug
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+  
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@182.237.126.19:1521:XE
+    username: jdeveloper40
+    password: jdeveloper40
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    properties:
+      hibernate: 
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: create
+    #defer-datasource-initialization: true   
+  # sql초기화  
+  sql:
+    init:
+      mode: never
+      schema-locations:
+      #- classpath:user.ddl  
+      #- classpath:board.ddl
+      data-locations:
+      #- classpath:user-insert.sql
+      #- classpath:board-insert.sql
+      continue-on-error: true

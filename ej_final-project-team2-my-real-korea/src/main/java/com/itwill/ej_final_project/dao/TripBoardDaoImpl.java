@@ -98,12 +98,14 @@ public class TripBoardDaoImpl implements TripBoardDao{
 	}
 	
 	/*
-	 * 게시판 리스트
+	 * 게시판 리스트(게시글 시작번호, 게시글 끝번호) - 페이징 처리
 	 */
 	@Override
-	public List<TripBoard> selectAllTb() throws Exception {
-		
-		return tripBoardMapper.selectAllTb();
+	public List<TripBoard> selectAllTb(int pageStart, int pageEnd) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		return tripBoardMapper.selectAllTb(pageMap);
 	}
 	
 	/*
@@ -163,6 +165,12 @@ public class TripBoardDaoImpl implements TripBoardDao{
 		return tripBoardMapper.selectTbSearchCount(keyword);
 	}
 	
-	
+	/*
+	 * 게시글의 지역정보 조회
+	 */
+	@Override
+	public TripBoard selectCityInfo(int tBoNo) throws Exception {
+		return tripBoardMapper.selectCityInfo(tBoNo);
+	}
 	
 }

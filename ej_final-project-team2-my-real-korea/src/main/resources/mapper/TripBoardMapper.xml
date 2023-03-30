@@ -10,14 +10,14 @@
 	insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
             values (#{tBoNo},#{tBoTitle},#{tBoContent},sysdate,#{tBoReadcount},#{tBoStatus},#{tBoPerson},
-                    #{tBoImg},#{tBoStartDate},#{tBoEndDate},#{tBoStyle},#{hashtag},#{cityNo},#{userId})
+                    #{tBoImg},#{tBoStartDate},#{tBoEndDate},#{tBoStyle},#{hashtag},#{city.cityNo},#{userId})
 </insert>
 
 <!--  동행게시판 게시글 수정 -->
 <update id="updateTripBoard" parameterType="com.itwill.ej_final_project.dto.TripBoard">
 	update trip_board set t_bo_title=#{tBoTitle},t_bo_content=#{tBoContent},t_bo_person=#{tBoPerson},
                         	t_bo_img=#{tBoImg},t_bo_start_date=#{tBoStartDate},t_bo_end_date=#{tBoEndDate},
-                        	t_bo_style=#{tBoStyle},hashtag=#{hashtag},city_no=#{cityNo} where t_bo_no=#{tBoNo}
+                        	t_bo_style=#{tBoStyle},hashtag=#{hashtag},city_no=#{city.cityNo} where t_bo_no=#{tBoNo}
 </update>
 
 <!--  동행게시판 게시글 삭제 -->
@@ -37,7 +37,7 @@
 
 <!--  게시글 지역별로 보기  -->
 <select id="selectByCityNoList" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from trip_board where city_no=#{cityNo}
+	select * from trip_board where city_no=#{city.cityNo}
 </select>
 
 <!--  게시글 해시태그별로 보기  -->
@@ -56,9 +56,14 @@
 	select * from trip_board order by t_bo_readcount desc
 </select>
 
-<!--  동행게시판 리스트 -->
+<!--  게시판 리스트(게시물 시작번호~끝번호) - 페이징 처리 -->
 <select id="selectAllTb" parameterType="java.util.Map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from trip_board
+	select * from
+    (select rownum idx, s.* from
+        (select t_bo_no, t_bo_title, t_bo_content, t_bo_date, t_bo_readcount, t_bo_status, t_bo_person,
+        t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id from trip_board) s
+    )
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
 </select>
 
 <!-- 게시글 총 개수 -->
@@ -73,7 +78,7 @@
 
 <!-- 지역별 게시글 개수 -->
 <select id="selectCityNoCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-	select count(*) from trip_board where city_no=#{cityNo}
+	select count(*) from trip_board where city_no=#{city.cityNo}
 </select>
 
 <!-- 해시태그별 게시글 개수 -->
@@ -94,5 +99,14 @@
 <!--  검색된 게시글 총 개수 -->
 <select id="selectTbSearchCount" parameterType="String" resultType="java.lang.Integer">
 	select count(*) cnt from trip_board where t_bo_title like '%'||#{keyword}||'%'
+</select>
+
+<!-- 게시글의 지역 조회 -->
+<resultMap id="CitywithTripBoardResultMap" type="com.itwill.ej_final_project.dto.TripBoard">
+	<association property="city" javaType="com.itwill.ej_final_project.dto.City" autoMapping="true">
+	</association>
+</resultMap>
+<select id="selectCityInfo" parameterType="java.lang.Integer" resultMap="CitywithTripBoardResultMap">
+	select c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = #{tBoNo}
 </select>
 </mapper>

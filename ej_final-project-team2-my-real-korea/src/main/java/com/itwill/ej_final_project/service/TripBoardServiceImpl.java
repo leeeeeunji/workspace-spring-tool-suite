@@ -39,16 +39,65 @@ public class TripBoardServiceImpl implements TripBoardService {
 	 * 게시글 삭제
 	 */
 	@Override
-	public int deleteTripBoard(int tbNo) throws Exception {
-		return tripBoardDao.deleteTripBoard(tbNo);
+	public int deleteTripBoard(int tBoNo) throws Exception {
+		return tripBoardDao.deleteTripBoard(tBoNo);
 	}
 	/*
 	 * 게시글 번호로 게시글 1개 보기
 	 */
 	@Override
-	public TripBoard selectByTbNo(int tbNo) throws Exception {
-		return tripBoardDao.selectByTbNo(tbNo);
+	public TripBoard selectByTbNo(int tBoNo) throws Exception {
+		return tripBoardDao.selectByTbNo(tBoNo);
 	}
+	
+	/*
+	 * 게시글 모집상태별로 보기
+	 */
+	@Override
+	public List<TripBoard> selectByTbStatusList(int tBoStatus) throws Exception {
+		return tripBoardDao.selectByTbStatusList(tBoStatus);
+	}
+	
+	/*
+	 * 게시글 지역별로 보기
+	 */
+	@Override
+	public List<TripBoard> selectByCityNoList(int cityNo) throws Exception {
+		return tripBoardDao.selectByCityNoList(cityNo);
+	}
+	
+	/*
+	 * 게시글 해시태그별로 보기
+	 */
+	@Override
+	public List<TripBoard> selectByHashtagList(String hashtag) throws Exception {
+		return tripBoardDao.selectByHashtagList(hashtag);
+	}
+	
+	/*
+	 * 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순)
+	 */
+	@Override
+	public List<TripBoard> selectAllOrderByDate() throws Exception {
+		return tripBoardDao.selectAllOrderByDate();
+	}
+	
+	/*
+	 * 게시판 리스트 정렬(조회수 기준 내림차순)
+	 */
+	@Override
+	public List<TripBoard> selectAllOrderByReadCount() throws Exception {
+		return tripBoardDao.selectAllOrderByReadCount();
+	}
+	
+	/*
+	 * 게시판 리스트
+	 */
+	@Override
+	public List<TripBoard> selectAllTb() throws Exception {
+		return tripBoardDao.selectAllTb();
+	}
+	
 	/*
 	 * 게시글  총 개수
 	 */
@@ -82,9 +131,17 @@ public class TripBoardServiceImpl implements TripBoardService {
 	 * 게시글 조회수 1 증가
 	 */
 	@Override
-	public int increaseTbReadCount(int tbNo) throws Exception {
-		return tripBoardDao.increaseTbReadCount(tbNo);
+	public int increaseTbReadCount(int tBoNo) throws Exception {
+		return tripBoardDao.increaseTbReadCount(tBoNo);
 	}
+	/*
+	 * 키워드로 검색된 동행게시판 리스트
+	 */
+	@Override
+	public List<TripBoard> selectSearchTbList(String keyword) throws Exception {
+		return tripBoardDao.selectSearchTbList(keyword);
+	}
+	
 	/*
 	 * 검색된 게시글 총 개수
 	 */
@@ -92,90 +149,13 @@ public class TripBoardServiceImpl implements TripBoardService {
 	public int selectTbSearchCount(String tbKeyword) throws Exception {
 		return tripBoardDao.selectTbSearchCount(tbKeyword);
 	}
-
-	@Override
-	public List<TripBoard> selectByTbStatusList(int pageStart, int pageEnd, int tBoStatus) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TripBoardListPageMakerDto selectByTbStatusList(int currentPage, int tBoStatus) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TripBoard> selectByCityNoList(int pageStart, int pageEnd, int cityNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TripBoardListPageMakerDto selectByCityNoList(int currentPage, int cityNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TripBoard> selectByHashtagList(int pageStart, int pageEnd, String hashtag) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TripBoardListPageMakerDto selectByHashtagList(int currentPage, String hashtag) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TripBoard> selectAllOrderByDate(int pageStart, int pageEnd) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TripBoardListPageMakerDto selectAllOrderByDate(int currentPage) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TripBoard> selectAllOrderByReadCount(int pageStart, int pageEnd) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TripBoardListPageMakerDto selectAllOrderByReadCount(int currentPage) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TripBoard> selectAllTb(int pageStart, int pageEnd) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TripBoardListPageMakerDto selectAllTb(int currentPage) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TripBoard> selectSearchTbList(int pageStart, int pageEnd, String keyword) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TripBoardListPageMakerDto selectSearchTbList(int currentPage, String keyword) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
+	/*
+	 * 게시글의 지역정보 조회
+	 */
+	@Override
+	public TripBoard selectCityInfo(int tBoNo) throws Exception {
+		return tripBoardDao.selectCityInfo(tBoNo);
+	}
 	
 }

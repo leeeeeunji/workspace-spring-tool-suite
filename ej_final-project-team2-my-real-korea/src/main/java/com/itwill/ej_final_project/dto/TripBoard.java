@@ -30,7 +30,7 @@ public class TripBoard {
 	private String tBoStyle;
 	private String hashtag;
 	//FK
-	private int cityNo;
+	private City city;
 	private String userId;
 	
 }

@@ -201,6 +201,48 @@ public class TripBoardServiceImpl2 implements TripBoardService2 {
 	public int selectTbSearchCount(String tbKeyword) throws Exception {
 		return tripBoardDao.selectTbSearchCount(tbKeyword);
 	}
+
+	@Override
+	public List<TripBoard> selectByTbStatusList(int pageStart, int pageEnd, int tBoStatus) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TripBoard> selectByCityNoList(int pageStart, int pageEnd, int cityNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TripBoard> selectByHashtagList(int pageStart, int pageEnd, String hashtag) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TripBoard> selectAllOrderByDate(int pageStart, int pageEnd) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TripBoard> selectAllOrderByReadCount(int pageStart, int pageEnd) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TripBoard> selectAllTb(int pageStart, int pageEnd) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TripBoard> selectSearchTbList(int pageStart, int pageEnd, String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

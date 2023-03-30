@@ -29,44 +29,32 @@ public interface TripBoardService {
 	/*
 	 * 게시글 모집상태별로 보기
 	 */
-	List<TripBoard> selectByTbStatusList(int pageStart, int pageEnd, int tBoStatus) throws Exception;
-	
-	TripBoardListPageMakerDto selectByTbStatusList(int currentPage, int tBoStatus) throws Exception;
+	List<TripBoard> selectByTbStatusList(int tBoStatus) throws Exception;
 	
 	/*
 	 * 게시글 지역별로 보기
 	 */
-	List<TripBoard> selectByCityNoList(int pageStart, int pageEnd, int cityNo) throws Exception;
-	
-	TripBoardListPageMakerDto selectByCityNoList(int currentPage, int cityNo) throws Exception;
+	List<TripBoard> selectByCityNoList(int cityNo) throws Exception;
 	
 	/*
 	 * 게시글 해시태그별로 보기
 	 */
-	List<TripBoard> selectByHashtagList(int pageStart, int pageEnd, String hashtag) throws Exception;
-	
-	TripBoardListPageMakerDto selectByHashtagList(int currentPage, String hashtag) throws Exception;
+	List<TripBoard> selectByHashtagList(String hashtag) throws Exception;
 	
 	/*
 	 * 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순)
 	 */
-	List<TripBoard> selectAllOrderByDate(int pageStart, int pageEnd) throws Exception;
-	
-	TripBoardListPageMakerDto selectAllOrderByDate(int currentPage) throws Exception;
+	List<TripBoard> selectAllOrderByDate() throws Exception;
 	
 	/*
 	 * 게시판 리스트 정렬(조회수 기준 내림차순)
 	 */
-	List<TripBoard> selectAllOrderByReadCount(int pageStart, int pageEnd) throws Exception;
-	
-	TripBoardListPageMakerDto selectAllOrderByReadCount(int currentPage) throws Exception;
+	List<TripBoard> selectAllOrderByReadCount() throws Exception;
 
 	/*
-	 * 게시판 리스트(게시물 시작번호~끝번호) - 페이징 처리
+	 * 게시판 리스트
 	 */
-	List<TripBoard> selectAllTb(int pageStart, int pageEnd) throws Exception;
-	
-	TripBoardListPageMakerDto selectAllTb(int currentPage) throws Exception;
+	List<TripBoard> selectAllTb() throws Exception;
 	
 	/*
 	 * 게시글  총 개수
@@ -96,12 +84,15 @@ public interface TripBoardService {
 	/*
 	 * 키워드로 검색된 동행게시판 리스트
 	 */
-	List<TripBoard> selectSearchTbList(int pageStart, int pageEnd, String keyword) throws Exception;
-	
-	TripBoardListPageMakerDto selectSearchTbList(int currentPage, String keyword) throws Exception;
+	List<TripBoard> selectSearchTbList(String keyword) throws Exception;
 	
 	/*
 	 * 검색된 게시글 총 개수
 	 */
 	int selectTbSearchCount(String keyword) throws Exception;
+	
+	/*
+	 * 게시글의 지역정보 조회
+	 */
+	TripBoard selectCityInfo(int tBoNo) throws Exception;
 }

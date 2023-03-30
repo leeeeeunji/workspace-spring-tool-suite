@@ -5,6 +5,6 @@ import java.util.List;
 import com.itwill.ej_final_project.util.PageMaker;
 
 public class TripBoardListPageMakerDto {
-	public List<TripBoard> writingList;
+	public List<TripBoard> itemList;
 	public PageMaker pageMaker;
 }
