@@ -101,12 +101,17 @@
 	select count(*) cnt from trip_board where t_bo_title like '%'||#{keyword}||'%'
 </select>
 
-<!-- 게시글의 지역 조회 -->
+<!-- 게시글 1개 조회 + City 정보 -->
 <resultMap id="CitywithTripBoardResultMap" type="com.itwill.ej_final_project.dto.TripBoard">
 	<association property="city" javaType="com.itwill.ej_final_project.dto.City" autoMapping="true">
 	</association>
 </resultMap>
-<select id="selectCityInfo" parameterType="java.lang.Integer" resultMap="CitywithTripBoardResultMap">
-	select c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = #{tBoNo}
+<select id="selectByCityInfo" parameterType="java.lang.Integer" resultMap="CitywithTripBoardResultMap">
+	select t.*,c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = #{tBoNo}
+</select>
+
+<!-- 게시글리스트 조회 + City 정보 -->
+<select id="selectAllByCityNo" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
+	select t.*,c.* from trip_board t join city c on t.city_no = c.city_no
 </select>
 </mapper>

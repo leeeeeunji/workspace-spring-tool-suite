@@ -2,10 +2,13 @@ package com.jpa.relation.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jpa.relation.SpringJpaRelationApplicationTests;
+import com.jpa.relation.entity.Category;
 import com.jpa.relation.entity.Product;
 import com.jpa.relation.entity.ProductDetail;
 import com.jpa.relation.entity.Provider;
@@ -21,6 +24,9 @@ class ProductRepositoryTest extends SpringJpaRelationApplicationTests {
 	
 	@Autowired
 	ProviderRepository providerRepository;
+	
+	@Autowired
+	CategoryRepository categoryRepository;
 	
 	
 	@Test
@@ -67,12 +73,28 @@ class ProductRepositoryTest extends SpringJpaRelationApplicationTests {
 		providerRepository.save(provider);
 		
 		
-		Product product=new Product();
-		product.setName("삼성출판사변경");
-		product.setPrice(100000);
-		product.setStock(100);
-		product.setProvider(provider);
-		productRepository.save(product);
+		Product product1 = new Product();
+		product1.setName("삼성");
+		product1.setPrice(100000);
+		product1.setStock(100);
+		
+		Product product2 = new Product();
+		product2.setName("삼성출");
+		product2.setPrice(9000);
+		product2.setStock(50);
+		
+		/******* 연관 설정 Product -> Provider ********/
+		product1.setProvider(provider);
+		product2.setProvider(provider);
+		/***********************************************/
+		productRepository.save(product1);
+		productRepository.save(product2);
+		
+		/******* 연관 설정 Provide -> Product ********/
+		//provider.getProductList().addAll(Arrays.asList(product1,  product2));
+		Provider provider2 = providerRepository.findById(1L).get();
+		
+		providerRepository.save(provider2);
 		
 		
 		System.out.println("product : " + productRepository.findById(2L).get());
@@ -81,5 +103,32 @@ class ProductRepositoryTest extends SpringJpaRelationApplicationTests {
 		
 	}
 	
+	@Test
+	void productCategorySaveAndRead() {
+		/********** case1[ManyToOne] ***********/
+		Category category = new Category("C1", "컴퓨터");
+		categoryRepository.save(category);
+		
+		Product product1 = Product.builder().name("EXCEL").price(500000).stock(10).build();
+		Product product2 = Product.builder().name("WORD").price(500000).stock(10).build();
+		Product product3 = Product.builder().name("POWERPOINT").price(500000).stock(10).build();
+		
+		product1.setCategory(category);
+		product2.setCategory(category);
+		product3.setCategory(category);
+		
+		productRepository.save(product1);
+		productRepository.save(product2);
+		productRepository.save(product3);
+		
+		
+		System.out.println("------------------ read --------------------");
+		System.out.println("Product : " + productRepository.findById(3L).get());
+		System.out.println("Product -> Category : " + productRepository.findById(3L).get().getCategory());
+		
+		
+		
+		
+	}
 
 }
