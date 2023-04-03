@@ -53,48 +53,61 @@ public class TripBoardDaoImpl implements TripBoardDao{
 	}
 	
 	/*
-	 * 게시글 모집상태별로 보기
+	 * 게시글 모집상태별로 보기 - 페이징 처리
 	 */
 	@Override
-	public List<TripBoard> selectByTbStatusList(int tBoStatus) throws Exception {
-		
-		return tripBoardMapper.selectByTbStatusList(tBoStatus);
+	public List<TripBoard> selectByTbStatusList(int pageStart, int pageEnd, int tBoStatus) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		pageMap.put("tBoStatus", tBoStatus);
+		return tripBoardMapper.selectByTbStatusList(pageMap);
 	}
 	
 	/*
-	 * 게시글 지역별로 보기
+	 * 게시글 지역별로 보기 - 페이징 처리
 	 */
 	@Override
-	public List<TripBoard> selectByCityNoList(int cityNo) throws Exception {
-		
-		return tripBoardMapper.selectByCityNoList(cityNo);
+	public List<TripBoard> selectByCityNoList(int pageStart, int pageEnd, int cityNo) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		pageMap.put("cityNo", cityNo);
+		return tripBoardMapper.selectByCityNoList(pageMap);
 	}
 	
 	/*
-	 * 게시글 해시태크별로 보기
+	 * 게시글 해시태크별로 보기 - 페이징 처리
 	 */
 	@Override
-	public List<TripBoard> selectByHashtagList(String hashtag) throws Exception {
-		
-		return tripBoardMapper.selectByHashtagList(hashtag);
+	public List<TripBoard> selectByHashtagList(int pageStart, int pageEnd, String hashtag) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		pageMap.put("hashtag", hashtag);
+		return tripBoardMapper.selectByHashtagList(pageMap);
 	}
 	
 	/*
-	 * 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순)
+	 * 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순) - 페이징 처리
 	 */
 	@Override
-	public List<TripBoard> selectAllOrderByDate() throws Exception {
-		
-		return tripBoardMapper.selectAllOrderByDate();
+	public List<TripBoard> selectAllOrderByDate(int pageStart, int pageEnd) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		return tripBoardMapper.selectAllOrderByDate(pageMap);
 	}
 	
 	/*
-	 * 게시판 리스트 정렬(조회수 기준 내림차순)
+	 * 게시판 리스트 정렬(조회수 기준 내림차순) - 페이징 처리
 	 */
 	@Override
-	public List<TripBoard> selectAllOrderByReadCount() throws Exception {
-		
-		return tripBoardMapper.selectAllOrderByReadCount();
+	public List<TripBoard> selectAllOrderByReadCount(int pageStart, int pageEnd) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		return tripBoardMapper.selectAllOrderByReadCount(pageMap);
 	}
 	
 	/*
@@ -149,12 +162,15 @@ public class TripBoardDaoImpl implements TripBoardDao{
 	}
 	
 	/*
-	 * 키워드로 검색된 동행게시판 리스트
+	 * 키워드로 검색된 동행게시판 리스트 - 페이징 처리
 	 */
 	@Override
-	public List<TripBoard> selectSearchTbList(String keyword) throws Exception {
-		
-		return tripBoardMapper.selectSearchTbList(keyword);
+	public List<TripBoard> selectSearchTbList(int pageStart, int pageEnd, String keyword) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		pageMap.put("keyword", keyword);
+		return tripBoardMapper.selectSearchTbList(pageMap);
 	}
 	
 	/*
@@ -169,16 +185,19 @@ public class TripBoardDaoImpl implements TripBoardDao{
 	 * 게시글 1개 조회 + City 정보
 	 */
 	@Override
-	public TripBoard selectCityInfo(int tBoNo) throws Exception {
-		return tripBoardMapper.selectCityInfo(tBoNo);
+	public TripBoard selectByCityInfo(int tBoNo) throws Exception {
+		return tripBoardMapper.selectByCityInfo(tBoNo);
 	}
 	
 	/*
-	 * 게시글리스트 조회 + City 정보
+	 * 게시글리스트 조회 + City 정보 - 페이징 처리
 	 */
 	@Override
-	public List<TripBoard> selectAllByCityNo() throws Exception {
-		return tripBoardMapper.selectAllByCityNo();
+	public List<TripBoard> selectAllByCityNo(int pageStart, int pageEnd) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		return tripBoardMapper.selectAllByCityNo(pageMap);
 	}
 	
 }

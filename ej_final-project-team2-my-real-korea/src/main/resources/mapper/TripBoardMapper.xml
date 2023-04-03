@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.ej_final_project.mapper.TripBoardMapper">
+<mapper namespace="com.itwill.my_real_korea.mapper.TripBoardMapper">
 
 <!--  동행게시판 게시글 추가 -->
-<insert id="insertTripBoard" parameterType="com.itwill.ej_final_project.dto.TripBoard" >
+<insert id="insertTripBoard" parameterType="com.itwill.my_real_korea.dto.tripboard.TripBoard" >
 	<selectKey resultType="java.lang.Integer" keyProperty="tBoNo" order="BEFORE">
 		select trip_board_t_bo_no_seq.nextval from dual
 	</selectKey>
@@ -14,7 +14,7 @@
 </insert>
 
 <!--  동행게시판 게시글 수정 -->
-<update id="updateTripBoard" parameterType="com.itwill.ej_final_project.dto.TripBoard">
+<update id="updateTripBoard" parameterType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
 	update trip_board set t_bo_title=#{tBoTitle},t_bo_content=#{tBoContent},t_bo_person=#{tBoPerson},
                         	t_bo_img=#{tBoImg},t_bo_start_date=#{tBoStartDate},t_bo_end_date=#{tBoEndDate},
                         	t_bo_style=#{tBoStyle},hashtag=#{hashtag},city_no=#{city.cityNo} where t_bo_no=#{tBoNo}
@@ -26,42 +26,72 @@
 </delete>
 
 <!--  게시글 번호로 게시글 1개 보기  -->
-<select id="selectByTbNo" parameterType="java.lang.Integer" resultType="com.itwill.ej_final_project.dto.TripBoard">
+<select id="selectByTbNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
 	select * from trip_board where t_bo_no=#{tBoNo}
 </select>
 
-<!--  게시글 모집상태별로 보기  -->
-<select id="selectByTbStatusList" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from trip_board where t_bo_status=#{tBoStatus}
+<!--  게시글 모집상태별로 보기 - 페이징 처리  -->
+<select id="selectByTbStatusList" parameterType="map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
+	select * from 
+	(select rownum idx, s.* from
+        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
+         from trip_board where t_bo_status=#{tBoStatus}) s
+    )
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 </select>
 
-<!--  게시글 지역별로 보기  -->
-<select id="selectByCityNoList" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from trip_board where city_no=#{city.cityNo}
+<!--  게시글 지역별로 보기 - 페이징 처리  -->
+<select id="selectByCityNoList" parameterType="map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
+	select * from 
+	select rownum idx, s.* from
+        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
+         from trip_board where city_no=#{city.cityNo}) s
+    )
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 </select>
 
-<!--  게시글 해시태그별로 보기  -->
-<select id="selectByHashtagList" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from trip_board where hashtag=#{hashtag}
+<!--  게시글 해시태그별로 보기 - 페이징 처리  -->
+<select id="selectByHashtagList" parameterType="map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
+	select * from 
+	 (select rownum idx, s.* from
+        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
+         from trip_board where hashtag=#{hashtag}) s
+    )
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 </select>
 
-<!--  게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순)  -->
-<select id="selectAllOrderByDate" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from trip_board order by t_bo_date desc
+<!--  게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순) - 페이징 처리  -->
+<select id="selectAllOrderByDate" parameterType="map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
+	select * from 
+	 (select rownum idx, s.* from
+	        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+	         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
+	         from trip_board order by t_bo_date desc) s
+	    )
+		<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 </select>
 
 
-<!--  게시판 리스트 정렬(조회수 기준 내림차순)  -->
-<select id="selectAllOrderByReadCount" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from trip_board order by t_bo_readcount desc
+<!--  게시판 리스트 정렬(조회수 기준 내림차순) - 페이징 처리  -->
+<select id="selectAllOrderByReadCount" parameterType="map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
+	select * from 
+	 (select rownum idx, s.* from
+        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
+         from trip_board order by t_bo_readcount desc) s
+    )
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
 </select>
 
 <!--  게시판 리스트(게시물 시작번호~끝번호) - 페이징 처리 -->
-<select id="selectAllTb" parameterType="java.util.Map" resultType="com.itwill.ej_final_project.dto.TripBoard">
+<select id="selectAllTb" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
 	select * from
     (select rownum idx, s.* from
         (select t_bo_no, t_bo_title, t_bo_content, t_bo_date, t_bo_readcount, t_bo_status, t_bo_person,
-        t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id from trip_board) s
+        t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id from trip_board order by t_bo_no asc) s
     )
 	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
 </select>
@@ -91,27 +121,37 @@
 	update trip_board set t_bo_readcount=t_bo_readcount+1 where t_bo_no=#{tBoNo}
 </update>
 
-<!--  키워드로 검색된 동행게시판 리스트 -->
-<select id="selectSearchTbList" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select * from trip_board where t_bo_title like '%'||#{keyword}||'%'
+<!--  키워드로 검색된 동행게시판 리스트 - 페이징 처리 -->
+<select id="selectSearchTbList" parameterType="map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
+	select * from 
+	 (select rownum idx, s.* from
+        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
+         from trip_board where t_bo_title like '%'||#{keyword}||'%' or t_bo_content like '%'||#{keyword}||'%') s
+    )
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
 </select>
 
 <!--  검색된 게시글 총 개수 -->
 <select id="selectTbSearchCount" parameterType="String" resultType="java.lang.Integer">
-	select count(*) cnt from trip_board where t_bo_title like '%'||#{keyword}||'%'
+	select count(*) cnt from trip_board where t_bo_title like '%'||#{keyword}||'%' or t_bo_content like '%'||#{keyword}||'%'
 </select>
 
 <!-- 게시글 1개 조회 + City 정보 -->
-<resultMap id="CitywithTripBoardResultMap" type="com.itwill.ej_final_project.dto.TripBoard">
-	<association property="city" javaType="com.itwill.ej_final_project.dto.City" autoMapping="true">
+<resultMap id="CitywithTripBoardResultMap" type="com.itwill.my_real_korea.dto.tripboard.TripBoard">
+	<association property="city" javaType="com.itwill.my_real_korea.dto.City" autoMapping="true">
 	</association>
 </resultMap>
 <select id="selectByCityInfo" parameterType="java.lang.Integer" resultMap="CitywithTripBoardResultMap">
-	select t.*,c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = #{tBoNo}
+	select t.*, c.city_name, c.latitude, c.longitude from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = #{tBoNo}
 </select>
 
-<!-- 게시글리스트 조회 + City 정보 -->
-<select id="selectAllByCityNo" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
-	select t.*,c.* from trip_board t join city c on t.city_no = c.city_no
+<!-- 게시글리스트 조회 + City 정보 - 페이징 처리 -->
+<select id="selectAllByCityNo" parameterType="map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
+	select * from
+	(select rownum idx, s.* from
+		(select t.*, c.city_name, c.latitude, c.longitude from trip_board t join city c on t.city_no = c.city_no  order by t.t_bo_no asc) s
+	)
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
 </select>
 </mapper>

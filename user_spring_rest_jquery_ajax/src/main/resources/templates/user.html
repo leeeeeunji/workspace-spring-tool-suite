@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>사용자 관리</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel=stylesheet href="css/styles.css" type="text/css">
+<link rel=stylesheet href="css/user.css" type="text/css">
+<script defer
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script defer src="js/jquery.validate.js"></script>
+<script defer type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+<script src="js/app.js" type="module"></script>
+</head>
+<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
+	marginwidth=0 marginheight=0>
+	<form id="user_main_form" name="user_main_form">
+		<input type="hidden" name="userId" th:value="${session.sUserId}"/>
+	</form>
+	<!-- container start-->
+	<div id="container">
+		<!-- header start -->
+		<div id="header">
+			<!-- include_common_top.jsp start-->
+
+			
+			<h1>
+				<a href="" id="menu_user_main">user_spring_rest_jquery_ajax</a>
+			</h1>
+
+			<!-- include_common_top.jsp end-->
+		</div>
+		<!-- header end -->
+		<!-- navigation start-->
+		<div id="navigation">
+			<!-- include_common_left.jsp start-->
+
+
+
+			<p>
+				<strong>메뉴</strong>
+			</p>
+			<ul>
+				 <th:block th:if="${!#strings.isEmpty(session.sUserId)}">
+					<li><a href='' th:text="${session.sUserId+'님'}">guard1 님</a></li>
+					<!-- 
+					<li><a href='' th:text="${#messages.msg('menu.id',session.sUserId)}">guard1 님</a></li>
+					 -->
+					<li><a href='user_view' id="menu_user_view">내정보</a></li>
+					<li><a href="user_logout_action" id="menu_user_logout_action">로그아웃</a></li>
+				</th:block>
+				<th:block th:unless=${!#strings.isEmpty(session.sUserId)}>
+					<li><a href="user_login_form" id="menu_user_login_form">로그인</a></li>
+					<li><a href="user_write_form" id="menu_user_write_form">회원가입</a></li>
+				</th:block>
+			</ul>
+
+
+			<!-- include_common_left.jsp end-->
+		</div>
+		<!-- navigation end-->
+		<!-- wrapper start -->
+		<div id="wrapper">
+			<!-- content start -->
+			<!-- include_content.jsp start-->
+
+			<div id="content"></div>
+			<!-- include_content.jsp end-->
+			<!-- content end -->
+		</div>
+		<!--wrapper end-->
+		<div id="footer">
+			<!-- include_common_bottom.jsp start-->
+
+			<p align="center">Copyright (&copy;) By Kimkyoungho.[김경호] All
+				rights reserved.</p>
+
+			<!-- include_common_bottom.jsp end-->
+		</div>
+	</div>
+	<!--container end-->
+	<script id="user-main-template" type="text/x-handlebars-template">
+		<img src='image/enter.png' width="540" height="350px"
+		style="margin: 10px" />
+	</script>
+	<script id="user-write-form-template" type="text/x-handlebars-template">
+		<table width="0" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				<!--contents--> <br>
+				<table style="padding-left: 10px" border="0" cellpadding="0"
+					cellspacing="0">
+					<tbody>
+						<tr>
+							<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 -
+									회원 가입</b></td>
+						</tr>
+					</tbody>
+				</table> 
+				<!-- write Form  -->
+				<form name="f" id="user_write_form" method="post">
+					<table border="0" cellpadding="0" cellspacing="1" width="590"
+						bgcolor="BBBBBB">
+						<tbody>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">사용자
+									아이디</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="text" style="width: 150px"
+									name="userId" value="{{data.userId}}">&nbsp;&nbsp;<font color="red">{{message}}</font>
+								</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">비밀번호</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="password" style="width: 150px"
+									name="password" value="{{data.password}}"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">비밀번호
+									확인</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="password" style="width: 150px"
+									name="password2" value="{{data.password}}"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="text" style="width: 150px"
+									name="name" value="{{data.name}}"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이메일
+									주소</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="text" style="width: 150px"
+									name="email" value="{{data.email}}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			
+				<br>
+
+				<table border="0" cellpadding="0" cellspacing="1">
+					<tbody>
+						<tr>
+							<td align="center">
+							<input type="button" id="btn_user_write_action" value="회원 가입"> &nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+	</script>
+<script id="user-view-template" type="text/x-handlebars-template">
+	<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				<!--contents--> <br>
+				<table style="padding-left: 10px" border="0" cellpadding="0"
+					cellspacing="0">
+					<tbody>
+						<tr>
+							<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 -
+									사용자 정보보기</b></td>
+						</tr>
+					</tbody>
+				</table> 
+				<!-- view Form  -->
+				{{#data}}
+				<form name="f" method="post" id="user_view_form">
+					<input type="hidden" name="userId" value="guard">
+					<table border="0" cellpadding="0" cellspacing="1" width="590"
+						bgcolor="BBBBBB">
+						<tbody>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">사용자
+									아이디</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10">
+									{{userId}}</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10">
+									{{name}}</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이메일
+									주소</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10">
+									{{email}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</form> 
+				{{/data}}
+				<br>
+				<table border="0" cellpadding="0" cellspacing="1">
+					<tbody>
+						<tr>
+							<td align="center"><input id="btn_user_modify_form" type="button" value="수정폼" > &nbsp; 
+							<input type="button"  
+								value="탈퇴" id="btn_user_delete_action" > &nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+	</table>	
+</script>
+<script id="user-modify-form-template"
+	type="text/x-handlebars-template">
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+				<!--contents--> <br>
+				<table style="padding-left: 10px" border="0" cellpadding="0"
+					cellspacing="0">
+					<tbody>
+						<tr>
+							<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 -
+									사용자수정</b></td>
+						</tr>
+					</tbody>
+				</table> 
+				<!-- update Form  -->
+				{{#data}}
+				<form name="f" id="user_modify_form" method="post">
+					<input type="hidden" name="userId" value="{{userId}}">
+					<table border="0" cellpadding="0" cellspacing="1" width="590"
+						bgcolor="BBBBBB">
+						<tbody>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">사용자
+									아이디</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left">{{userId}}</td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">비밀번호</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="password" style="width: 150px"
+									name="password" value="{{password}}"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">비밀번호
+									확인</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="password" style="width: 150px"
+									name="password2" value="{{password}}"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="text" style="width: 150px"
+									name="name" value="{{name}}"></td>
+							</tr>
+							<tr>
+								<td width="100" align="center" bgcolor="E6ECDE" height="22">이메일
+									주소</td>
+								<td width="490" bgcolor="ffffff" style="padding-left: 10px"
+									align="left"><input type="text" style="width: 150px"
+									name="email" value="{{email}}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form> 
+				{{/data}}
+				<br>
+
+				<table width="590" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td align="center">
+							<input type="button" id="btn_user_modify_action" value="수정"> &nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</td>
+		</tr>
+	</tbody>
+	</table>
+</script>
+<script id="user-login-form-template" type="text/x-handlebars-template">
+		<table border=0 cellpadding=0 cellspacing=0>
+	<tr>
+		<td><br />
+			<table style="padding-left: 10px" border=0 cellpadding=0
+				cellspacing=0>
+				<tr>
+					<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 -
+							로그인</b></td>
+				</tr>
+			</table> <!-- login Form  -->
+			<form name="f" id="user_login_form" method="post">
+				<table border="0" cellpadding="0" cellspacing="1" bgcolor="BBBBBB">
+					<tr>
+						<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
+							아이디</td>
+						<td width=490 align="left" bgcolor="ffffff"
+							style="padding-left: 10px"><input type="text"
+							style="width: 150" name="userId" value="{{data.userId}}">&nbsp;&nbsp;<font
+							color="red">{{#ifCond status 5000}}{{message}}{{/ifCond}} </font></td>
+					</tr>
+					<tr>
+						<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
+						<td width=490 align="left" bgcolor="ffffff"
+							style="padding-left: 10px"><input type="password"
+							style="width: 150" name="password" value="{{data.password}}">&nbsp;&nbsp;<font
+							color="red">{{#ifCond status 5100}}{{message}}{{/ifCond}}</font></td>
+					</tr>
+				</table>
+			</form> <br />
+			<table border="0" cellpadding="0" cellspacing="1">
+				<tr>
+					<td align=center><input type="button" value="로그인" id="btn_user_login_action"> &nbsp; <input type="button"
+						value="회원가입폼" id="btn_user_write_form"></td>
+				</tr>
+			</table></td>
+	</tr>
+	</table>
+</script>
+
+</body>
+</html>

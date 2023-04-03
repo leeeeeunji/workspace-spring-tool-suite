@@ -2,7 +2,9 @@ package com.itwill.my_real_korea.util;
 
 import java.util.Iterator;
 
-import com.itwill.my_real_korea.dto.notice.Notice;
+import com.itwill.my_real_korea.dto.tripboard.TripBoard;
+
+//import com.itwill.my_real_korea.dto.notice.Notice;
 
 
 public class BoardUtils {
@@ -30,7 +32,7 @@ public class BoardUtils {
 	}
 	/*
 	 * 게시글, 답글의 title 출력 설정
-	 */
+	 *
 	public String getTitleString(Notice notice) {
 		StringBuilder title = new StringBuilder(128);
 		String t = notice.getNTitle();
@@ -41,5 +43,16 @@ public class BoardUtils {
 		title.append(t.replace(" ", "&nbsp;"));
 		return title.toString();
 	}
+	*/
 	
+	public String getTitleString(TripBoard tripBoard) {
+		StringBuilder title = new StringBuilder(128);
+		String t = tripBoard.getTBoTitle();
+		if (t.length() > 15) {
+			t = String.format("%s...", t.substring(0, 15));
+		}
+	
+		title.append(t.replace(" ", "&nbsp;"));
+		return title.toString();
+	}
 }

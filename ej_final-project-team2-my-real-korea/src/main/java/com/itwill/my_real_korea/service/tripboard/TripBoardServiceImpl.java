@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.tripboard.TripBoardDao;
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
-import com.itwill.my_real_korea.dto.tripboard.TripBoardListPageMakerDto;
 import com.itwill.my_real_korea.util.PageMaker;
+import com.itwill.my_real_korea.util.PageMakerDto;
 
 @Service
 public class TripBoardServiceImpl implements TripBoardService {
@@ -54,8 +54,12 @@ public class TripBoardServiceImpl implements TripBoardService {
 	 * 게시글 모집상태별로 보기
 	 */
 	@Override
-	public List<TripBoard> selectByTbStatusList(int tBoStatus) throws Exception {
-		return tripBoardDao.selectByTbStatusList(tBoStatus);
+	public PageMakerDto<TripBoard> selectByTbStatusList(int currentPage, int tBoStatus) throws Exception {
+		int totalTripBoardCount = tripBoardDao.selectByTbStatusList(tBoStatus);
+		PageMaker pageMaker = new PageMaker(totalTripBoardCount, currentPage);
+		List<TripBoard> tripBoardList = tripBoardDao.selectByTbStatusList(pageMaker.getPageBegin(), pageMaker.getPageEnd(), tBoStatus);
+		PageMakerDto<TripBoard> pageMakerTripBoardList = new PageMakerDto<TripBoard>(tripBoardList, pageMaker, totalTripBoardCount);
+		return pageMakerTripBoardList;
 	}
 	
 	/*
@@ -94,15 +98,14 @@ public class TripBoardServiceImpl implements TripBoardService {
 	 * 게시판 리스트
 	 */
 	@Override
-	public TripBoardListPageMakerDto selectAllTb(int currentPage) throws Exception {
-		int totalRecordCount = tripBoardDao.selectAllTbCount();
-		
-		PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
-		
+	public PageMakerDto<TripBoard> selectAllTb(int currentPage) throws Exception {
+		//전체 글의 수
+		int totalTripBoardCount = tripBoardDao.selectAllTbCount();
+		//paging 계산(PageMaker)
+		PageMaker pageMaker = new PageMaker(totalTripBoardCount, currentPage);
+		//게시글 데이터 얻기
 		List<TripBoard> tripBoardList = tripBoardDao.selectAllTb(pageMaker.getPageBegin(), pageMaker.getPageEnd());
-		TripBoardListPageMakerDto pageMakerBoardList = new TripBoardListPageMakerDto();
-		pageMakerBoardList.itemList = tripBoardList;
-		pageMakerBoardList.pageMaker = pageMaker;
+		PageMakerDto<TripBoard> pageMakerBoardList = new PageMakerDto<TripBoard>(tripBoardList, pageMaker, totalTripBoardCount);
 		return pageMakerBoardList;
 	}
 	

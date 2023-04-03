@@ -11,12 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.itwill.my_real_korea.dto.tripboard.City;
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
+import com.itwill.my_real_korea.util.PageMakerDto;
 
-//@SpringBootTest
-//@ComponentScan(basePackages = {"com.itwill.ej_final_project"})
+@SpringBootTest
+@ComponentScan(basePackages = {"com.itwill.ej_final_project"})
 class TripBoardServiceImplTest {
 	
 	@Autowired
@@ -124,10 +125,10 @@ class TripBoardServiceImplTest {
 	 * 게시판 리스트
 	 */
 	//성공
-	@Disabled
+	//@Disabled
 	@Test
 	void testSelectAllTb() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardService.selectAllTb();
+		PageMakerDto<TripBoard> tripBoardList = tripBoardService.selectAllTb(1);
 		System.out.println(tripBoardList);
 	}
 	
@@ -222,7 +223,7 @@ class TripBoardServiceImplTest {
 	/*
 	 * 게시글리스트 조회 + City 정보
 	 */
-	@Test
+	//@Test
 	void testSelectAllByCityNo() throws Exception {
 		List<TripBoard> tripBoardList = tripBoardService.selectAllByCityNo();
 		System.out.println(tripBoardList);
