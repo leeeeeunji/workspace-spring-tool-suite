@@ -1,13 +1,10 @@
-package com.itwill.my_real_korea.mapper;
+package com.itwill.my_real_korea.service.tripboard;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
 
-@Mapper
-public interface TripBoardCommentMapper {
+public interface TripBoardCommentService {
 	/*
 	 * 댓글 추가
 	 */

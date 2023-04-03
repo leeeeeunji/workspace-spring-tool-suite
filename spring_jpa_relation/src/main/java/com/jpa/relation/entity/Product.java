@@ -61,11 +61,11 @@ public class Product extends BaseEntity {
 	private Provider provider;
 	
 	
-	/*************** case1[@ManyToOne] ****************
+	/*************** case1[@ManyToOne] ****************/
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-	***************************************************/
+	/***************************************************/
 	
 	
 	/*************** case1[@ManyToOne] ****************

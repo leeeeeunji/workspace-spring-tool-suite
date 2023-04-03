@@ -1,15 +1,11 @@
-package com.itwill.my_real_korea.mapper;
+package com.itwill.my_real_korea.dao.tripboard;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 
-@Mapper
-public interface TripBoardMapper2 {
-
+public interface TripBoardDao2 {
 	/*
 	 * 게시글 추가
 	 */
@@ -33,33 +29,33 @@ public interface TripBoardMapper2 {
 	/*
 	 * 게시글 모집상태별로 보기
 	 */
-	List<TripBoard> selectByTbStatusList(Map<String, Object> statusMap) throws Exception;
+	List<TripBoard> selectByTbStatusList(int pageBegin, int pageEnd, int tBoStatus) throws Exception;
 
 	/*
 	 * 게시글 지역별로 보기
 	 */
-	List<TripBoard> selectByCityNoList(Map<String, Object> cityNoMap) throws Exception;
+	List<TripBoard> selectByCityNoList(int pageBegin, int pageEnd, int cityNo) throws Exception;
 	
 	/*
 	 * 게시글 해시태그별로 보기
 	 */
-	List<TripBoard> selectByHashtagList(Map<String, Object> hashtagMap) throws Exception;
+	List<TripBoard> selectByHashtagList(int pageBegin, int pageEnd, String hashtag) throws Exception;
 	
 	/*
 	 * 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순)
 	 */
-	List<TripBoard> selectAllOrderByDate(Map<String, Object> pageMapByDate) throws Exception;
+	List<TripBoard> selectAllOrderByDate(int pageBegin, int pageEnd) throws Exception;
 	
 	/*
 	 * 게시판 리스트 정렬(조회수 기준 내림차순)
 	 */
-	List<TripBoard> selectAllOrderByReadCount(Map<String, Object> pageMapByReadCount) throws Exception;
+	List<TripBoard> selectAllOrderByReadCount(int pageBegin, int pageEnd) throws Exception;
 
 	/*
 	 * 게시판 리스트(게시물 시작번호~끝번호) - 페이징 처리
 	 */
-	List<TripBoard> selectAllTb(Map<String, Object> pageMap) throws Exception;
-	
+	List<TripBoard> selectAllTb(int pageBegin, int pageEnd) throws Exception;
+
 	/*
 	 * 게시글  총 개수
 	 */
@@ -79,7 +75,7 @@ public interface TripBoardMapper2 {
 	 * 해시태그별 게시글 개수
 	 */
 	int selectHashtagCount(String hashtag) throws Exception;
-
+	
 	/*
 	 * 게시글 조회수 1 증가
 	 */
@@ -88,7 +84,7 @@ public interface TripBoardMapper2 {
 	/*
 	 * 키워드로 검색된 동행게시판 리스트
 	 */
-	List<TripBoard> selectSearchTbList(Map<String, Object> keywordPageMap) throws Exception;
+	List<TripBoard> selectSearchTbList(int pageBegin, int pageEnd, String keyword) throws Exception;
 	
 	/*
 	 * 검색된 게시글 총 개수

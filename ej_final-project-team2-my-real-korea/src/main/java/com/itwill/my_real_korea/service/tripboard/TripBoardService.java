@@ -1,15 +1,11 @@
-package com.itwill.my_real_korea.mapper;
+package com.itwill.my_real_korea.service.tripboard;
 
 import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Mapper;
 
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
+import com.itwill.my_real_korea.dto.tripboard.TripBoardListPageMakerDto;
 
-@Mapper
-public interface TripBoardMapper2 {
-
+public interface TripBoardService {
 	/*
 	 * 게시글 추가
 	 */
@@ -33,32 +29,32 @@ public interface TripBoardMapper2 {
 	/*
 	 * 게시글 모집상태별로 보기
 	 */
-	List<TripBoard> selectByTbStatusList(Map<String, Object> statusMap) throws Exception;
-
+	List<TripBoard> selectByTbStatusList(int tBoStatus) throws Exception;
+	
 	/*
 	 * 게시글 지역별로 보기
 	 */
-	List<TripBoard> selectByCityNoList(Map<String, Object> cityNoMap) throws Exception;
+	List<TripBoard> selectByCityNoList(int cityNo) throws Exception;
 	
 	/*
 	 * 게시글 해시태그별로 보기
 	 */
-	List<TripBoard> selectByHashtagList(Map<String, Object> hashtagMap) throws Exception;
+	List<TripBoard> selectByHashtagList(String hashtag) throws Exception;
 	
 	/*
 	 * 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순)
 	 */
-	List<TripBoard> selectAllOrderByDate(Map<String, Object> pageMapByDate) throws Exception;
+	List<TripBoard> selectAllOrderByDate() throws Exception;
 	
 	/*
 	 * 게시판 리스트 정렬(조회수 기준 내림차순)
 	 */
-	List<TripBoard> selectAllOrderByReadCount(Map<String, Object> pageMapByReadCount) throws Exception;
+	List<TripBoard> selectAllOrderByReadCount() throws Exception;
 
 	/*
-	 * 게시판 리스트(게시물 시작번호~끝번호) - 페이징 처리
+	 * 게시판 리스트
 	 */
-	List<TripBoard> selectAllTb(Map<String, Object> pageMap) throws Exception;
+	TripBoardListPageMakerDto selectAllTb(int CurrentPage) throws Exception;
 	
 	/*
 	 * 게시글  총 개수
@@ -88,10 +84,20 @@ public interface TripBoardMapper2 {
 	/*
 	 * 키워드로 검색된 동행게시판 리스트
 	 */
-	List<TripBoard> selectSearchTbList(Map<String, Object> keywordPageMap) throws Exception;
+	List<TripBoard> selectSearchTbList(String keyword) throws Exception;
 	
 	/*
 	 * 검색된 게시글 총 개수
 	 */
 	int selectTbSearchCount(String keyword) throws Exception;
+	
+	/*
+	 * 게시글 1개 조회 + City 정보
+	 */
+	TripBoard selectCityInfo(int tBoNo) throws Exception;
+	
+	/*
+	 * 게시글리스트 조회 + City 정보
+	 */
+	List<TripBoard> selectAllByCityNo() throws Exception;
 }

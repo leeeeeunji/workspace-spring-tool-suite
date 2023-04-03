@@ -79,5 +79,8 @@ where idx >= 1 and idx <= 10;
 -- 검색된 게시글 총 개수
 select count(*) cnt from trip_board where t_bo_title like '%동행%';
 
--- 게시글 지역정보 조회
-select c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = 21;
+-- 게시글 1개 조회 + City 정보
+select t.*,c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = 21;
+
+-- 게시글리스트 조회 + City 정보
+select t.*,c.* from trip_board t join city c on t.city_no = c.city_no;

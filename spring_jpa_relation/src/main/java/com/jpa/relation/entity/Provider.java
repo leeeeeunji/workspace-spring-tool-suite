@@ -43,12 +43,26 @@ public class Provider extends BaseEntity {
 	List<Product> productList = new ArrayList<>();
 	**************************************/
 	
-	/****************** case1 CascadeType.PERSIST *******************/
+	/****************** case1 CascadeType.PERSIST *******************
 	@OneToMany(mappedBy = "provider", 
 				cascade = CascadeType.PERSIST, 
 				fetch = FetchType.EAGER)
 	List<Product> productList = new ArrayList<>();
-	 /***************************************************************/
+	 ***************************************************************/
 	
+	/****** case2 CascadeType.ALL[ CascadeType.REMOVE,CascadeType.PERSIST] **
+	@OneToMany(	mappedBy = "provider",
+			cascade = CascadeType.ALL, 
+			fetch = FetchType.EAGER)
+	List<Product> productList=new ArrayList<>();
+	********************************************************/
+	
+	/****** case3 orphanRemoval = true ***********************/
+	@OneToMany(	mappedBy = "provider",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true, 
+			fetch = FetchType.EAGER)
+	List<Product> productList=new ArrayList<>();
+	/********************************************************/
 	
 }

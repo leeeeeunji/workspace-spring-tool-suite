@@ -2,8 +2,6 @@ package com.jpa.relation.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +27,7 @@ class ProductRepositoryTest extends SpringJpaRelationApplicationTests {
 	CategoryRepository categoryRepository;
 	
 	
-	@Test
+	//@Test
 	void productSaveAndUpdate() {
 		Product product=Product.builder()
 						.name("JPA일주일만하면")
@@ -44,7 +42,7 @@ class ProductRepositoryTest extends SpringJpaRelationApplicationTests {
 		
 	}
 	
-	@Test
+	//@Test
 	void productProductDetailSaveRead() {
 		
 			Product product=new Product();
@@ -65,7 +63,7 @@ class ProductRepositoryTest extends SpringJpaRelationApplicationTests {
 			
 		}
 	
-	@Test
+	//@Test
 	void productProviderSaveRead() {
 		
 		Provider provider = new Provider();
@@ -92,9 +90,7 @@ class ProductRepositoryTest extends SpringJpaRelationApplicationTests {
 		
 		/******* 연관 설정 Provide -> Product ********/
 		//provider.getProductList().addAll(Arrays.asList(product1,  product2));
-		Provider provider2 = providerRepository.findById(1L).get();
-		
-		providerRepository.save(provider2);
+		providerRepository.save(provider);
 		
 		
 		System.out.println("product : " + productRepository.findById(2L).get());

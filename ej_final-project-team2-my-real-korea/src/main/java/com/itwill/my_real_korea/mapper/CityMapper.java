@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.itwill.my_real_korea.dto.City;
+import com.itwill.my_real_korea.dto.tripboard.City;
 @Mapper
 public interface CityMapper {
 	//1. 시티 새로 추가
