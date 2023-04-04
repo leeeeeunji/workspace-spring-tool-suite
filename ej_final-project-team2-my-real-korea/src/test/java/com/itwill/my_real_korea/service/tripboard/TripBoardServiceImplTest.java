@@ -17,7 +17,7 @@ import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 @SpringBootTest
-@ComponentScan(basePackages = {"com.itwill.ej_final_project"})
+@ComponentScan(basePackages = {"com.itwill.my_real_korea"})
 class TripBoardServiceImplTest {
 	
 	@Autowired
@@ -208,6 +208,5 @@ class TripBoardServiceImplTest {
 		int rowCount = tripBoardService.selectTbSearchCount("추추");
 		assertEquals(rowCount, 2);
 	}
-	
 	
 }
