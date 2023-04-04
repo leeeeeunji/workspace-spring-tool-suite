@@ -59,7 +59,7 @@ class TripBoardServiceImplTest {
 	 * 게시글 번호로 게시글 1개 보기
 	 */
 	//성공
-	@Disabled
+	//@Disabled
 	@Test
 	void testSelectByTbNo() throws Exception {
 		System.out.println(tripBoardService.selectByTbNo(1));
@@ -72,7 +72,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectByTbStatusList() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardService.selectByTbStatusList(0);
+		PageMakerDto<TripBoard> tripBoardList = tripBoardService.selectByTbStatusList(1, 0);
 		System.out.println(tripBoardList);
 	}
 
@@ -83,7 +83,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectByCityNoList() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardService.selectByCityNoList(1);
+		PageMakerDto<TripBoard> tripBoardList = tripBoardService.selectByCityNoList(1, 4);
 		System.out.println(tripBoardList);
 	}
 	
@@ -94,7 +94,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectByHashtagList() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardService.selectByHashtagList("아무나다좋아");
+		PageMakerDto<TripBoard> tripBoardList = tripBoardService.selectByHashtagList(1, "인싸만");
 		System.out.println(tripBoardList);
 	}
 	
@@ -105,7 +105,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectAllOrderByDate() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardService.selectAllOrderByDate();
+		PageMakerDto<TripBoard> tripBoardList = tripBoardService.selectAllOrderByDate(1);
 		System.out.println(tripBoardList);
 	}
 	
@@ -117,7 +117,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectAllOrderByReadCount() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardService.selectAllOrderByReadCount();
+		PageMakerDto<TripBoard> tripBoardList = tripBoardService.selectAllOrderByReadCount(1);
 		System.out.println(tripBoardList);
 	}
 	
@@ -125,7 +125,7 @@ class TripBoardServiceImplTest {
 	 * 게시판 리스트
 	 */
 	//성공
-	//@Disabled
+	@Disabled
 	@Test
 	void testSelectAllTb() throws Exception {
 		PageMakerDto<TripBoard> tripBoardList = tripBoardService.selectAllTb(1);
@@ -140,7 +140,7 @@ class TripBoardServiceImplTest {
 	@Test
 	void testSelectAllTbCount() throws Exception {
 		int rowCount = tripBoardService.selectAllTbCount();
-		assertEquals(rowCount, 4);
+		assertEquals(rowCount, 7);
 	}
 	
 	/*
@@ -161,8 +161,8 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectCityNoCount() throws Exception {
-		int rowCount = tripBoardService.selectCityNoCount(1);
-		assertEquals(rowCount, 2);
+		int rowCount = tripBoardService.selectCityNoCount(4);
+		assertEquals(rowCount, 1);
 	}
 	
 	/*
@@ -183,7 +183,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testIncreaseTbReadCount() throws Exception {
-		int rowCount = tripBoardService.increaseTbReadCount(1);
+		int rowCount = tripBoardService.increaseTbReadCount(3);
 		assertEquals(rowCount, 1);
 	}
 	
@@ -194,7 +194,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectSearchTbList() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardService.selectSearchTbList("");
+		PageMakerDto<TripBoard> tripBoardList = tripBoardService.selectSearchTbList(1, "추추");
 		System.out.println(tripBoardList);
 	}
 
@@ -205,28 +205,9 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectTbSearchCount() throws Exception {
-		int rowCount = tripBoardService.selectTbSearchCount("");
-		assertEquals(rowCount, 4);
+		int rowCount = tripBoardService.selectTbSearchCount("추추");
+		assertEquals(rowCount, 2);
 	}
 	
-	/*
-	 * 게시글 1개 조회 + City 정보
-	 */
-	//성공
-	@Disabled
-	@Test
-	void testSelectCityInfo() throws Exception {
-		TripBoard tripBoard = tripBoardService.selectCityInfo(1);
-		System.out.println(tripBoard);
-	}
-	
-	/*
-	 * 게시글리스트 조회 + City 정보
-	 */
-	//@Test
-	void testSelectAllByCityNo() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardService.selectAllByCityNo();
-		System.out.println(tripBoardList);
-	}
 	
 }

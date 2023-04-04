@@ -55,8 +55,11 @@ public class TripBoardServiceImpl implements TripBoardService {
 	 */
 	@Override
 	public PageMakerDto<TripBoard> selectByTbStatusList(int currentPage, int tBoStatus) throws Exception {
-		int totalTripBoardCount = tripBoardDao.selectByTbStatusList(tBoStatus);
+		//전체 글의 수
+		int totalTripBoardCount = tripBoardDao.selectStatusCount(tBoStatus);
+		// paging 계산 (PageMaker)
 		PageMaker pageMaker = new PageMaker(totalTripBoardCount, currentPage);
+		// 게시글 데이터 얻기
 		List<TripBoard> tripBoardList = tripBoardDao.selectByTbStatusList(pageMaker.getPageBegin(), pageMaker.getPageEnd(), tBoStatus);
 		PageMakerDto<TripBoard> pageMakerTripBoardList = new PageMakerDto<TripBoard>(tripBoardList, pageMaker, totalTripBoardCount);
 		return pageMakerTripBoardList;
@@ -66,32 +69,60 @@ public class TripBoardServiceImpl implements TripBoardService {
 	 * 게시글 지역별로 보기
 	 */
 	@Override
-	public List<TripBoard> selectByCityNoList(int cityNo) throws Exception {
-		return tripBoardDao.selectByCityNoList(cityNo);
+	public PageMakerDto<TripBoard> selectByCityNoList(int currentPage, int cityNo) throws Exception {
+		//전체 글의 수
+		int totalTripBoardCount = tripBoardDao.selectCityNoCount(cityNo);
+		// paging 계산 (PageMaker)
+		PageMaker pageMaker = new PageMaker(totalTripBoardCount, currentPage);
+		// 게시글 데이터 얻기
+		List<TripBoard> tripBoardList = tripBoardDao.selectByCityNoList(pageMaker.getPageBegin(), pageMaker.getPageEnd(), cityNo);
+		PageMakerDto<TripBoard> pageMakerTripBoardList = new PageMakerDto<TripBoard>(tripBoardList, pageMaker, totalTripBoardCount);
+		return pageMakerTripBoardList;
 	}
 	
 	/*
 	 * 게시글 해시태그별로 보기
 	 */
 	@Override
-	public List<TripBoard> selectByHashtagList(String hashtag) throws Exception {
-		return tripBoardDao.selectByHashtagList(hashtag);
+	public PageMakerDto<TripBoard> selectByHashtagList(int currentPage, String hashtag) throws Exception {
+		//전체 글의 수
+		int totalTripBoardCount = tripBoardDao.selectHashtagCount(hashtag);
+		// paging 계산 (PageMaker)
+		PageMaker pageMaker = new PageMaker(totalTripBoardCount, currentPage);
+		// 게시글 데이터 얻기
+		List<TripBoard> tripBoardList = tripBoardDao.selectByHashtagList(pageMaker.getPageBegin(), pageMaker.getPageEnd(), hashtag);
+		PageMakerDto<TripBoard> pageMakerTripBoardList = new PageMakerDto<TripBoard>(tripBoardList, pageMaker, totalTripBoardCount);
+		return pageMakerTripBoardList;
 	}
 	
 	/*
 	 * 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순)
 	 */
 	@Override
-	public List<TripBoard> selectAllOrderByDate() throws Exception {
-		return tripBoardDao.selectAllOrderByDate();
+	public PageMakerDto<TripBoard> selectAllOrderByDate(int currentPage) throws Exception {
+		//전체 글의 수
+		int totalTripBoardCount = tripBoardDao.selectAllTbCount();
+		// paging 계산 (PageMaker)
+		PageMaker pageMaker = new PageMaker(totalTripBoardCount, currentPage);
+		// 게시글 데이터 얻기
+		List<TripBoard> tripBoardList = tripBoardDao.selectAllOrderByDate(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<TripBoard> pageMakerTripBoardList = new PageMakerDto<TripBoard>(tripBoardList, pageMaker, totalTripBoardCount);
+		return pageMakerTripBoardList;
 	}
 	
 	/*
 	 * 게시판 리스트 정렬(조회수 기준 내림차순)
 	 */
 	@Override
-	public List<TripBoard> selectAllOrderByReadCount() throws Exception {
-		return tripBoardDao.selectAllOrderByReadCount();
+	public PageMakerDto<TripBoard> selectAllOrderByReadCount(int currentPage) throws Exception {
+		//전체 글의 수
+		int totalTripBoardCount = tripBoardDao.selectAllTbCount();
+		// paging 계산 (PageMaker)
+		PageMaker pageMaker = new PageMaker(totalTripBoardCount, currentPage);
+		// 게시글 데이터 얻기
+		List<TripBoard> tripBoardList = tripBoardDao.selectAllOrderByReadCount(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<TripBoard> pageMakerTripBoardList = new PageMakerDto<TripBoard>(tripBoardList, pageMaker, totalTripBoardCount);
+		return pageMakerTripBoardList;
 	}
 	
 	/*
@@ -149,8 +180,15 @@ public class TripBoardServiceImpl implements TripBoardService {
 	 * 키워드로 검색된 동행게시판 리스트
 	 */
 	@Override
-	public List<TripBoard> selectSearchTbList(String keyword) throws Exception {
-		return tripBoardDao.selectSearchTbList(keyword);
+	public PageMakerDto<TripBoard> selectSearchTbList(int currentPage, String keyword) throws Exception {
+		//전체 글의 수
+		int totalTripBoardCount = tripBoardDao.selectTbSearchCount(keyword);
+		// paging 계산 (PageMaker)
+		PageMaker pageMaker = new PageMaker(totalTripBoardCount, currentPage);
+		// 게시글 데이터 얻기
+		List<TripBoard> tripBoardList = tripBoardDao.selectSearchTbList(pageMaker.getPageBegin(), pageMaker.getPageEnd(),keyword);
+		PageMakerDto<TripBoard> pageMakerTripBoardList = new PageMakerDto<TripBoard>(tripBoardList, pageMaker, totalTripBoardCount);
+		return pageMakerTripBoardList;
 	}
 	
 	/*
@@ -161,19 +199,4 @@ public class TripBoardServiceImpl implements TripBoardService {
 		return tripBoardDao.selectTbSearchCount(tbKeyword);
 	}
 	
-	/*
-	 * 게시글 1개 조회 + City 정보
-	 */
-	@Override
-	public TripBoard selectCityInfo(int tBoNo) throws Exception {
-		return tripBoardDao.selectCityInfo(tBoNo);
-	}
-	
-	/*
-	 * 게시글리스트 조회 + City 정보
-	 */
-	@Override
-	public List<TripBoard> selectAllByCityNo() throws Exception {
-		return tripBoardDao.selectAllByCityNo();
-	}
 }

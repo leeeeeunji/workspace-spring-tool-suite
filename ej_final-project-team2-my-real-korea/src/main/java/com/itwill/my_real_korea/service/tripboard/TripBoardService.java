@@ -91,13 +91,4 @@ public interface TripBoardService {
 	 */
 	int selectTbSearchCount(String keyword) throws Exception;
 	
-	/*
-	 * 게시글 1개 조회 + City 정보
-	 */
-	TripBoard selectByCityInfo(int tBoNo) throws Exception;
-	
-	/*
-	 * 게시글리스트 조회 + City 정보 - 페이징 처리
-	 */
-	PageMakerDto<TripBoard> selectAllByCityNo(int currentPage) throws Exception;
 }

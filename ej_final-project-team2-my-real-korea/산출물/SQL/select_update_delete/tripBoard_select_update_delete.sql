@@ -14,56 +14,45 @@ select t_bo_no, t_bo_title, t_bo_content, t_bo_date, t_bo_readcount, t_bo_status
         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id from trip_board where t_bo_no=1;
         
 --  게시글 모집상태별로 보기 - 페이징 처리
-select * from 
+select * from
 	(select rownum idx, s.* from
-        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
-         from trip_board where t_bo_status=0) s
-    )
-where idx >= 1 and idx <= 10;
+		(select * from trip_board t join city c on t.city_no = c.city_no where t.t_bo_status = 0 order by t.t_bo_no asc) s
+	)
+	where idx >= 1 and idx <= 10;
         
 --  게시글 지역별로 보기 - 페이징 처리
-select * from 
-	select rownum idx, s.* from
-        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
-         from trip_board where city_no=1) s
-    )
-where idx >= 1 and idx <= 10;
+select * from
+	(select rownum idx, s.* from
+		(select * from trip_board t join city c on t.city_no = c.city_no where c.city_no = 3 order by t.t_bo_no asc) s
+	)
+	where idx >= 1 and idx <= 10;
 
 --  게시글 해시태그별로 보기 - 페이징 처리
-select * from 
-	 (select rownum idx, s.* from
-        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
-         from trip_board where hashtag='인싸만') s
-    )
+select * from
+	(select rownum idx, s.* from
+		(select * from trip_board t join city c on t.city_no = c.city_no where t.hashtag = '인싸만' order by t.t_bo_no asc) s
+	)
 where idx >= 1 and idx <= 10;
 
 -- 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순) - 페이징 처리
-select * from 
-	 (select rownum idx, s.* from
-	        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-	         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
-	         from trip_board order by t_bo_date desc) s
-	    )
+select * from
+	(select rownum idx, s.* from
+		(select * from trip_board t join city c on t.city_no = c.city_no order by t.t_bo_date desc) s
+	)
 where idx >= 1 and idx <= 10;
 
 -- 게시판 리스트 정렬(조회수 기준 내림차순) - 페이징 처리
-select * from 
-	 (select rownum idx, s.* from
-        (select t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-         t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id 
-         from trip_board order by t_bo_readcount desc) s
-    )
+select * from
+	(select rownum idx, s.* from
+		(select * from trip_board t join city c on t.city_no = c.city_no order by t.t_bo_readcount desc) s
+	)
 where idx >= 1 and idx <= 10;
 
 -- 게시판 리스트(게시글 시작번호~끝번호)- 페이징 처리
 select * from
-    (select rownum idx, s.* from
-        (select t_bo_no, t_bo_title, t_bo_content, t_bo_date, t_bo_readcount, t_bo_status, t_bo_person,
-        t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id from trip_board order by t_bo_no asc) s
-    )
+	(select rownum idx, s.* from
+		(select * from trip_board t join city c on t.city_no = c.city_no order by t.t_bo_no asc) s
+	)
 where idx >= 1 and idx <= 10;
 
 -- 게시글 총 개수
@@ -87,10 +76,10 @@ select * from trip_board where t_bo_title like '%동행%' order by t_bo_no desc;
 
 select * from
     (select rownum idx, s.* from
-        (select t_bo_no, t_bo_title, t_bo_content, t_bo_date, t_bo_readcount, t_bo_status, t_bo_person,
-        t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id from trip_board
-        where t_bo_title like '%추추%' or t_bo_content like '%추추%'
-        order by t_bo_no desc) s
+        (select * from trip_board t
+        join city c on t.city_no = c.city_no
+        where t.t_bo_title like '%추추%' or t.t_bo_content like '%추추%'
+        order by t.t_bo_no desc) s
     )
 where idx >= 1 and idx <= 10;
 
@@ -98,11 +87,11 @@ where idx >= 1 and idx <= 10;
 select count(*) cnt from trip_board where t_bo_title like '%추추%' or t_bo_content like '%추추%';
 
 -- 게시글 1개 조회 + City 정보
-select t.*, c.city_name, c.latitude, c.longitude from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = 21;
+select * from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = 21;
 
 -- 게시글리스트 조회 + City 정보 - 페이징 처리
 select * from
 	(select rownum idx, s.* from
-		(select t.*, c.city_name, c.latitude, c.longitude from trip_board t join city c on t.city_no = c.city_no  order by t.t_bo_no asc) s
+		(select * from trip_board t join city c on t.city_no = c.city_no  order by t.t_bo_no asc) s
 	)
 	where idx >= 1 and idx <= 10;

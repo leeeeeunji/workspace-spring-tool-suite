@@ -40,7 +40,7 @@ class TripBoardDaoImplTest {
 	 @Disabled
 	 @Test 
 	 void testUpdateTripBoard() throws Exception { 
-		 int rowCount = tripBoardDao.updateTripBoard(new TripBoard(3, "제목수정", "내용수정", new Date(), 3, 0, 1, "수정사진1.png", new Date(), new Date(), "무계획", "아무나다좋아", new City(1, "서울", 1, 1), "user1"));
+		 int rowCount = tripBoardDao.updateTripBoard(new TripBoard(26, "제목또수정", "내용또수정", new Date(), 3, 0, 1, "수정사진1.png", new Date(), new Date(), "즉흥적", "맛집투어", new City(4, "부산", 4, 4), "user2"));
 		 assertEquals(rowCount, 1); 
 	 }
 	 
@@ -56,7 +56,7 @@ class TripBoardDaoImplTest {
 	 }
 	 
 	/* 
-	 * 게시글 번호로 게시글 1개 보기
+	 * 게시글 번호로 게시글 1개 보기 + City 정보
 	 */
 	 //성공
 	 @Disabled
@@ -78,10 +78,10 @@ class TripBoardDaoImplTest {
 	 }
 	 
 	/* 
-	 * 게시글 지역별로 보기 - 페이징 처리 => 오류
+	 * 게시글 지역별로 보기 - 페이징 처리
 	 */
 	 //성공
-	 //@Disabled
+	 @Disabled
 	 @Test 
 	 void testSelectByCityNoList() throws Exception { 
 		 List<TripBoard> tripBoardList = tripBoardDao.selectByCityNoList(1, 10, 1);
@@ -121,7 +121,7 @@ class TripBoardDaoImplTest {
 		 System.out.println(tripBoardList);
 	 }
 	/* 
-	 * 게시판 리스트 - 페이징 처리
+	 * 게시판 리스트 + City 정보 - 페이징 처리
 	 */
 	 @Disabled
 	 @Test
@@ -137,13 +137,13 @@ class TripBoardDaoImplTest {
 	 @Test 
 	 void testSelectAllTbCount() throws Exception { 
 		 int rowCount = tripBoardDao.selectAllTbCount(); 
-		 assertEquals(rowCount, 5); 
+		 assertEquals(rowCount, 7); 
 	 }
 	
 	/* 
 	 * 모집상태별 게시글 개수
 	 */
-	 //성공
+	//성공
 	@Disabled
 	@Test 
 	void testSelectStatusCount() throws Exception { 
@@ -157,7 +157,7 @@ class TripBoardDaoImplTest {
 	 //성공
 	 @Disabled
 	 @Test void testSelectCityNoCount() throws Exception { 
-		 int rowCount = tripBoardDao.selectCityNoCount(1); 
+		 int rowCount = tripBoardDao.selectCityNoCount(4); 
 		 assertEquals(rowCount, 1); 
 	 }
 	 
@@ -202,27 +202,7 @@ class TripBoardDaoImplTest {
 	 @Test 
 	 void testSelectTbSearchCount() throws Exception { 
 		 int rowCount =tripBoardDao.selectTbSearchCount("추추"); 
-		 assertEquals(rowCount, 3); 
-	}
-	 
-	/*
-	* 게시글 1개 조회 + City 정보 => tripBoard 정보 안 뜨고, city정보만 뜸
-	*/
-	@Disabled
-	@Test
-	void testSelectCityInfo() throws Exception {
-		TripBoard tripBoard = tripBoardDao.selectByCityInfo(1);
-		System.out.println(tripBoard);
-	}
-	
-	/*
-	 * 게시글리스트 조회 + City 정보 - 페이징 처리 => city 정보 안 뜸
-	 */
-	@Disabled
-	@Test
-	void testSelectAllByCityNo() throws Exception {
-		List<TripBoard> tripBoardList = tripBoardDao.selectAllByCityNo(1, 10);
-		System.out.println(tripBoardList);
+		 assertEquals(rowCount, 2); 
 	}
 	
 }

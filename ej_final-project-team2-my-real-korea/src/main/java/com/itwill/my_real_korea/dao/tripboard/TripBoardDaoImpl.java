@@ -181,23 +181,4 @@ public class TripBoardDaoImpl implements TripBoardDao{
 		return tripBoardMapper.selectTbSearchCount(keyword);
 	}
 	
-	/*
-	 * 게시글 1개 조회 + City 정보
-	 */
-	@Override
-	public TripBoard selectByCityInfo(int tBoNo) throws Exception {
-		return tripBoardMapper.selectByCityInfo(tBoNo);
-	}
-	
-	/*
-	 * 게시글리스트 조회 + City 정보 - 페이징 처리
-	 */
-	@Override
-	public List<TripBoard> selectAllByCityNo(int pageStart, int pageEnd) throws Exception {
-		Map<String, Object> pageMap = new HashMap<>();
-		pageMap.put("pageStart", pageStart);
-		pageMap.put("pageEnd", pageEnd);
-		return tripBoardMapper.selectAllByCityNo(pageMap);
-	}
-	
 }
