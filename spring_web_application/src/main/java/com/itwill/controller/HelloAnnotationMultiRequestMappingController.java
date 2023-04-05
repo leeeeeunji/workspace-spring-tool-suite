@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloAnnotationMultiRequestMappingController {
 	@RequestMapping("hello3")
 	public String hello3() {
-		
+		System.out.println("### HelloAnnotationMultiRequestMappingController.hello3() 메소드 호출");
 		return "forward:/WEB-INF/views/hello3.jsp";
 	}
 	

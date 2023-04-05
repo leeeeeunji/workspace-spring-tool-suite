@@ -9,11 +9,11 @@
 		insert into city(city_no,city_name,latitude,longitude) values(#{cityNo},#{cityName},#{latitude},#{longtitude})
 	</insert>
 	<!-- 2. 시티번호로 시티 찾기 -->
-	<select id="selectByCityNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.City">
+	<select id="findByCityNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.City">
 		select * from city where city_no=#{cityNo}
 	</select>
 	<!-- 3. 시티 리스트 전체 출력 -->
-	<select id="selectAllCity" resultType="com.itwill.my_real_korea.dto.City">
+	<select id="findAllCity" resultType="com.itwill.my_real_korea.dto.City">
 		select * from city
 	</select>
 </mapper>

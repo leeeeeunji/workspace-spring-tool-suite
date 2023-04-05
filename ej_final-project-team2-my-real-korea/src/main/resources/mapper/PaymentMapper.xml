@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.my_real_korea.mapper.PaymentMapper">
+    <resultMap id="paymentResultMap" type="com.itwill.my_real_korea.dto.Payment" autoMapping="true">
+        <association property="ticket" javaType="com.itwill.my_real_korea.dto.ticket.Ticket" autoMapping="true"> </association>
+        <association property="tour" javaType="com.itwill.my_real_korea.dto.tour.Tour" autoMapping="true"> </association>
+    </resultMap>
+    <!--예약 (주문) 생성 -->
+    <insert id="insertPayment" parameterType="com.itwill.my_real_korea.dto.Payment">
+        <selectKey resultType="java.lang.Integer" keyProperty="pNo" order="BEFORE">
+            SELECT PAYMENT_P_NO_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+            INSERT INTO PAYMENT (P_NO, P_PRICE, P_QTY, P_DATE, P_START_DATE, P_MSG, P_POINT, P_METHOD, TO_NO, TI_NO,USER_ID)
+            VALUES (#{pNo},#{pPrice},#{pQty},SYSDATE,#{pStartDate},#{pMsg},#{pPoint},#{pMethod},CASE WHEN #{tour.toNo} = 0 THEN NULL ELSE #{tour.toNo} END,CASE WHEN #{ticket.tiNo} = 0 THEN NULL ELSE #{ticket.tiNo} END, #{userId})
+    </insert>
+
+    <!-- 내 예약 보기 -->
+    <select id="selectAllUser" parameterType="String" resultMap="paymentResultMap">
+            SELECT P.*, TI.*, TR.*
+            FROM PAYMENT P
+                     JOIN TICKET TI ON TI.TI_NO = P.TI_NO
+                     JOIN TOUR TR ON TR.TO_NO = P.TO_NO
+            WHERE P.USER_ID=#{userId} ORDER BY P_NO DESC
+    </select>
+
+    <!--예약 상세보기 - 번호 누르면 -->
+        <select id="selectPaymentNo" parameterType="java.lang.Integer" resultMap="paymentResultMap">
+            SELECT P.*, TI.*, TR.*
+            FROM PAYMENT P
+                     LEFT JOIN TICKET TI ON TI.TI_NO = P.TI_NO
+                     LEFT JOIN TOUR TR ON TR.TO_NO = P.TO_NO
+            WHERE P_NO = #{pNo}
+        </select>
+    <!-- 주문 취소-->
+    <delete id="deletePayment" parameterType="java.lang.Integer">
+        DELETE FROM PAYMENT WHERE P_NO=#{pNo}
+    </delete>
+
+</mapper>
