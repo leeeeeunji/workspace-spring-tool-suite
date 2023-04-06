@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //@RestController
 public class HomeRestController {
+	
 	@GetMapping("/")
 	public String index() {
 		return "홈페이지";

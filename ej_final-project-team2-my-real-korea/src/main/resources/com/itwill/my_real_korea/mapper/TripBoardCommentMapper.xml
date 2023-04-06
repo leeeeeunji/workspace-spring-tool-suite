@@ -26,9 +26,9 @@
 	select t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id from trip_board_comment where t_co_no=#{tCoNo}
 </select>
 
-<!--  동행게시판 댓글 전체 보기 -->
-<select id="selectAll" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoardComment">
-	select * from trip_board_comment
+<!--  동행게시판 N번 게시글의 댓글 전체 보기 -->
+<select id="selectAllByTBoNo" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoardComment">
+	select * from trip_board_comment where t_bo_no=#{tBoNo}
 </select>
 
 <!-- 댓글 총 개수 -->

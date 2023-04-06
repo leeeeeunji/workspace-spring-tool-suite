@@ -26,9 +26,9 @@ public interface TripBoardCommentService {
 	TripBoardComment selectByNo(int tCoNo) throws Exception;
 	
 	/*
-	 * 댓글 리스트
+	 * N번 게시글의 댓글 전체 보기
 	 */
-	List<TripBoardComment> selectAll() throws Exception;
+	List<TripBoardComment> selectAllByTBoNo(int tBoNo) throws Exception;
 	
 	/*
 	 * 댓글 총 개수

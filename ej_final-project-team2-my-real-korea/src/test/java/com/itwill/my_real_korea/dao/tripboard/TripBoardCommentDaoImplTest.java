@@ -16,8 +16,8 @@ import com.itwill.my_real_korea.dao.tripboard.TripBoardCommentDao;
 import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
 
 //@SpringBootApplication
-//@SpringBootTest
-//@MapperScan(basePackages = "com.itwill.ej_final_project.mapper")
+@SpringBootTest
+//\@MapperScan(basePackages = "com.itwill.ej_final_project.mapper")
 class TripBoardCommentDaoImplTest {
 	@Autowired
 	private TripBoardCommentDao tripBoardCommentDao;
@@ -58,8 +58,8 @@ class TripBoardCommentDaoImplTest {
 	//성공
 	@Disabled
 	@Test
-	void testSelectAll() throws Exception {
-		List<TripBoardComment> tripBoardCommentList = tripBoardCommentDao.selectAll();
+	void testSelectAllByTBoNo() throws Exception {
+		List<TripBoardComment> tripBoardCommentList = tripBoardCommentDao.selectAllByTBoNo(2);
 		System.out.println(tripBoardCommentList);
 	}
 	

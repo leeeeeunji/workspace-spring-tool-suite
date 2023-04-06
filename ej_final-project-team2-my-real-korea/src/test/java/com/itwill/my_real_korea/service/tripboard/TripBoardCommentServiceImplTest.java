@@ -16,7 +16,7 @@ import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
 import com.itwill.my_real_korea.service.tripboard.TripBoardCommentService;
 
 //@SpringBootApplication
-//@SpringBootTest
+@SpringBootTest
 //@ComponentScan(basePackages = {"com.itwill.ej_final_project"})
 class TripBoardCommentServiceImplTest {
 	
@@ -68,13 +68,13 @@ class TripBoardCommentServiceImplTest {
 	}
 	
 	/*
-	 * 댓글 리스트
+	 * N번 게시글의 댓글 전체 보기
 	 */
 	//성공
 	@Disabled
 	@Test
-	void testSelectAll() throws Exception {
-		List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectAll();
+	void testSelectAllByTBoNo() throws Exception {
+		List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectAllByTBoNo(2);
 		System.out.println(tripBoardCommentList);
 	}
 	

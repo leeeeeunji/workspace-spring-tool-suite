@@ -29,6 +29,14 @@
                 <button class="btn btn-info" type="submit">  로그아웃 </button>
             </form>
         </div>
+        <div class ="link" sec:authorize="authenticated">
+        	<ol>
+        		<li sec:authentication:"principal"></li>
+        		<li sec:authentication:"principal.username"></li>
+        		<li sec:authentication:"principal.password"></li>
+        		<li sec:authentication:"principal.authorities"></li>
+        	</ol>
+        </div>
     </div>
 </div>
 <script th:src="@{/js/bootstrap.js}" />

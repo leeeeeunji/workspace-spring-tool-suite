@@ -52,11 +52,11 @@ public class TripBoardCommentDaoImpl implements TripBoardCommentDao {
 	}
 	
 	/*
-	 * 댓글 리스트
+	 * N번 게시글의 댓글 전체 보기
 	 */
 	@Override
-	public List<TripBoardComment> selectAll() throws Exception {
-		return tripBoardCommentMapper.selectAll();
+	public List<TripBoardComment> selectAllByTBoNo(int tBoNo) throws Exception {
+		return tripBoardCommentMapper.selectAllByTBoNo(tBoNo);
 	}
 	
 	/*
