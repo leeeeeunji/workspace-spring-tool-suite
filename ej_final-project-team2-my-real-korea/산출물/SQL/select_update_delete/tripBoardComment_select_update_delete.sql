@@ -12,8 +12,8 @@ USER_ID                    VARCHAR2(50)
 --  댓글 번호로 댓글 1개 보기
 select t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id from trip_board_comment where t_co_no=1;
 
--- 댓글 전체 보기
-select * from trip_board_comment;
+-- N번 게시글의 댓글 전체 보기
+select * from trip_board_comment where t_bo_no=1;
         
 -- 댓글 수정
 update trip_board_comment set t_comment_content='댓글수정' where t_co_no=2;
