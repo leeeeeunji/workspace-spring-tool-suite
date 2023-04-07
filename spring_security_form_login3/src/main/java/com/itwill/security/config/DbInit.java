@@ -15,12 +15,19 @@ public class DbInit implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (!userService.findUser("user@test.com").isPresent()) {
-			Users user = userService
-					.save(Users.builder().email("user@test.com").password("1111").enabled(true).build());
+		if (!userService.findUser("users1").isPresent()) {
+			Users users1 = userService
+					.save(Users.builder().email("user1").password("1111").enabled(true).build());
 			
-			userService.addAuthority(user.getUserId(), "ROLE_USER");
-			userService.addAuthority(user.getUserId(), "ROLE_ADMIN");
+			userService.addAuthority(users1.getUserId(), "ROLE_USER");
+		}
+			
+			if (!userService.findUser("users2").isPresent()) {
+				Users users2 = userService
+						.save(Users.builder().email("user1").password("1111").enabled(true).build());
+				
+			userService.addAuthority(users2.getUserId(), "ROLE_USER");
+			userService.addAuthority(users2.getUserId(), "ROLE_ADMIN");
 		}
 
 	}
