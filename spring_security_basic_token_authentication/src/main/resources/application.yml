@@ -1,0 +1,18 @@
+server:
+  port: 9053
+logging:
+  level:
+    org: 
+      springframework: 
+        security: DEBUG
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  datasource:
+    url: jdbc:oracle:thin:@182.237.126.19:1521:XE
+    username: jdeveloper61
+    password: jdeveloper61
