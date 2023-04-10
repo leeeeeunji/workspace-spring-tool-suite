@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div style="margin:30px;">
+    <h1> My Real Korea 가입을 위한 인증번호입니다.</h1>
+    <br>
+        <p> 아래 인증번호를 확인하여 이메일 인증을 완료해주세요.</p>
+    <br>
+    <div align="center" style="border:1px solid black; font-family:verdana;">
+    <h3 style="color:blue"> 회원가입 인증 코드 </h3>
+        <div style="font-size:130%" th:text="${authNum}"> </div>
+    </div>
+    <br/>
+</div>
+
+</body>
+</html>

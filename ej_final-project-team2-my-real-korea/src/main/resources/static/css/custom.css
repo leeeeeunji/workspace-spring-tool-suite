@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* logo home with h1 */
+#logo_home h1{
+	margin:10px 0 0 0;
+	padding:0;
+}
+#logo_home h1 a, header.sticky #logo_home h1 a, header#plain #logo_home h1 a, header#colored #logo_home h1 a{
+	width:200px;
+	height:80px;
+	display:block;
+	background-image:url(../img/logo_myrealkorea_main1.png);
+	background-repeat:no-repeat;
+	background-position:left top;
+	background-size: 200px 80px;
+	text-indent:-9999px;
+}
+header.sticky #logo_home h1{
+	margin:0 0 10px 0;
+	padding:0;
+}
+header.sticky #logo_home h1 a{
+	background-image:url(../img/logo_myrealkorea_main2.png);
+}
+header#plain #logo_home h1 a{
+	background-image:url(../img/logo_myrealkorea_main2.png);
+}
+header.sticky#colored #logo_home h1 a{
+	background-image:url(../img/logo_sticky_colored.png);
+}
+@media only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+#logo_home h1 a, header#colored #logo_home h1 a{
+    background-image: url(../img/logo_2x.png);
+	background-size: 160px 34px;
+}
+header.sticky #logo_home h1 a, header#plain #logo_home h1 a{
+    background-image: url(../img/logo_sticky_2x.png);
+	background-size: 160px 34px;
+}
+header.sticky#colored #logo_home h1 a{
+    background-image: url(../img/logo_sticky_colored_2x.png);
+	background-size: 160px 34px;
+}
+}
+
+.intro_title.error h1 {
+    font-size: 50px;
+    color: #fff;
+    font-weight: bold;
+}
+
+#notice-list-main {
+    color: #fff;
+    text-decoration: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    outline: none;
+}
+#notice-list-main:hover {
+	color: #e14d67;
+}
+
+.banner_2 .wrapper h3 {
+    font-size: 60px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.banner_2 .wrapper p {
+    font-size: 30px;
+    font-weight: 300;
+}

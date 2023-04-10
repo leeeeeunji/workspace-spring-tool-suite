@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
+	<meta name="author" content="Ansonika">
+	<title>CITY TOURS - City tours and travel site template by Ansonika</title>
+
+	<!-- Favicons-->
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montserrat:300,400,700" rel="stylesheet">
+	
+	<!-- COMMON CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<link href="css/vendors.css" rel="stylesheet">
+	
+	<!-- SPECIFIC CSS -->
+	<link href="css/admin.css" rel="stylesheet">
+	
+	<!-- CUSTOM CSS -->
+	<link href="css/custom.css" rel="stylesheet">
+<!-- ajax, handlebars 
+<script  defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script  defer src="js/jquery.validate.js"></script>
+<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+-->	
+
+<script type="text/javascript">
+
+function modifyUser() {
+	  if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
+	    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+	    return;
+	  }
+	  document.f.action = "user-modify-action";
+	  document.f.submit();
+	}
+	
+	function modifyAddInfo() {
+		document.a.action = "user-add-modify-action";
+		document.a.submit();
+	}
+	
+
+	function userView() {
+		if (confirm("정말 취소하시겠습니까?")) {
+			location.href = "user-view";
+		}
+	}
+</script>
+
+</head>
+
+<body>
+
+
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!--======================== Header========================== -->
+	<div id="header" th:include="include-common-top::include-common-top"></div>
+	<!--======================== End Header======================== -->
+
+	<section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">
+		<div class="parallax-content-1">
+			<div class="animated fadeInDown">
+				<h1>Hello <a th:text="${session.sUserId}" href=''></a> !</h1>
+				<p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+			</div>
+		</div>
+	</section>
+	<!-- End section -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="margin_60 container">
+			<div id="tabs" class="tabs">
+				<nav>
+					<ul>
+						<li><a href="#section-4" class="icon-profile"><span>Profile</span></a>
+						</li>
+						<li><a href="#section-2" class="icon-wishlist"><span>Wishlist</span></a>
+						</li>
+						<li><a href="#section-3" class="icon-settings"><span>Settings</span></a>
+						</li>
+					</ul>
+				</nav>
+
+				
+				<div class="content">
+
+					<section id="section-4">
+<!-- 
+<div class="row" th:object="${loginUser}" name="f" method="post">
+ -->
+ <form th:object="${loginUser}" name="f" method="post">
+	<input th:value="${session.sUserId}" type="hidden" name="userId"/>
+	<div class="col-md-6">
+		<h4>회원 기본 정보</h4>
+		<ul id="profile_summary">
+
+			<li>이름 <span th:text="*{name}"></span>
+			</li>
+			<li>비밀번호 <span><input type="password" th:value="*{password}" name="password"></span>
+			</li>
+			<li>비밀번호 확인<span><input type="password" th:value="*{password}" name="password2"></span>
+			</li>
+			<li>닉네임 <span><input type="text" th:value="*{nickname}" name="nickname"></span>
+			</li>
+			<li>휴대폰 <span><input type="text"th:value="*{phone}" name="phone" ></span>
+			</li>
+			<li>이메일 <span><input type="text" th:value="*{email}" name="email"></span>
+			</li>
+			<li>주소 <span><input type="text" th:value="*{address}" name="address"></span>
+			</li>
+		</ul>
+	</div>
+
+	</form>
+<button class="btn_1 green" type="button" onclick="modifyUser();">기본 정보 수정</button><br/><br/>
+	
+ <form th:object="${loginUser.userAddInfo}" name="a" method="post">
+	<input th:value="${session.sUserId}" type="hidden" name="userId"/>
+	<div class="col-md-6">
+		<h4>회원 추가 정보</h4>
+		<ul id="profile_summary">
+
+			<li>자기 소개 <span><input type="text" th:value="*{introduce}" name="introduce"></span>
+			</li>
+			<li>음주 여부 <span><input type="radio" name="alcohol" value="0" checked> 음주 선호
+								<input type="radio" name="alcohol" value="1"> 음주 선호하지 않음</span>
+			</li>
+			<li>흡연 여부 <span><input type="radio" name="smoking" value="0" checked> 흡연
+								<input type="radio" name="smoking" value="1"> 비흡연</span>
+			</li>
+<!-- 
+			<li>흡연 여부 <span><input type="text" th:value="*{smoking}" name="smoking"></span>
+			 -->
+		</ul>
+	</div>
+
+	</form>
+<button class="btn_1 green" type="button" onclick="modifyAddInfo();">추가 정보 수정</button>
+<button class="btn_1 green" type="button" method="GET" onclick="userView();">취소</button>
+
+
+	<div class="col-md-6">
+		<p>
+		<img src="img/tourist_guide_pic.jpg" alt="Image" class="img-fluid styled profile_pic">
+		</p>
+	</div>
+	<!-- 
+</div>
+ -->
+						<!-- End row -->
+<!-- 
+						<div class="divider"></div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<h4>Edit profile</h4>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>First name</label>
+									<input class="form-control" name="first_name" id="first_name" type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Last name</label>
+									<input class="form-control" name="last_name" id="last_name" type="text">
+								</div>
+							</div>
+						</div>
+						<!-- End row 
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Phone number</label>
+									<input class="form-control" name="email_2" id="email_2" type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Date of birth <small>(dd/mm/yyyy)</small>
+									</label>
+									<input class="form-control" name="email" id="email" type="text">
+								</div>
+							</div>
+						</div>
+						<!-- End row 
+
+						<hr>
+						<div class="row">
+							<div class="col-md-12">
+								<h4>Edit address</h4>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Street address</label>
+									<input class="form-control" name="first_name" id="first_name" type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>City/Town</label>
+									<input class="form-control" name="last_name" id="last_name" type="text">
+								</div>
+							</div>
+						</div>
+						<!-- End row 
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Zip code</label>
+									<input class="form-control" name="email" id="email" type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Country</label>
+									<select id="country" class="form-control" name="country">
+										<option value="">Select...</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!-- End row 
+
+						<hr>
+						<h4>Upload profile photo</h4>
+						<div class="form-inline upload_1">
+							<div class="form-group">
+								<input type="file" name="files[]" id="js-upload-files" multiple>
+							</div>
+							<button type="submit" class="btn_1 green" id="js-upload-submit">Upload file</button>
+						</div>
+							<!-- Drop Zone 
+							<h5>Or drag and drop files below</h5>
+							<div class="upload-drop-zone" id="drop-zone">
+								Just drag and drop files here
+							</div>
+							<!-- Progress Bar 
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+									<span class="sr-only">60% Complete</span>
+								</div>
+							</div>
+							<!-- Upload Finished 
+							<div class="js-upload-finished">
+								<h5>Processed files</h5>
+								<div class="list-group">
+									<a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
+								</div>
+							</div>
+							<!-- End Hidden on mobiles 
+
+							<hr>
+							<button type="submit" class="btn_1 green">Update Profile</button>
+-->
+					</section>
+					<!-- End section 4 -->
+					<section id="section-2">
+						<div class="row">
+							<div class="col-lg-4 col-md-6">
+								<div class="hotel_container">
+									<div class="img_container">
+										<a href="single_hotel.html">
+											<img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+											<div class="ribbon top_rated">
+											</div>
+											<div class="score">
+												<span>7.5</span>Good
+											</div>
+											<div class="short_info hotel">
+												From/Per night<span class="price"><sup>$</sup>59</span>
+											</div>
+										</a>
+									</div>
+									<div class="hotel_title">
+										<h3><strong>Park Hyatt</strong> Hotel</h3>
+										<div class="rating">
+											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+										</div>
+										<!-- end rating -->
+										<div class="wishlist_close_admin">
+											-
+										</div>
+									</div>
+								</div>
+								<!-- End box tour -->
+							</div>
+							<!-- End col-md-6 -->
+
+							<div class="col-lg-4 col-md-6 ">
+								<div class="hotel_container">
+									<div class="img_container">
+										<a href="single_hotel.html">
+											<img src="img/hotel_2.jpg" width="800" height="533" class="img-fluid" alt="Image">
+											<div class="ribbon top_rated">
+											</div>
+											<div class="score">
+												<span>9.0</span>Superb
+											</div>
+											<div class="short_info hotel">
+												From/Per night<span class="price"><sup>$</sup>45</span>
+											</div>
+										</a>
+									</div>
+									<div class="hotel_title">
+										<h3><strong>Mariott</strong> Hotel</h3>
+										<div class="rating">
+											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+										</div>
+										<!-- end rating -->
+										<div class="wishlist_close_admin">
+											-
+										</div>
+									</div>
+								</div>
+								<!-- End box -->
+							</div>
+							<!-- End col-md-6 -->
+
+							<div class="col-lg-4 col-md-6">
+								<div class="tour_container">
+									<div class="img_container">
+										<a href="single_tour.html">
+											<img src="img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+											<div class="ribbon top_rated">
+											</div>
+											<div class="short_info">
+												<i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>45</span>
+											</div>
+										</a>
+									</div>
+									<div class="tour_title">
+										<h3><strong>Arc Triomphe</strong> tour</h3>
+										<div class="rating">
+											<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
+										</div>
+										<!-- end rating -->
+										<div class="wishlist_close_admin">
+											-
+										</div>
+									</div>
+								</div>
+								<!-- End box tour -->
+							</div>
+							<!-- End col-md-6 -->
+
+							<div class="col-lg-4 col-md-6">
+								<div class="tour_container">
+									<div class="img_container">
+										<a href="single_tour.html">
+											<img src="img/tour_box_3.jpg" width="800" height="533" class="img-fluid" alt="Image">
+											<div class="ribbon popular">
+											</div>
+											<div class="short_info">
+												<i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>45</span>
+											</div>
+										</a>
+									</div>
+									<div class="tour_title">
+										<h3><strong>Versailles</strong> tour</h3>
+										<div class="rating">
+											<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
+										</div>
+										<!-- end rating -->
+										<div class="wishlist_close_admin">
+											-
+										</div>
+									</div>
+								</div>
+								<!-- End box tour -->
+							</div>
+							<!-- End col-md-6 -->
+
+							<div class="col-lg-4 col-md-6">
+								<div class="tour_container">
+									<div class="img_container">
+										<a href="single_tour.html">
+											<img src="img/tour_box_4.jpg" width="800" height="533" class="img-fluid" alt="Image">
+											<div class="ribbon popular">
+											</div>
+											<div class="short_info">
+												<i class="icon_set_1_icon-30"></i>Walking tour<span class="price"><sup>$</sup>45</span>
+											</div>
+										</a>
+									</div>
+									<div class="tour_title">
+										<h3><strong>Pompidue</strong> tour</h3>
+										<div class="rating">
+											<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
+										</div>
+										<!-- end rating -->
+										<div class="wishlist_close_admin">
+											-
+										</div>
+									</div>
+								</div>
+								<!-- End box tour -->
+							</div>
+							<!-- End col-md-6 -->
+
+							<div class="col-lg-4 col-md-6">
+								<div class="transfer_container">
+									<div class="img_container">
+										<a href="single_transfer.html">
+											<img src="img/transfer_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+											<div class="ribbon top_rated">
+											</div>
+											<div class="short_info">
+												From/Per person<span class="price"><sup>$</sup>45</span>
+											</div>
+										</a>
+									</div>
+									<div class="transfer_title">
+										<h3><strong>Orly Airport</strong> private</h3>
+										<div class="rating">
+											<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
+										</div>
+										<!-- end rating -->
+										<div class="wishlist_close_admin">
+											-
+										</div>
+									</div>
+								</div>
+								<!-- End box tour -->
+							</div>
+							<!-- End col-md-6 -->
+
+						</div>
+						<!-- End row -->
+						<button type="submit" class="btn_1 green">Update wishlist</button>
+					</section>
+					<!-- End section 2 -->
+
+					<section id="section-3">
+						<div class="row">
+							<div class="col-md-6 add_bottom_30">
+								<h4>Change your password</h4>
+								<div class="form-group">
+									<label>Old password</label>
+									<input class="form-control" name="old_password" id="old_password" type="password">
+								</div>
+								<div class="form-group">
+									<label>New password</label>
+									<input class="form-control" name="new_password" id="new_password" type="password">
+								</div>
+								<div class="form-group">
+									<label>Confirm new password</label>
+									<input class="form-control" name="confirm_new_password" id="confirm_new_password" type="password">
+								</div>
+								<button type="submit" class="btn_1 green">Update Password</button>
+							</div>
+							<div class="col-md-6 add_bottom_30">
+								<h4>Change your email</h4>
+								<div class="form-group">
+									<label>Old email</label>
+									<input class="form-control" name="old_password" id="old_password" type="password">
+								</div>
+								<div class="form-group">
+									<label>New email</label>
+									<input class="form-control" name="new_password" id="new_password" type="password">
+								</div>
+								<div class="form-group">
+									<label>Confirm new email</label>
+									<input class="form-control" name="confirm_new_password" id="confirm_new_password" type="password">
+								</div>
+								<button type="submit" class="btn_1 green">Update Email</button>
+							</div>
+						</div>
+						<!-- End row -->
+
+						<hr>
+						<br>
+						<div class="row">
+							<div class="col-lg-6">
+								<h4>Notification settings</h4>
+								<table class="table table-striped options_cart">
+									<tbody>
+										<tr>
+											<td style="width:10%">
+												<i class="icon_set_1_icon-33"></i>
+											</td>
+											<td style="width:60%">
+												New Citytours Tours
+											</td>
+											<td style="width:35%">
+												<label class="switch-light switch-ios pull-right">
+													<input type="checkbox" name="option_1" id="option_1" checked value="">
+													<span>
+													<span>No</span>
+													<span>Yes</span>
+													</span>
+													<a></a>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<i class="icon_set_1_icon-6"></i>
+											</td>
+											<td>
+												New Citytours Hotels
+											</td>
+											<td>
+												<label class="switch-light switch-ios pull-right">
+													<input type="checkbox" name="option_2" id="option_2" value="">
+													<span>
+													<span>No</span>
+													<span>Yes</span>
+													</span>
+													<a></a>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<i class="icon_set_1_icon-26"></i>
+											</td>
+											<td>
+												New Citytours Transfers
+											</td>
+											<td>
+												<label class="switch-light switch-ios pull-right">
+													<input type="checkbox" name="option_3" id="option_3" value="" checked>
+													<span>
+							<span>No</span>
+													<span>Yes</span>
+													</span>
+													<a></a>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<i class="icon_set_1_icon-81"></i>
+											</td>
+											<td>
+												New Citytours special offers
+											</td>
+											<td>
+												<label class="switch-light switch-ios pull-right">
+													<input type="checkbox" name="option_4" id="option_4" value="">
+													<span>
+							<span>No</span>
+													<span>Yes</span>
+													</span>
+													<a></a>
+												</label>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<button type="submit" class="btn_1 green">Update notifications settings</button>
+							</div>
+						</div>
+						<!-- End row -->
+					</section>
+					<!-- End section 3 -->
+
+					
+
+					</div>
+					<!-- End content -->
+					
+					
+					
+				</div>
+				<!-- End tabs -->
+			</div>
+			<!-- end container -->
+	</main>
+	<!-- End main -->
+	<!--========================= footer ========================-->
+	<footer class="revealed">
+		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
+	</footer>
+		<!-- End container -->
+	<!--========================= End footer ========================-->
+
+	<div id="toTop"></div><!-- Back to top button -->
+	
+	<!-- Search Menu -->
+	<div class="search-overlay-menu">
+		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
+		<form role="search" id="searchform" method="get">
+			<input value="" name="q" type="search" placeholder="Search..." />
+			<button type="submit"><i class="icon_set_1_icon-78"></i>
+			</button>
+		</form>
+	</div><!-- End Search Menu -->
+	
+	<!-- Sign In Popup -->
+	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="small-dialog-header">
+			<h3>Sign In</h3>
+		</div>
+		<form>
+			<div class="sign-in-wrapper">
+				<a href="#0" class="social_bt facebook">Login with Facebook</a>
+				<a href="#0" class="social_bt google">Login with Google</a>
+				<div class="divider"><span>Or</span></div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="email" class="form-control" name="email" id="email">
+					<i class="icon_mail_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" name="password" id="password" value="">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div class="clearfix add_bottom_15">
+					<div class="checkboxes float-left">
+						<input id="remember-me" type="checkbox" name="check">
+						<label for="remember-me">Remember Me</label>
+					</div>
+					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
+				</div>
+				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+				<div class="text-center">
+					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
+				</div>
+				<div id="forgot_pw">
+					<div class="form-group">
+						<label>Please confirm login email below</label>
+						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
+						<i class="icon_mail_alt"></i>
+					</div>
+					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+				</div>
+			</div>
+		</form>
+		<!--form -->
+	</div>
+	<!-- /Sign In Popup -->
+
+	<!-- Common scripts -->
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<script src="js/common_scripts_min.js"></script>
+	<script src="js/functions.js"></script>
+
+	<!-- Specific scripts -->
+	<script src="js/tabs.js"></script>
+	<script>
+		new CBPFWTabs(document.getElementById('tabs'));
+	</script>
+	<script>
+		$('.wishlist_close_admin').on('click', function (c) {
+			$(this).parent().parent().parent().fadeOut('slow', function (c) {});
+		});
+	</script>
+</script>
+</body>
+
+</html>

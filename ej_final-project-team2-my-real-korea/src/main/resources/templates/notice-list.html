@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
+    <meta name="author" content="Ansonika">
+    <title>CITY TOURS - City tours and travel site template by Ansonika</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montserrat:300,400,700" rel="stylesheet">
+
+    <!-- COMMON CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<link href="css/vendors.css" rel="stylesheet">
+	
+	<!-- SPECIFIC CSS -->
+	<link href="css/shop.css" rel="stylesheet">
+	
+	<!-- CUSTOM CSS -->
+	<link href="css/custom.css" rel="stylesheet">
+
+<!-- Handlebars -->
+<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+
+</head>
+
+<body>
+
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!--======================== Header========================== -->
+	<div id="header" th:include="include-common-top::include-common-top"></div>
+	<!--======================== End Header======================== -->
+	<!-- End Header -->
+
+	<section class="parallax-window" data-parallax="scroll" data-image-src="img/notice_list.png" data-natural-width="1400" data-natural-height="470">
+		<div class="parallax-content-1">
+			<div class="animated fadeInDown">
+				<h1><a id="notice-list-main" href="notice-list">공지사항</a></h1>
+				<p>마이리얼코리아의 공지사항을 확인해보세요.</p>
+			</div>
+		</div>
+	</section>
+	<!-- End Section -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="container margin_60">
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="shop-section">
+
+						<div class="items-sorting">
+							<div class="row">
+								<div class="col-6">
+									<div id="page-info" class="results_shop" th:each="noticePage:${noticeListPage}">
+										Showing 
+										<span id="cur-page" th:text="${noticePage.pageMaker.curPage}"></span> of 
+										<span id="tot-record-count" th:text="${noticePage.totRecordCount}"></span> results
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<select id="sort-by" name="sort-by">
+											<option value="notice-date-desc">정렬</option>
+											<option value="notice-date-desc"><a href="">최신순</a></option>
+											<option value="notice-date-asc"><a href="">오래된순</a></option>
+											<option value="notice-readcount"><a href="">조회수높은순</a></option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--End Sort By-->
+
+						<div class="row" id="notice-list" >
+
+							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="notice:${noticeList}">
+								<div class="inner-box">
+									<div class="image-box">
+										<figure class="image">
+											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html"><img src="img/products/image-1.jpg" alt=""></a>
+										</figure>
+										<div class="item-options clearfix">
+											<a href="wishlist" class="btn_shop"><span class="icon-heart-8"></span>
+                                            <div class="tool-tip">
+                                                Add to Wishlist
+                                            </div>
+                                            </a>
+										</div>
+									</div>
+									<div class="product_description">
+										<h3><a th:text="${notice.nTitle}" th:href="@{notice-detail(nNo=${notice.nNo})}" href="" >Travel Book</a></h3>
+										<div class="price">
+											<span class="notice_readcount" th:text="${#dates.format(notice.nDate, 'yyyy.MM.dd')}">$20.00</span> 
+										</div>
+										<div class="item-options clearfix">
+											<span class="icon-eye"></span>
+											<span th:text=${notice.nReadcount}>$15.00</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--End Shop Item-->
+
+						</div>
+						<!--End Shop Item-->
+
+						<hr>
+
+						<nav aria-label="Page navigation">
+							<ul class="pagination justify-content-center">
+								<li class="page-item">
+									<a class="page-link" href="#" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+									</a>
+								</li>
+								<li class="page-item active"><span class="page-link">1<span class="sr-only">(current)</span></span>
+								</li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item">
+									<a class="page-link" href="#" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- end pagination-->
+						
+					</div>
+					<!-- End row -->
+				</div>
+				<!-- End col -->
+
+				<!--Sidebar-->
+				<div class="col-lg-3">
+					<aside class="sidebar">
+						<div class="widget">
+							<div class="input-group">
+								<input id="notice-search-keyword" type="text" class="form-control" placeholder="Search...">
+								<span id="notice-search-btn"  class="input-group-btn">
+		                        <button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
+		                        </span>
+							</div>
+						</div>
+						<!-- End Search -->
+						<hr>
+						<div class="widget" id="cat_shop">
+							<h4>Categories</h4>
+							<ul>
+								<li><a href="tour-list">투어 보러가기</a>
+								</li>
+								<li><a href="ticket-list">티켓 보러가기</a>
+								</li>
+								<li><a href="tripboard-list">여행 동행 찾기</a>
+								</li>
+								<li><a href="freeboard-list">자유게시판</a>
+								</li>
+							</ul>
+						</div>
+						<!-- End widget -->
+						<hr>
+					</aside>
+				</div>
+				<!--Sidebar-->
+			</div>
+		</div>
+		<!-- End Container -->
+	</main>
+	<!-- End main -->
+	<!--========================= footer ========================-->
+	<footer class="revealed">
+		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
+	</footer>
+		<!-- End container -->
+	<!--========================= End footer ========================-->
+
+	<div id="toTop"></div><!-- Back to top button -->
+	
+	<!-- Search Menu -->
+	<div class="search-overlay-menu">
+		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
+		<form role="search" id="searchform" method="get">
+			<input value="" name="q" type="search" placeholder="Search..." />
+			<button type="submit"><i class="icon_set_1_icon-78"></i>
+			</button>
+		</form>
+	</div><!-- End Search Menu -->
+	
+	<!-- ##################### template ###################### -->
+	<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
+	<!-- notice-search-list-template -->
+	<script id="notice-search-list-template" type="text/x-handlebars-template">
+	{{#each data.itemList}}
+	<div class="shop-item col-lg-4 col-md-6 col-sm-6">
+	<div class="inner-box">
+		<div class="image-box">
+			<figure class="image">
+				<a href="notice-detail?nNo={{nno}}"><img src="img/products/image-1.jpg" alt=""></a>
+			</figure>
+			<div class="item-options clearfix">
+				<a href="wishlist" class="btn_shop"><span class="icon-heart-8"></span>
+                <div class="tool-tip">
+                    Add to Wishlist
+                </div>
+                </a>
+			</div>
+		</div>
+		<div class="product_description">
+			<h3><a href="notice-detail?nNo={{nno}}">{{ntitle}}</a></h3>
+			<div class="price">
+				<span class="notice_readcount">{{dateFormat ndate}}</span> 
+			</div>
+			<div class="item-options clearfix">
+				<span class="icon-eye"></span>
+				<span>{{nreadcount}}</span>
+			</div>
+		</div>
+	</div>
+	</div>
+	{{/each}}
+	</script>
+
+	<!-- Common scripts -->
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<script src="js/common_scripts_min.js"></script>
+	<script src="js/functions.js"></script>
+	<script src="js/app.js" type="module"></script>
+	
+
+</body>
+
+</html>
