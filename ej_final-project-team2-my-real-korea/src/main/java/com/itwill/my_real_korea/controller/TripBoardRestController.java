@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -27,7 +29,7 @@ public class TripBoardRestController {
 	
 	//게시글 모집상태별로 보기
 	@ApiOperation(value = "동행게시판 모집상태별 리스트")
-	@GetMapping(value = "/tripboard-search/{tBoStatus}", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/tripboard-tBoStatus/{tBoStatus}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripBoard_tBoStatus_list(@RequestParam(required = false, defaultValue = "1") int pageNo,
 														@PathVariable int tBoStatus) {
 		
@@ -57,7 +59,7 @@ public class TripBoardRestController {
 	
 	//게시글 지역별로 보기
 	@ApiOperation(value = "동행게시판 지역별 리스트")
-	@GetMapping(value = "/tripboard-search/{cityNo}", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/tripboard-cityno/{cityNo}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripBoard_cityNo_list(@RequestParam(required = false, defaultValue = "1") int pageNo,
 														@PathVariable int cityNo) {
 		
@@ -87,7 +89,7 @@ public class TripBoardRestController {
 	
 	//게시글 해시태그별로 보기
 	@ApiOperation(value = "동행게시판 해시태그별 리스트")
-	@GetMapping(value = "/tripboard-search/{hashtag}", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/tripboard-hashtag/{hashtag}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripBoard_hashtag_list(@RequestParam(required = false, defaultValue = "1") int pageNo,
 														@PathVariable String hashtag) {
 		
@@ -226,6 +228,7 @@ public class TripBoardRestController {
 	//게시글 삭제
 	@LoginCheck
 	@ApiOperation(value = "동행게시판 게시글 삭제")
+	@ApiImplicitParam(name = "tBoNo", value = "동행게시판 번호")
 	@PostMapping(value = "/tripboard/{tBoNo}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripBoard_delete_action(@PathVariable(value = "tBoNo")int tBoNo) {
 		
@@ -260,7 +263,8 @@ public class TripBoardRestController {
 	//게시글 수정
 	@LoginCheck
 	@ApiOperation(value = "동행게시판 게시글 수정")
-	@PostMapping(value = "/tripboard/{tBoNo}", produces = "application/json;charset=UTF-8")
+	@ApiImplicitParam(name = "tBoNo", value = "동행게시판 번호")
+	@PutMapping(value = "/tripboard/{tBoNo}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripBoard_modify_action(@PathVariable(value = "tBoNo")int tBoNo,
 														@RequestBody TripBoard tripBoard) {
 		

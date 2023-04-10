@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>주문확인</h1><hr>
-<form  action="session_order_create.do">
+<form  action="session_order_create">
 <div>
 	주문데이타1[이름]<br>
 	주문데이타2[카드번호]<br>

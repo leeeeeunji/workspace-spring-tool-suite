@@ -77,10 +77,10 @@ public class TripBoardCommentRestController {
 			if(findTripBoardComment != null) {
 				//댓글 수정 성공 시 code1
 				tripBoardComment.setTCoNo(tCoNo);
-				tripBoardCommentService.updateTripBoardComment(findTripBoardComment);
+				tripBoardCommentService.updateTripBoardComment(tripBoardComment);
 				code = 1;
 				msg = "성공";
-				data.add(findTripBoardComment);
+				data.add(tripBoardComment);
 			}else {
 				//댓글 수정 실패 시 code2
 				code = 2;

@@ -56,8 +56,8 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/header_bg.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>Shop</h1>
-				<p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+				<h1>동행찾기</h1>
+				<p>즐거운 여행을 함께 할 일행을 찾아보아요~</p>
 			</div>
 		</div>
 	</section>
@@ -103,8 +103,50 @@
 						<!--End Sort By-->
 
 						<div class="row">
+						
+							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="tripBoard:${tripBoardList}">
+								<div class="ribbon_3 popular"><span>모집중</span>
+								</div>
+								<div class="inner-box">
+									<div class="image-box">
+										<figure class="image">
+											<a href="tripboard-detail.html"><img src="img/products/image-1.jpg" alt="">
+											</a>
+										</figure>
+										<div class="item-options clearfix">
+											<a href="shopping-cart.html" class="btn_shop"><span class="icon-basket"></span>
+                                            <div class="tool-tip">
+                                                Add to cart
+                                            </div>
+                                            </a>
+											<a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
+                                            <div class="tool-tip">
+                                                Add to Fav
+                                            </div>
+                                            </a>
+											<a href="shop-single.html" class="btn_shop"><span class="icon-eye"></span>
+                                            <div class="tool-tip">
+                                                View
+                                            </div>
+                                            </a>
+										</div>
+									</div>
+									<div class="product_description">
+										<div class="rating">
+											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+										</div>
+										<h3><a href="tripboard-detail.html" th:text="${tripBoard.tBoTitle}">Travel Book</a></h3>
+										<div class="price">
+											<span class="offer">$20.00</span> $15.00
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--End Shop Item-->
 
 							<div class="shop-item col-lg-4 col-md-6 col-sm-6">
+								<div class="ribbon_3 popular"><span>모집중</span>
+								</div>
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
@@ -380,13 +422,15 @@
 						<div class="widget" id="cat_shop">
 							<h4>Categories</h4>
 							<ul>
-								<li><a href="#">Places to visit</a>
+								<li><a href="#">서울</a>
 								</li>
-								<li><a href="#">Top tours</a>
+								<li><a href="#">경기</a>
 								</li>
-								<li><a href="#">Tips for travellers</a>
+								<li><a href="#">강원</a>
 								</li>
-								<li><a href="#">Events</a>
+								<li><a href="#">부산</a>
+								</li>
+								<li><a href="#">대전</a>
 								</li>
 							</ul>
 						</div>
