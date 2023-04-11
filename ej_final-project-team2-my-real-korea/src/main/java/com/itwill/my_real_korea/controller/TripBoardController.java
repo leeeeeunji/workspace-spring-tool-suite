@@ -17,9 +17,14 @@ import com.itwill.my_real_korea.util.PageMakerDto;
 @Controller
 public class TripBoardController {
 	
-	@Autowired
 	private TripBoardService tripBoardService;
 	private TripBoardCommentService tripBoardCommentService;
+	
+	@Autowired
+	public TripBoardController(TripBoardService tripBoardService, TripBoardCommentService tripBoardCommentService) {
+		this.tripBoardService = tripBoardService;
+		this.tripBoardCommentService = tripBoardCommentService;
+	}
 	
 	//동행게시판 리스트
 	@GetMapping("/tripboard-list")
@@ -40,7 +45,7 @@ public class TripBoardController {
 	
 	//동행게시판 게시글 1개 상세보기
 	@GetMapping("/tripboard-detail")
-	public String tripBoard_detail(@RequestParam Integer tBoNo, Model model) {
+	public String tripBoard_detail(@RequestParam Integer tBoNo, Model model) throws Exception {
 		if(tBoNo == null) {
 			return "tripboard-list";
 		}
@@ -63,7 +68,7 @@ public class TripBoardController {
 	@LoginCheck
 	@GetMapping("/tripboard-write-form")
 	public String tripBoardWriteForm() {
-		return "tripboardwriteform";
+		return "tripboard-write-form";
 	}
 	
 	
@@ -71,7 +76,7 @@ public class TripBoardController {
 	//동행게시판 수정 폼
 	@LoginCheck
 	@GetMapping("/tripboard-modify-form")
-	public String tripBoardModifyForm(Integer tBoNo, Model model) {
+	public String tripBoardModifyForm(Integer tBoNo, Model model) throws Exception {
 		if(tBoNo == null) {
 			return "tripboard-list";
 		}

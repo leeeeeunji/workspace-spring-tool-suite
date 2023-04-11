@@ -105,7 +105,7 @@
 						<div class="row">
 						
 							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="tripBoard:${tripBoardList}">
-								<div class="ribbon_3 popular"><span>모집중</span>
+								<div class="ribbon_3"><span>모집중</span>
 								</div>
 								<div class="inner-box">
 									<div class="image-box">
@@ -132,10 +132,12 @@
 										</div>
 									</div>
 									<div class="product_description">
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+										<div class="trip-title">
+											<h3><a href="tripboard-detail.html" th:text="${tripBoard.tBoTitle}">Travel Book</a></h3>
 										</div>
-										<h3><a href="tripboard-detail.html" th:text="${tripBoard.tBoTitle}">Travel Book</a></h3>
+										<div class="trip-date">
+											<h3><a href="tripboard-detail.html" th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}"></a><a> ~ </a><a href="tripboard-detail.html" th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}"></a></h3>
+										</div>
 										<div class="price">
 											<span class="offer">$20.00</span> $15.00
 										</div>
@@ -145,7 +147,7 @@
 							<!--End Shop Item-->
 
 							<div class="shop-item col-lg-4 col-md-6 col-sm-6">
-								<div class="ribbon_3 popular"><span>모집중</span>
+								<div class="ribbon_3 popular"><span>모집완료</span>
 								</div>
 								<div class="inner-box">
 									<div class="image-box">
@@ -422,6 +424,8 @@
 						<div class="widget" id="cat_shop">
 							<h4>Categories</h4>
 							<ul>
+								<li><a href="#">전체보기</a>
+								</li>
 								<li><a href="#">서울</a>
 								</li>
 								<li><a href="#">경기</a>

@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
+import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
+import com.itwill.my_real_korea.service.tripboard.TripBoardCommentService;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -35,6 +37,9 @@ public class TripBoardControllerTest {
 	
 	@MockBean
 	TripBoardService tripBoardService;
+	
+	@MockBean
+	TripBoardCommentService tripBoardCommentService;
 	
 	@Disabled
 	@Test
@@ -64,25 +69,34 @@ public class TripBoardControllerTest {
 		verify(tripBoardService).selectAllTb(1); // 메소드 호출되는지 검증
 	}
 	
-	//@Test
+	@Disabled
+	@Test
 	void testTripBoard_detail() throws Exception {
 		// 임의로 tripBoard 만들기
-		TripBoard tripBoard = new TripBoard(1, "1", "1", null, 0, 0, 1, "1.png", null, null, "1", "1", new City(1, "서울", 1, 1), "1");
+		TripBoard tripBoard = new TripBoard(1, "1", "1", null, 0, 0, 1, "1.png", null, null, "1", "1", new City(1, "서울", 1, 1), "user1");
+		List<TripBoardComment> tripBoardCommentList = new ArrayList<>();
+				
+		tripBoardCommentList.add(new TripBoardComment(1, "1", null, 1, "user1"));
+		tripBoardCommentList.add(new TripBoardComment(2, "2", null, 2, "user1"));
 		
 		// selectByTbNo(1) 메소드 실행시 tripBoard 가 return 된다고 가정
 		given(tripBoardService.selectByTbNo(1)).willReturn(tripBoard);
+		given(tripBoardCommentService.selectAllByTBoNo(1)).willReturn(tripBoardCommentList);
 		
 		mockMvc.perform(get("/tripboard-detail").param("tBoNo", "1"))
 		.andExpect(status().isOk())
 		.andExpect(model().attributeExists("tripBoard"))
+		.andExpect(model().attributeExists("tripBoardCommentList"))
 		.andExpect(model().attributeExists("tBoNo"))
 		.andExpect(view().name("tripboard-detail"))
 		.andDo(print());
 		
 		verify(tripBoardService).selectByTbNo(1);
+		verify(tripBoardCommentService).selectAllByTBoNo(1);
 	}
 	
-	//@Test
+	@Disabled
+	@Test
 	void testTripBoard_write_form() throws Exception {
 		mockMvc.perform(get("/tripboard-write-form"))
 		.andExpect(status().isOk())
@@ -90,10 +104,15 @@ public class TripBoardControllerTest {
 		.andDo(print());
 	}
 	
-	//@Test
+	@Disabled
+	@Test
 	void testTripBoard_modify_form() throws Exception {
-		mockMvc.perform(get("/notice-modify-form"))
+		TripBoard tripBoard = new TripBoard(1, "1", "1", null, 0, 0, 1, "1.png", null, null, "1", "1", new City(1, "서울", 1, 1), "user1");
+		given(tripBoardService.selectByTbNo(1)).willReturn(tripBoard);
+		
+		mockMvc.perform(get("/tripboard-modify-form").param("tBoNo", "1"))
 		.andExpect(status().isOk())
+		.andExpect(model().attributeExists("tripBoard"))
 		.andExpect(view().name("tripboard-modify-form"))
 		.andDo(print());
 	}
