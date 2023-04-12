@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+body {
+	font-family: Arial;
+}
+
+.excontainer {
+	width: 400px;
+	margin: 30px auto 30px auto;
+	padding: 1em;
+}
+
+label {
+	display: block;
+	width: 100%;
+}
+
+p {
+	padding: .5em;
+}
+
+a, a:visited {
+	color: #2d9afd;
+}
+
+.changed {
+	color: #ff0099;
+}
+
+.highlight {
+	background: #faffda;
+}
+
+.entered {
+	color: #f5560a;
+}
+
+.green {
+	color: #7fbf38;
+}
+
+.hellomouse, .clickable, #foo, #event {
+	cursor: pointer;
+}
+
+button {
+	margin-left: 2.5em; 
+	margin-top : 1em;
+	width: 80px;
+	margin-top: 1em;
+}
+
+div {
+	margin: 1em 0;
+}
+
+#foo {
+	display: inline-block;
+}
+
+ul {
+	margin: 1em 0;
+}
+
+.form, form, .stuff, .morestuff, stuff3 {
+	margin: 1em auto;
+	padding: 3em;
+	background: #ececec;
+}
+
+input {
+	width: 200px;
+	font-size: 1.1em;
+	margin-left: 10px; margin-bottom : 6px;
+	padding: 3px;
+	margin-bottom: 6px;
+}
+
+.placeholder {
+	color: #ff0099;
+	font-weight: normal;
+}
+
+::-webkit-input-placeholder {
+	color: #cccccc;
+}
+
+:-moz-placeholder {
+	color: #cccccc;
+}
+
+:-ms-input-placeholder {
+	color: #cccccc;
+}
+
+:focus::-webkit-input-placeholder {
+	color: transparent;
+}
+
+.content {
+	margin-top: 5px;
+	padding: 1em;
+	background: #eeeeee;
+}
+</style>
+</head>
+<body>
+
+	<div class="excontainer">
+		<form id="loginForm">
+			아이디&nbsp;&nbsp;&nbsp;<input type="text" name="userId"><br>
+			패쓰워드<input type="text" name="password"><br>
+			<button id="loginBtn">로그인</button>
+			<button id="logoutBtn">로그아웃</button>
+		</form>
+
+
+
+		</br>Response:
+		<div id="result"></div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$.ajaxSetup({
+				cache : false
+			});
+			/*========================
+			setRequestHeader메소드를 호출하거나 headers 속성에 값을 추가하지 않으면 OPTIONS HTTP 메소드 호출도 하지 않는다
+			OPTIONS 메소드 발생시에 컨텐츠길이는 0 
+			직후에 POST메소드 발생
+			========================*/
+			$("#logoutBtn").click(function() {
+				$.ajax({
+					type : 'GET',
+					url : 'http://localhost:9053/logout',
+					success : function(data) {
+						console.log(data);
+						$('#result').html(JSON.stringify(data));
+					}
+				});
+			});
+
+			$("#loginBtn").click(
+					function() {
+						var username = $("#loginForm input[name='userId']")
+								.val();
+						var password = $("#loginForm input[name='password']")
+								.val();
+						console.log(username);
+						console.log(password);
+						username = "guard1";
+						password = "1111";
+						$.ajax({
+							type : 'POST',
+							url : 'http://localhost:9053/login',
+							headers : {
+								"Authorization" : "Basic "
+										+ btoa(username + ":" + password)
+							},
+							data : {
+								Code : '1234',
+								Name : 'abcd'
+							},
+							success : function(data) {
+								console.log(data);
+								$('#result').html(JSON.stringify(data));
+
+							}
+
+							,
+							beforeSend : function(xhr) { //access denied가 되면 헤더 조작이 전혀 되지 않는다.
+								//alert('beforeSend');
+								xhr.withCredentials = true;
+
+								//xhr.setRequestHeader('Authentication', 'Basic XXXXXX');
+								//xhr.setRequestHeader('Authorization', 'Basic XXXXXX');
+							}
+						});
+					});
+			// end  
+		});
+	</script>
+</body>
+</html>
