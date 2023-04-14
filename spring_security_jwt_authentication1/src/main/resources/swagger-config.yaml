@@ -1,0 +1,16 @@
+openapi: 3.0.1
+info:
+  title: LMS API Specification
+  version: 1.0.0
+  description: Open documentation for LMS API
+servers:
+- url: http://localhost:8091/
+apis: ['api/v1/instructor/index.js']
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
